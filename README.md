@@ -1,4 +1,4 @@
 # Employee-Attrition
-Healthcare employees quitting their jobs
+Healthcare employees being fired 
 library(ggplot2)
 library(tidyverse)
