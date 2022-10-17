@@ -1,5 +1,4 @@
 # Employee-Attrition
 Healthcare employees quitting their jobs
 
-
-library(tidyverse)
+attrition <- read.csv("watson_healthcare_modified.csv")
