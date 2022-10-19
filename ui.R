@@ -1,7 +1,7 @@
 library(shiny)
 
 #Application Title 
-titlePanel("Healthcare Employee Attrition Prediction")
+titlePanel("Healthcare Employee Attrition")
 
 #Show a plot of the generated distribution 
 mainPanel(
