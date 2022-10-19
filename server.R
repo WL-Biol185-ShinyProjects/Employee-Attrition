@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 # Define server logic required to draw a histogram
 function(input, output) {
   output$Plot <- renderPlot({
@@ -12,6 +13,10 @@ function(input, output) {
 =======
 
 >>>>>>> 03c39dfa7a83cadb6d1aff60cc21ff06b0c9af9f
+=======
+
+
+>>>>>>> db1bfb4957548c6f01812d8567bf51e12bb0a42b
 server <- function(input, output) {
   set.seed(122)
   histdata <- rnorm(500)
