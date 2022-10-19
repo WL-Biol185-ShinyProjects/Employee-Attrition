@@ -16,7 +16,7 @@ dashboardPage(
       box(plotOutput("plot1"),
           selectInput("column", "Choose an X-axis column", choices = "Age", "Monthly Income")
           )
-      )
+      ),
     
     tabItems(
       tabItem(tabName = "Graphs"),
