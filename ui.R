@@ -20,7 +20,7 @@ dashboardPage(
     #Boxes need to be put in a row (or column)
     fluidRow(
       box(plotOutput("plot1"),
-      selectInput("column", "Choose an X-axis column", choices = "Age", "Monthly Income")
+      selectInput("column", "Choose an X-axis column", choices = c("Age", "Monthly Income"))
         )
       )
     )
