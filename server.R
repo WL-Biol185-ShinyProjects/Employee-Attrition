@@ -1,29 +1,9 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-library(shiny)
-library(leaflet)
-library(tidyverse)
-
-# Define server logic to plot various variables  
-function(input, output) {
+server <- function(input, output) {
+  set.seed(122)
+  histdata <- rnorm(500)
   
-}
-#example that he did on the board
-output$plot <- renderPlot ({
-  ggplot(watson_healthcare_modified, aes _string(input$column, "mpg")) + geom_point()
-
+  output$plot1 <- renderPlot({
+    data <- histdata[seq_len(input$slider)]
+    hist(data)
   })
-
 }
