@@ -1,0 +1,23 @@
+---
+title: "regression"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(psych)
+library(corrr)
+
+#chi squared test
+cor(employee_attrition)
+
+library(readr)
+employee_attrition <- read_csv("watson_healthcare_modified.csv")
+
+employee_attrition
+
+```
+
