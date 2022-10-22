@@ -1,8 +1,11 @@
 
 library(shiny)
 library(shinydashboard)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 
-dashboardPage(
+dashboardPage(skin = "green", 
   dashboardHeader(title = "Healthcare Attrition", titleWidth = 750),
   dashboardSidebar(
     sidebarMenu(
@@ -13,15 +16,18 @@ dashboardPage(
   dashboardBody(
     #Boxes need to be put in a row (or column)
     fluidRow(
-      box(plotOutput("plot1"),
+      box(plotOutput("densityplot"),
           selectInput("column", "Choose an X-axis column", choices = "Age", "Monthly Income")
           )
-      )
+      ),
     
     tabItems(
       tabItem(tabName = "Graphs"),
       tabItem(tabName = "History")
     )
-  )
 )
+)
+    
+    
+
 
