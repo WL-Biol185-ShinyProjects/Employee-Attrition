@@ -1,11 +1,20 @@
 
-library(shiny)
-library(shinydashboard)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(shiny)
+library(shinydashboard)
 
-dashboardPage(skin = "green", 
+#Application Title 
+titlePanel("Healthcare Employee Attrition")
+
+#Show a plot of the generated distribution 
+mainPanel(
+  plotOutput("Plot"), 
+  selectInput("column", "Choose an X-axis column", choices = colnames())
+)
+
+dashboardPage(skin = green,
   dashboardHeader(title = "Healthcare Attrition", titleWidth = 750),
   dashboardSidebar(
     sidebarMenu(
@@ -16,18 +25,14 @@ dashboardPage(skin = "green",
   dashboardBody(
     #Boxes need to be put in a row (or column)
     fluidRow(
-      box(plotOutput("densityplot"),
-          selectInput("column", "Choose an X-axis column", choices = "Age", "Monthly Income")
-          )
-      ),
+      box(plotOutput("plot1"),
+          selectInput("column", "Choose an X-axis column", choices = c("Age", "Monthly Income"))
+      )
+    )
     
     tabItems(
       tabItem(tabName = "Graphs"),
       tabItem(tabName = "History")
     )
+  )
 )
-)
-    
-    
-
-
