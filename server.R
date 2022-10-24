@@ -1,12 +1,18 @@
 
-
-
-server <- function(input, output) {
-  set.seed(122)
-  histdata <- rnorm(500)
-  
-  output$plot1 <- renderPlot({
-    data <- histdata[seq_len(input$slider)]
-    hist(data)
+# Define server logic required to draw a histogram
+function(input, output) {
+  output$Plot <- renderPlot({
+    
   })
 }
+
+server <- function(input, output) {
+
+  
+  output$densityplot <- renderPlot({
+    ggplot(watson_healthcare_modified, aes_string(x=output$var)) +
+      geom_density(adjust = 1.5, alpha = 0.4) })
+    
+    
+  }
+
