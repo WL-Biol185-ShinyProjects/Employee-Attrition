@@ -10,7 +10,7 @@ server <- function(input, output) {
 
   
   output$densityplot <- renderPlot({
-    ggplot(watson_healthcare_modified, aes_string(x=output$var, y = "Attrition")) +
+    ggplot(watson_healthcare_modified, aes_string(x=output$var)) +
       geom_density(adjust = 1.5, alpha = 0.4) )}
     
     
