@@ -28,7 +28,7 @@ dashboardPage(skin = green,
       box(plotOutput("plot1"),
           selectInput("column", "Choose an X-axis column", choices = c("Age", "Monthly Income"))
       )
-    )
+    ),
     
     tabItems(
       tabItem(tabName = "Graphs"),
