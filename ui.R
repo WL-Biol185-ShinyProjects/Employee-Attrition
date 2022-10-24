@@ -1,15 +1,13 @@
 
 library(shiny)
 library(shinydashboard)
-
+library(ggplot2)
 
 #Show a plot of the generated distribution 
 mainPanel(
-  plotOutput("densityplot"), 
-  selectInput("var", "Choose an X-axis column", choices = colnames())
 )
 
-  dashboardPage(skin = green,
+  dashboardPage(skin = "green",
     dashboardHeader(title = "Healthcare Attrition", titleWidth = 750),
     dashboardSidebar(
       sidebarMenu(
@@ -22,16 +20,16 @@ mainPanel(
       
       #Boxes need to be put in a row (or column)
       fluidRow(
-              ),
+      ),
       
       tabItems(
         tabItem(tabName = "Graphs", h2("This is a graph"),
-                box(plotOutput("plot1"),
-                    selectInput("column", "Choose an X-axis column", choices = c("Age", "Monthly Income")
-                                )
+                box(plotOutput("densityplot"),
+                    selectInput("var", "Choose an X-axis column", choices = colnames(watson_healthcare_modified)
                     )
-                ),
-        tabItem(tabName = "History", h2("Let's learn some history"), x = "In the United States, healthcare employees experience some of the highest rates of burnout of any industry. This is due to long hours and sad outcomes.")
-              ), 
-            )
+                )
+        ),
+        tabItem(tabName = "History", h2("Let's Learn Some History"), "In the United States, healthcare employees experience some of the highest rates of burnout of any industry. This is due to long hours and sad outcomes.")
+      ), 
+    )
   )
