@@ -13,14 +13,16 @@ dashboardPage(
   dashboardBody(
     #Boxes need to be put in a row (or column)
     fluidRow(
-      box(plotOutput("plot1"),
-          selectInput("column", "Choose an X-axis column", choices = "Age", "Monthly Income")
-          )
-      ),
+            ),
     
     tabItems(
-      tabItem(tabName = "Graphs"),
-      tabItem(tabName = "History")
+      tabItem(tabName = "Graphs", h2("This is a graph"),
+              box(plotOutput("plot1"),
+                  selectInput("column", "Choose an X-axis column", choices = c("Age", "Monthly Income")
+                              )
+                  )
+              ),
+      tabItem(tabName = "History", h2("Let's learn some history"))
     )
   )
 )
