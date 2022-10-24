@@ -3,10 +3,10 @@
 
 server <- function(input, output) {
 
-watson_healthcare_modified$Attrition <- factor(watson_healthcare_modified$Attrition)
-watson_healthcare_modified$BusinessTravel <- factor(watson_healthcare_modified$BusinessTravel)
+watson_healthcare_clean$Attrition <- factor(watson_healthcare_clean$Attrition)
+watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel)
 output$densityplot <- renderPlot({
-  ggplot(watson_healthcare_modified, aes_string(input$attrition_data, fill = watson_healthcare_modified$Attrition)) +
+  ggplot(watson_healthcare_clean, aes_string(input$attrition_data, fill = watson_healthcare_clean$Attrition)) +
   geom_histogram(stat = "count")  
   })
 }
