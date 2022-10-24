@@ -10,7 +10,7 @@ titlePanel("Healthcare Employee Attrition")
 
 #Show a plot of the generated distribution 
 mainPanel(
-  plotOutput("Plot"), 
+  plotOutput("densityplot"), 
   selectInput("column", "Choose an X-axis column", choices = colnames())
 )
 
