@@ -1,17 +1,13 @@
 
 # Define server logic required to draw a histogram
-function(input, output) {
-  output$Plot <- renderPlot({
-    
-  })
-}
 
 server <- function(input, output) {
 
   
   output$densityplot <- renderPlot({
-    ggplot(watson_healthcare_modified, aes_string(x=output$var)) +
-      geom_density(adjust = 1.5, alpha = 0.4) })
+    ggplot(watson_healthcare_modified, aes_string(input$var, fill = watson_healthcare_modified$Attrition)) +
+      geom_histogram()  
+  })
     
     
   }
