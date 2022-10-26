@@ -74,7 +74,6 @@ dashboardPage(skin = "green",
         )
     )       
   )
-)
 
 
 
