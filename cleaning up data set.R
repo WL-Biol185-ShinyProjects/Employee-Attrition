@@ -1,6 +1,11 @@
 #Cleaning up data set 
-
 library(tidyverse)
 
 watson_healthcare_clean <- watson_healthcare_modified %>% 
-  select ( c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", "YearsAtCompany", "YearsInCurrentRole"))
+  select ( c("EmployeeID", "Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", "YearsAtCompany", "YearsInCurrentRole"
+, "Attrition"))
+
+#write.csv(watson_healthcare_clean, file = "healthcare_clean.csv")
+
+
+
