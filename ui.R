@@ -24,14 +24,15 @@ dashboardPage(skin = "green",
       fluidRow(
       ),
       
-      #Below tabs are named and their contents is specified
+      #Below tabs are named and their contents is specified\
+      #The first tab is the graphs tab
       tabItems(
         tabItem(tabName = "Graphs", 
                 h2("Histograms"),
                 box(plotOutput("histogramplot"),
-                    selectInput("attrition_data", 
+                    selectInput("histogram_data", 
                                 "Choose an X-axis", 
-                                choices = c("EmployeeID", "Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
+                                choices = c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
                                                                                   "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
                                                                                   "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
                                                                                   "YearsAtCompany", "YearsInCurrentRole")
@@ -41,22 +42,30 @@ dashboardPage(skin = "green",
                 h2("Density Plots"),
 
                 box(plotOutput("densityplot"),
-                    selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")
+                    selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany")
+                                )
                     )
-                )
-        ),
- 
-        tabItem(tabName = "History",
-                h2("Let's learn some history"),
-                h3("In the United States, healthcare employees experience some of the highest rates of burnout of any industry.")
-        ),
+                ),
         
+        #The Second Tab is the History Tab
+        tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
+                                                                        healthcare employees experience some of the highest rates of burnout of any industry. 
+                                                                        This is due to long hours and sad outcomes.")
+                ), 
+
+        #The Third Tab is the Self-Help Tab          
         tabItem(tabName = "Self-Help",
                 h2("Estimating Your Chance of Quitting! Happiness"),
                 
                 box(
-                  sliderInput("age", "What is Your Age?", 18, 60, step = 1),
-                  sliderInput()
+                  sliderInput("Age", "What is Your Age?", 18, 60, 40, step = 1),
+                  selectizeInput("BusinessTravel", "How Often Do you Travel?", c("Non-Travel", "Travel_Rarely", "Travel_Frequently")),
+                  selectizeInput("EducationField", "What Field Did You Study?", c("Life Sciences", "Medical", "Marketing", "Technical Degree", "Human Resources", "Other")),
+                  sliderInput("EnvironmentSatisfaction", "How Satisfied Are You with Your Job Enivironment?", 1, 4, 2, step = 1),
+                  selectizeInput("Gener", "What Is Your Gender?", c("Male", "Female")),
+                  sliderInput("JobSatisfaction", "How Satisfied Are You with Your Job?", 1, 4, 2, step = 1),
+                  selectizeInput("MaritalStatus", "What's Your Marital Status?", c("Single", "Married", "Divorced")),
+                  width = 12
                 ),
                 
                 h2("What You Can Do to Minimize Burnout")
