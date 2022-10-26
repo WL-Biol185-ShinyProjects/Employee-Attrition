@@ -13,17 +13,18 @@ output$histogramplot <- renderPlot({
 output$scatterplot <-renderPlot({
  ggplot(watson_healthcare_clean, aes_string(input$attrition_data, "EmployeeID")) +
     geom_point(stat = "identity")
+})
 
 
 output$densityplot <-renderPlot({
-<<<<<<< HEAD
+
  ggplot(watson_healthcare_clean, aes_string(input$attrition_data, fill = watson_healthcare_clean$Attrition)) +
     geom_density(stat = "density", position = "identity")
 
-=======
+
  ggplot(watson_healthcare_clean, aes_string(input$density_data, fill = watson_healthcare_clean$Attrition)) +
     geom_density()
->>>>>>> fa226cf4b31887b6295251da3402ffd6419ac91a
+
   })
 }
 
