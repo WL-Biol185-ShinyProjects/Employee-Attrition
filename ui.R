@@ -52,8 +52,14 @@ dashboardPage(skin = "green",
         ),
         
         tabItem(tabName = "Self-Help",
-                h("Estimating Your Chance of Quitting! Happiness"),
-                h("What You Can Do to Minimize Burnout")
+                h2("Estimating Your Chance of Quitting! Happiness"),
+                
+                box(
+                  sliderInput("age", "What is Your Age?", 18, 60, step = 1),
+                  sliderInput()
+                ),
+                
+                h2("What You Can Do to Minimize Burnout")
         )
     )       
   )
