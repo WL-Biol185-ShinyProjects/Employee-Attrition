@@ -27,7 +27,7 @@ dashboardPage(skin = "green",
                                                                                   "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
                                                                                   "YearsAtCompany", "YearsInCurrentRole"))),
                 box(plotOutput("densityplot"),
-                    selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")))),
+                    selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany")))),
         tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
                                                                         healthcare employees experience some of the highest rates of burnout of any industry. 
                                                                         This is due to long hours and sad outcomes.")
