@@ -9,9 +9,9 @@ output$histogramplot <- renderPlot({
   ggplot(watson_healthcare_clean, aes_string(input$attrition_data, fill = watson_healthcare_clean$Attrition)) +
     geom_histogram(stat = "count") + 
     ggtitle("Potential Predictors of Healthcare Employee Attrition")})
-output$scatterplot <-renderPlot({
- ggplot(watson_healthcare_clean, aes_string(input$attrition_data, "EmployeeID")) +
-    geom_point(stat = "identity")
+output$densityplot <-renderPlot({
+ ggplot(watson_healthcare_clean, aes_string(input$attrition_data, fill = watson_healthcare_clean$Attrition)) +
+    geom_density(stat = "density", position = "identity")
   })
 }
 
