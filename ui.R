@@ -3,9 +3,6 @@ library(shiny)
 library(shinydashboard)
 library(ggplot2)
 
-#Show a plot of the generated distribution 
-mainPanel(
-)
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "green",
@@ -28,7 +25,9 @@ dashboardPage(skin = "green",
       #The first tab is the graphs tab
       tabItems(
         tabItem(tabName = "Graphs", 
-                h2("Histograms"),
+                h2("Histogram"),
+                
+                #Histogram
                 box(plotOutput("histogramplot"),
                     selectInput("histogram_data", 
                                 "Choose an X-axis", 
@@ -36,15 +35,22 @@ dashboardPage(skin = "green",
                                                                                   "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
                                                                                   "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
                                                                                   "YearsAtCompany", "YearsInCurrentRole")
-                    )
+                                )
                 ),
                 
-                h2("Density Plots"),
-
+                h2("Density Plot"),
+                
+                #Density Plot 
                 box(plotOutput("densityplot"),
                     selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany")
                                 )
-                    )
+                    ),
+                #Scatter Plot
+                box(plotOutput("scatterplot"), 
+                    selectInput("x_scatter_data", "Choose an X-axis", choices = c("MonthlyIncome", "Percent Salary Hike")),
+                    selectInput("y_scatter_data", "Choose a Y-axis", choices = c("TotalWorkingYears", "YearsAtCompany")
+                                )
+                )
                 ),
         
         #The Second Tab is the History Tab
@@ -73,4 +79,6 @@ dashboardPage(skin = "green",
     )       
   )
 )
+
+
 
