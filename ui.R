@@ -52,7 +52,7 @@ dashboardPage(skin = "green",
         ),
         
         tabItem(tabName = "Self-Help",
-                h("How to Measure Your Level of Burnout"),
+                h("Estimating Your Chance of Quitting! Happiness"),
                 h("What You Can Do to Minimize Burnout")
         )
     )       
