@@ -3,6 +3,10 @@ library(shiny)
 library(shinydashboard)
 library(ggplot2)
 
+#Show a plot of the generated distribution 
+mainPanel(
+)
+
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "green",
   dashboardHeader(title = "Healthcare Attrition"),
@@ -11,6 +15,7 @@ dashboardPage(skin = "green",
       menuItem("Graphs", tabName = "Graphs"),
       menuItem("History", tabName = "History"),
       menuItem("About", tabName = "About our page")
+      menuItem("Self-Help", tabName = "Self-Help")
     )
   ),
 
@@ -18,15 +23,24 @@ dashboardPage(skin = "green",
       
       #Boxes need to be put in a row (or column)
       fluidRow(
-              ),
+      ),
+      
       #Below tabs are named and their contents is specified
       tabItems(
-        tabItem(tabName = "Graphs", h2("Graphs"),
+        tabItem(tabName = "Graphs", 
+                h2("Histograms"),
                 box(plotOutput("histogramplot"),
-                    selectInput("histogram_data", "Choose an X-axis", choices = c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
+                    selectInput("attrition_data", 
+                                "Choose an X-axis", 
+                                choices = c("EmployeeID", "Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
                                                                                   "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
                                                                                   "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
-                                                                                  "YearsAtCompany", "YearsInCurrentRole"))),
+                                                                                  "YearsAtCompany", "YearsInCurrentRole")
+                    )
+                ),
+                
+                h2("Density Plots"),
+
                 box(plotOutput("densityplot"),
                     selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")))),
         tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
@@ -34,6 +48,21 @@ dashboardPage(skin = "green",
                                                                         This is due to long hours and sad outcomes.")
       ),
         tabItem(tabName = "About our page", h2("Thank you for visiting our page."))
+                    selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")
+                    )
+                )
+        ),
+ 
+        tabItem(tabName = "History",
+                h2("Let's learn some history"),
+                h3("In the United States, healthcare employees experience some of the highest rates of burnout of any industry.")
+        ),
+        
+        tabItem(tabName = "Self-Help",
+                h("Estimating Your Chance of Quitting! Happiness"),
+                h("What You Can Do to Minimize Burnout")
+        )
     )       
   )
 )
+
