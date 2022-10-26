@@ -50,6 +50,7 @@ dashboardPage(skin = "green",
                     selectInput("x_scatter_data", "Choose an X-axis", choices = c("MonthlyIncome", "Percent Salary Hike")),
                     selectInput("y_scatter_data", "Choose a Y-axis", choices = c("TotalWorkingYears", "YearsAtCompany")
                                 )
+                )
                 ),
         
         #The Second Tab is the History Tab
@@ -66,6 +67,6 @@ dashboardPage(skin = "green",
     )       
   )
 )
-)
+
 
 
