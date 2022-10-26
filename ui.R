@@ -21,11 +21,13 @@ dashboardPage(skin = "green",
       #Below tabs are named and their contents is specified
       tabItems(
         tabItem(tabName = "Graphs", h2("Graphs"),
-                box(plotOutput("densityplot"),
-                    selectInput("attrition_data", "Choose an X-axis", choices = c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
+                box(plotOutput("histogramplot"),
+                    selectInput("attrition_data", "Choose an X-axis", choices = c("EmployeeID", "Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
                                                                                   "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
                                                                                   "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
-                                                                                  "YearsAtCompany", "YearsInCurrentRole")))),
+                                                                                  "YearsAtCompany", "YearsInCurrentRole"))),
+                box(plotOutput("scatterplot"),
+                    selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")))),
         tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
                                                                         healthcare employees experience some of the highest rates of burnout of any industry. 
                                                                         This is due to long hours and sad outcomes.")
