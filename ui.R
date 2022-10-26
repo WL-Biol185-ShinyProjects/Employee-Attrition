@@ -53,7 +53,7 @@ dashboardPage(skin = "green",
                                                                         This is due to long hours and sad outcomes.")
                 ), 
 
-                   
+        #The Third Tab is the Self-Help Tab          
         tabItem(tabName = "Self-Help",
                 h2("Estimating Your Chance of Quitting! Happiness"),
                 h2("What You Can Do to Minimize Burnout")
