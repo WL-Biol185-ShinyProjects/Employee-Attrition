@@ -7,7 +7,9 @@ watson_healthcare_clean$Attrition <- factor(watson_healthcare_clean$Attrition)
 watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel)
 output$densityplot <- renderPlot({
   ggplot(watson_healthcare_clean, aes_string(input$attrition_data, fill = watson_healthcare_clean$Attrition)) +
-  geom_histogram(stat = "count")  
+  geom_histogram(stat = "count") + 
+  ggtitle("Potential Predictors of Healthcare Employee Attrition")
+    
   })
 }
 

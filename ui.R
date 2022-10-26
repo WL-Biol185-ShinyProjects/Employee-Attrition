@@ -20,7 +20,7 @@ dashboardPage(skin = "green",
               ),
       #Below tabs are named and their contents is specified
       tabItems(
-        tabItem(tabName = "Graphs", h2("This is a graph"),
+        tabItem(tabName = "Graphs", h2("Graphs"),
                 box(plotOutput("densityplot"),
                     selectInput("attrition_data", "Choose an X-axis", choices = c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
                                                                                   "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
