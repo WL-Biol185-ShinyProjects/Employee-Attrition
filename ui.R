@@ -9,7 +9,8 @@ dashboardPage(skin = "green",
   dashboardSidebar(
     sidebarMenu(
       menuItem("Graphs", tabName = "Graphs"),
-      menuItem("History", tabName = "History")
+      menuItem("History", tabName = "History"),
+      menuItem("About", tabName = "About our page")
     )
   ),
 
@@ -31,7 +32,8 @@ dashboardPage(skin = "green",
         tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
                                                                         healthcare employees experience some of the highest rates of burnout of any industry. 
                                                                         This is due to long hours and sad outcomes.")
-      ) 
+      ),
+        tabItem(tabName = "About our page", h2("Thank you for visiting our page."))
     )       
   )
 )
