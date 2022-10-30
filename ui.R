@@ -72,7 +72,6 @@ dashboardPage(skin = "green",
               h2("Estimating Your Chance of Quitting! Happiness"),
               
               box(
-                textOutput("AttritionEstimation"),
                 sliderInput("Age", "What is Your Age?", 18, 60, 40, step = 1),
                 selectizeInput("BusinessTravel", "How Often Do you Travel?", c("Non-Travel", "Travel_Rarely", "Travel_Frequently")),
                 selectizeInput("EducationField", "What Field Did You Study?", c("Life Sciences", "Medical", "Marketing", "Technical Degree", "Human Resources", "Other")),
@@ -90,9 +89,9 @@ dashboardPage(skin = "green",
                 width = 12
               ),
               
-              
-                #textOutput("AttritionEstimation")
-        
+              box(
+                textOutput("AttritionEstimation")
+              ),
               
               h2("What You Can Do to Minimize Burnout")
       )
