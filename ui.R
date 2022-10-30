@@ -11,7 +11,7 @@ dashboardPage(skin = "green",
     sidebarMenu(
       menuItem("Graphs", tabName = "Graphs"),
       menuItem("History", tabName = "History"),
-      menuItem("About", tabName = "About our page"),
+      menuItem("About", tabName = "About"),
       menuItem("Self-Help", tabName = "Self-Help")
     )
   ),
@@ -54,7 +54,7 @@ dashboardPage(skin = "green",
       ),
       
       #The Third Tab Is the About Tab
-      tabItem(tabName = "About our page", 
+      tabItem(tabName = "About", 
               box(
                 h2("Thank you for visiting our page."),
                 selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")),
