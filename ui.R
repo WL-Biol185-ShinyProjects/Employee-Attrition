@@ -35,8 +35,8 @@ dashboardPage(skin = "green",
                               choices = c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
                                                                                 "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
                                                                                 "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
-                                                                                "YearsAtCompany", "YearsInCurrentRole")
-                              )
+                                                                                "YearsAtCompany", "YearsInCurrentRole"))
+                            
               ),
               
               h2("Density Plot"),
@@ -56,9 +56,8 @@ dashboardPage(skin = "green",
       #The Third Tab Is the About Tab
       tabItem(tabName = "About", 
               box(
-                h2("Thank you for visiting our page."),
                 selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")),
-                selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany")),
+                selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany"))
               ),
                   
               #Scatter Plot
@@ -73,6 +72,7 @@ dashboardPage(skin = "green",
               h2("Estimating Your Chance of Quitting! Happiness"),
               
               box(
+                textOutput("AttritionEstimation"),
                 sliderInput("Age", "What is Your Age?", 18, 60, 40, step = 1),
                 selectizeInput("BusinessTravel", "How Often Do you Travel?", c("Non-Travel", "Travel_Rarely", "Travel_Frequently")),
                 selectizeInput("EducationField", "What Field Did You Study?", c("Life Sciences", "Medical", "Marketing", "Technical Degree", "Human Resources", "Other")),
@@ -90,9 +90,9 @@ dashboardPage(skin = "green",
                 width = 12
               ),
               
-              box(
-                textOutput("AttritionEstimation")
-              ),
+              
+                #textOutput("AttritionEstimation")
+        
               
               h2("What You Can Do to Minimize Burnout")
       )
