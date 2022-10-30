@@ -90,6 +90,10 @@ dashboardPage(skin = "green",
                 width = 12
               ),
               
+              box(
+                textOutput("AttritionEstimation")
+              ),
+              
               h2("What You Can Do to Minimize Burnout")
       )
     )
