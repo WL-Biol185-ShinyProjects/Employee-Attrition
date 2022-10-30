@@ -16,11 +16,10 @@ dashboardPage(skin = "green",
     )
   ),
 
-    dashboardBody(
+  dashboardBody(
       
       #Boxes need to be put in a row (or column)
-      fluidRow(
-      ),
+    fluidRow(
       
       #Below tabs are named and their contents is specified\
       #The first tab is the graphs tab
@@ -44,22 +43,17 @@ dashboardPage(skin = "green",
                 #Density Plot 
                 box(plotOutput("densityplot"),
                     selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")))),
-        tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
-                                                                        healthcare employees experience some of the highest rates of burnout of any industry. 
-                                                                        This is due to long hours and sad outcomes.")
-      ),
-        tabItem(tabName = "About our page", h2("Thank you for visiting our page.")),
-                    selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike"),
-                    selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany")
-                                )
-                    ),
+    
+        
+                
+            
                 #Scatter Plot
                 box(plotOutput("scatterplot"), 
                     selectInput("x_scatter_data", "Choose an X-axis", choices = c("MonthlyIncome", "Percent Salary Hike")),
-                    selectInput("y_scatter_data", "Choose a Y-axis", choices = c("TotalWorkingYears", "YearsAtCompany")
-                                )
-                )
+                    selectInput("y_scatter_data", "Choose a Y-axis", choices = c("TotalWorkingYears", "YearsAtCompany"))
+                                
                 ),
+              
         
         #The Second Tab is the History Tab
         tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
@@ -71,10 +65,13 @@ dashboardPage(skin = "green",
         tabItem(tabName = "Self-Help",
                 h2("Estimating Your Chance of Quitting! Happiness"),
                 h2("What You Can Do to Minimize Burnout")
+        ),
+                
+        tabItem(tabName = "About our page", h2("Thank you for visiting our page."))
+                
+            )    
         )
-    )       
-  )
+    )
 )
-
-
+    
 
