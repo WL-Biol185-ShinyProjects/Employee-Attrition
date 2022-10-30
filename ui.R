@@ -83,7 +83,7 @@ dashboardPage(skin = "green",
                   selectizeInput("Overtime", "Do You Work Overtime Often?", c("Yes", "No")),
                   sliderInput("PercentSalaryHike", "How Much Has Your Salary Increased over Your Career?", 10, 25, 15),
                   sliderInput("TotalWorkingYears", "How Many Years Have You Worked?", 0, 40, 20, step = 1),
-                  sliderInput("WorkLifeBalance", "How Is Your Work/Life Balance?" 1, 4, 2, step = 1),
+                  sliderInput("WorkLifeBalance", "How Is Your Work/Life Balance?", 1, 4, 2, step = 1),
                   sliderInput("YearsAtCompany", "How Many Years Have You Worked at Your Current Company?", 0, 40, 20, step = 1),
                   sliderInput("YearsInCurrentRole", "How Many Years Have You Worked in Your Current Role?", 0, 20, 10, step = 1),
                   width = 12
