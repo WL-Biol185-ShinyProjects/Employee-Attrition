@@ -22,7 +22,7 @@ dashboardPage(skin = "green",
     fluidRow(
     ),
     
-    #Below tabs are named and their contents is specified\
+    #Below tabs are named and their contents is specified
     #The first tab is the graphs tab
     tabItems(
       tabItem(tabName = "Graphs", 
