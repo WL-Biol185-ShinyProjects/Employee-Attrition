@@ -11,6 +11,7 @@ dashboardPage(skin = "green",
     sidebarMenu(
       menuItem("Graphs", tabName = "Graphs"),
       menuItem("History", tabName = "History"),
+      menuItem("About", tabName = "About our page"),
       menuItem("Self-Help", tabName = "Self-Help")
     )
   ),
@@ -42,6 +43,13 @@ dashboardPage(skin = "green",
                 
                 #Density Plot 
                 box(plotOutput("densityplot"),
+                    selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")))),
+        tabItem(tabName = "History", h2("Let's learn some history"), h3("In the United States, 
+                                                                        healthcare employees experience some of the highest rates of burnout of any industry. 
+                                                                        This is due to long hours and sad outcomes.")
+      ),
+        tabItem(tabName = "About our page", h2("Thank you for visiting our page.")),
+                    selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike"),
                     selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany")
                                 )
                     ),
