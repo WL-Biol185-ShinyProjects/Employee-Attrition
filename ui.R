@@ -14,7 +14,8 @@ dashboardPage(skin = "green",
       menuItem("About", tabName = "About"),
       menuItem("Self-Help", tabName = "Self-Help")
     )
-  ),
+  )
+),
 
   dashboardBody(
       

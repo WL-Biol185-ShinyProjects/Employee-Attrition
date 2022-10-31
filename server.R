@@ -28,7 +28,7 @@ server <- function(input, output) {
   
   #Output for Estimation Feature
   output$AttritionEstimation <- renderText({
-    watson_healthcare_clean %>%
+    watson_healthcare_clean
       
   })
   
