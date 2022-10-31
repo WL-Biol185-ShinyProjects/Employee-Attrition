@@ -1,7 +1,7 @@
 
 # Define server logic required to draw a histogram
 
-server <- function(input, output) {
+server <- function(input, output, session) {
   #Converting Character Vectors to Factors
   watson_healthcare_clean$Attrition <- factor(watson_healthcare_clean$Attrition)
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel)
@@ -27,10 +27,67 @@ server <- function(input, output) {
   })
   
   #Output for Estimation Feature
-  output$AttritionEstimation <- renderText({
-    watson_healthcare_clean %>%
-      
-  })
+  #output$AttritionEstimation <- renderText({
+  #  watson_healthcare_clean %>%
+  #    group_by(input$Age)
+  #})
   
+  oldChoices <- colnames(watson_healthcare_clean)
+  
+  observeEvent(input$Rank2, {
+      
+      newChoices <- setdiff(oldChoices, input$Rank1)
+      
+      updateSelectInput(sesson, "Rank2", choices = newChoices)
+    }
+  )
+  
+  observeEvent(input$Rank3, {
+    
+    newChoices <- setdiff(oldChoices, c(input$Rank1, input$Rank2))
+    
+    updateSelectInput(sesson, "Rank3", choices = newChoices)
+    }
+  )
+  
+  observeEvent(input$Rank4, {
+    
+    newChoices <- setdiff(oldChoices, c(input$Rank1, input$Rank2, input$Rank3))
+    
+    updateSelectInput(sesson, "Rank4", choices = newChoices)
+    }
+  )
+  
+  observeEvent(input$Rank5, {
+    
+    newChoices <- setdiff(oldChoices, c(input$Rank1, input$Rank2, input$Rank3, input$Rank4))
+    
+    updateSelectInput(sesson, "Rank5", choices = newChoices)
+    }
+  )
+  
+  observeEvent(input$Rank6, {
+    
+    newChoices <- setdiff(oldChoices, c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5))
+    
+    updateSelectInput(sesson, "Rank6", choices = newChoices)
+    }
+  )
+  
+  observeEvent(input$Rank7, {
+    
+    newChoices <- setdiff(oldChoices, c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6))
+    
+    updateSelectInput(sesson, "Rank7", choices = newChoices)
+  }
+  )
+  
+  observeEvent(input$Rank8, {
+    
+    newChoices <- setdiff(oldChoices, c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7))
+    
+    updateSelectInput(sesson, "Rank8", choices = newChoices)
+  }
+  )
 }
 
