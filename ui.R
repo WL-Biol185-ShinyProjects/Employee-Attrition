@@ -21,7 +21,7 @@ dashboardPage(skin = "green",
       
     #Boxes need to be put in a row (or column)
     fluidRow(
-    ),
+  
     
     #Below tabs are named and their contents is specified
     #The first tab is the graphs tab
@@ -34,7 +34,7 @@ dashboardPage(skin = "green",
                   selectInput("histogram_data", 
                               "Choose an X-axis", 
                               choices = c("Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", 
-                                                                                "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", 
+                                                                                "Gender", "JobSatisfaction", "MaritalStatus", 
                                                                                 "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", 
                                                                                 "YearsAtCompany", "YearsInCurrentRole"))
                             
@@ -45,6 +45,12 @@ dashboardPage(skin = "green",
               #Density Plot 
               box(plotOutput("densityplot"),
                   selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike"))
+              ),
+              h2("Scatter Plot"),
+              #Scatter Plot
+              box(plotOutput("scatterplot"), 
+                  selectInput("x_scatter_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")),
+                  selectInput("y_scatter_data", "Choose a Y-axis", choices = c("TotalWorkingYears", "YearsAtCompany"))
               )
       ),
       
@@ -59,13 +65,8 @@ dashboardPage(skin = "green",
               box(
                 selectInput("attrition_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike")),
                 selectInput("density_data", "Choose an X-axis", choices = c("MonthlyIncome", "PercentSalaryHike", "TotalWorkingYears", "YearsAtCompany"))
-              ),
-                  
-              #Scatter Plot
-              box(plotOutput("scatterplot"), 
-                  selectInput("x_scatter_data", "Choose an X-axis", choices = c("MonthlyIncome", "Percent Salary Hike")),
-                  selectInput("y_scatter_data", "Choose a Y-axis", choices = c("TotalWorkingYears", "YearsAtCompany"))
               )
+              
       ),
 
       #The Fourth Tab is the Self-Help Tab          
@@ -97,13 +98,12 @@ dashboardPage(skin = "green",
               h2("What You Can Do to Minimize Burnout")
       ),
       tabItem(tabName = "Employee Lifestlye", 
-              box(plotOutput("barbusinesstravel"),
-    
-                
+              box(plotOutput("barbusinesstravel")
               )
              )
     )
   )
+)
 )
 
 
