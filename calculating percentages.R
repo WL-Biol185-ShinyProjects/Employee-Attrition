@@ -1,6 +1,5 @@
 #Calculating Percentages
 
-
 #Business Travel and Attrition
 library(dplyr)
 watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
