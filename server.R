@@ -32,6 +32,7 @@ server <- function(input, output, session) {
   #    group_by(input$Age)
   #})
   
+  #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
   
   observeEvent(input$Rank2, {
@@ -89,5 +90,22 @@ server <- function(input, output, session) {
     updateSelectInput(sesson, "Rank8", choices = newChoices)
   }
   )
+  
+  #Output for Bar Graphs 
+  output$barbusinesstravel <- renderPlot({
+    watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
+    watson_healthcare_clean %>%
+      group_by(BusinessTravel, Attrition) %>%
+      summarise(cnt = n()) %>%
+      mutate(freq = (cnt / sum(cnt))*100) %>%
+      ggplot(aes(x = BusinessTravel, y = freq, fill = Attrition)) + 
+      geom_bar(position = position_stack(), stat = "identity", width = .7) +
+      geom_text(aes(label = paste0(round(freq,0), "%")), 
+                position = position_stack(vjust = 0.5), size = 3) +
+      scale_x_discrete(breaks = c("Travel_Rarely", "Travel_Frequently", "Non-Travel"),
+                       labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
+      scale_fill_manual(values = c("#fde725", "#21918c"))
+  })
 }
+  
 
