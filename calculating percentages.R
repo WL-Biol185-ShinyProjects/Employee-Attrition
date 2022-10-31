@@ -109,3 +109,6 @@ watson_healthcare_clean %>%
   scale_y_continuous(labels = function(x) paste0(x, "%")) +
   labs(title = "Work Life Balance and Attrition", x = "Work Life Balance", y = "Percentage") +
   scale_fill_manual(values = c("#fde725",  "#21918c"))
+
+
+??newChoices
