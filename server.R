@@ -25,6 +25,11 @@ server <- function(input, output) {
     ggplot(watson_healthcare_clean, aes_string(input$x_scatter_data, input$y_scatter_data)) +
       geom_point(stat = "identity")
   })
+  
+  #Output for Bar Graphs 
+  output$barbusinesstravel <- renderPlot({
+    
+  })
 }
   
   #Output for Estimation Feature

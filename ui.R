@@ -12,7 +12,8 @@ dashboardPage(skin = "green",
       menuItem("Graphs", tabName = "Graphs"),
       menuItem("History", tabName = "History"),
       menuItem("About", tabName = "About"),
-      menuItem("Self-Help", tabName = "Self-Help")
+      menuItem("Self-Help", tabName = "Self-Help"),
+      menuItem("Employee Lifestyle", tabName= "Employee Lifestyle")
     )
   ),
 
@@ -94,7 +95,13 @@ dashboardPage(skin = "green",
               
               
               h2("What You Can Do to Minimize Burnout")
-      )
+      ),
+      tabItem(tabName = "Employee Lifestlye", 
+              box(plotOutput("barbusinesstravel"),
+    
+                
+              )
+             )
     )
   )
 )
