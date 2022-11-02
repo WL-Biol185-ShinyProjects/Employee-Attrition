@@ -63,7 +63,7 @@ server <- function(input, output, session
                   newChoices <- setdiff(oldChoices, input$Rank1
                             )
       
-                  updateSelectInput(sesson, "Rank2", choices = newChoices
+                  updateSelectInput(session, "Rank2", choices = newChoices
                         )
                 }
                )
@@ -76,7 +76,7 @@ server <- function(input, output, session
                                          )
                                        )
     
-                 updateSelectInput(sesson, 
+                 updateSelectInput(session, 
                                    "Rank3", 
                                    choices = newChoices
                                    )
@@ -93,7 +93,7 @@ server <- function(input, output, session
                                         )
                                       )
     
-                updateSelectInput(sesson, 
+                updateSelectInput(session, 
                                   "Rank4", 
                                   choices = newChoices
                                   )
@@ -111,7 +111,7 @@ server <- function(input, output, session
                                          )
                                       )
     
-                updateSelectInput(sesson, 
+                updateSelectInput(session, 
                                   "Rank5", 
                                   choices = newChoices
                                   )
@@ -129,7 +129,7 @@ server <- function(input, output, session
                                         )
                                       )
     
-                 updateSelectInput(sesson, 
+                 updateSelectInput(session, 
                                    "Rank6", 
                                    choices = newChoices
                                    )
@@ -149,7 +149,7 @@ server <- function(input, output, session
                                         )
                                       )
     
-                updateSelectInput(sesson, 
+                updateSelectInput(session, 
                                   "Rank7", 
                                   choices = newChoices
                                   )
@@ -170,12 +170,162 @@ server <- function(input, output, session
                                         )
                                       )
     
-                updateSelectInput(sesson, 
+                updateSelectInput(session, 
                                   "Rank8", 
                                   choices = newChoices
                                   )
                }
               )
+  observeEvent(input$Rank9, 
+               {
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2, 
+                                         input$Rank3, 
+                                         input$Rank4, 
+                                         input$Rank5, 
+                                         input$Rank6,
+                                         input$Rank7,
+                                         input$Rank8
+                                       )
+                 )
+                 
+                 updateSelectInput(session, 
+                                   "Rank9", 
+                                   choices = newChoices
+                 )
+               }
+  
+              )
+  observeEvent(input$Rank10, 
+               {
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2, 
+                                         input$Rank3, 
+                                         input$Rank4, 
+                                         input$Rank5, 
+                                         input$Rank6,
+                                         input$Rank7,
+                                         input$Rank8,
+                                         input$Rank9
+                                       )
+                 )
+                 
+                 updateSelectInput(session, 
+                                   "Rank10", 
+                                   choices = newChoices
+                 )
+               }
+               
+            )
+  observeEvent(input$Rank11, 
+               {
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2, 
+                                         input$Rank3, 
+                                         input$Rank4, 
+                                         input$Rank5, 
+                                         input$Rank6,
+                                         input$Rank7,
+                                         input$Rank8,
+                                         input$Rank9,
+                                         input$Rank10
+                                       )
+                 )
+                 
+                 updateSelectInput(session, 
+                                   "Rank11", 
+                                   choices = newChoices
+                 )
+               }
+               
+            )
+  
+  observeEvent(input$Rank12, 
+               {
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2, 
+                                         input$Rank3, 
+                                         input$Rank4, 
+                                         input$Rank5, 
+                                         input$Rank6,
+                                         input$Rank7,
+                                         input$Rank8,
+                                         input$Rank9,
+                                         input$Rank10,
+                                         input$Rank11
+                                       )
+                 )
+                 
+                 updateSelectInput(session, 
+                                   "Rank12", 
+                                   choices = newChoices
+                 )
+               }
+               
+            )
+  
+  observeEvent(input$Rank13, 
+               {
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2, 
+                                         input$Rank3, 
+                                         input$Rank4, 
+                                         input$Rank5, 
+                                         input$Rank6,
+                                         input$Rank7,
+                                         input$Rank8,
+                                         input$Rank9,
+                                         input$Rank10,
+                                         input$Rank11,
+                                         input$Rank12
+                                       )
+                 )
+                 
+                 updateSelectInput(session, 
+                                   "Rank13", 
+                                   choices = newChoices
+                 )
+               }
+               
+            )
+  
+  observeEvent(input$Rank14, 
+               {
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2, 
+                                         input$Rank3, 
+                                         input$Rank4, 
+                                         input$Rank5, 
+                                         input$Rank6,
+                                         input$Rank7,
+                                         input$Rank8,
+                                         input$Rank9,
+                                         input$Rank10,
+                                         input$Rank11,
+                                         input$Rank12,
+                                         input$Rank13
+                                       )
+                 )
+                 
+                 updateSelectInput(session, 
+                                   "Rank14", 
+                                   choices = newChoices
+                 )
+               }
+               
+             )
   
   #Output for Bar Graphs 
   output$barbusinesstravel <- renderPlot(
