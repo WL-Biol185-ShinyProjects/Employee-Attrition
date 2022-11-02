@@ -91,9 +91,9 @@ dashboardPage(skin = "green",
       
 #The Third Tab Is the About Tab
                   tabItem( tabName = "About", 
-                    box(
-                    
-                        )
+                    h2("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley"
+                        ),
+                    a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", "kaggle")
               
                           ),
 
