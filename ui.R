@@ -226,7 +226,7 @@ dashboardPage(skin = "green",
                            h2("What You Can Do to Minimize Burnout")
                          ),
 
-                  tabItem(tabName = "Employee Lifestlye", 
+                  tabItem(tabName = "Employee Lifestyle", 
                     box(
                       plotOutput( "barbusinesstravel"
                                  )
