@@ -91,20 +91,7 @@ dashboardPage(skin = "green",
 #The Third Tab Is the About Tab
                   tabItem(tabName = "About", 
                     box(
-                      selectInput( "attrition_data",
-                                   "Choose an X-axis", 
-                                    choices = c( "MonthlyIncome", 
-                                                 "PercentSalaryHike"
-                                              )
-                                  ),
-                      selectInput( "density_data", 
-                                   "Choose an X-axis", 
-                                   choices = c( "MonthlyIncome", 
-                                                "PercentSalaryHike", 
-                                                 "TotalWorkingYears", 
-                                                 "YearsAtCompany"
-                                              )
-                                  )
+                    
                         )
               
                       ),
