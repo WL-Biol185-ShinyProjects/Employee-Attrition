@@ -117,7 +117,7 @@ dashboardPage(skin = "green",
                                                     "Travel_Rarely", 
                                                     "Travel_Frequently"
                                                    ), 
-                                                 selected = " "
+                                                 
                                                 ),
                                  selectizeInput( "EducationField", 
                                                  "What Field Did You Study?", 
@@ -210,7 +210,7 @@ dashboardPage(skin = "green",
                           h2("Rank How Important Each Item Is to You."),
               
                           box(
-                              selectInput( "Rank1", "First", choices = c( "Age", 
+                              selectInput( "Rank1", "First", choices = c("", "Age", 
                                                                   "BusinessTravel", 
                                                                   "EducationField", 
                                                                   "EnvironmentSatisfaction", 
@@ -222,13 +222,13 @@ dashboardPage(skin = "green",
                                                                   "TotalWorkingYears",
                                                                   "WorkLifeBalance", 
                                                                   "YearsAtCompany", 
-                                                                  "YearsInCurrentRole",
-                                                                  " "
+                                                                  "YearsInCurrentRole"
                                                                   ),
-                                           selected = " "
+                                           selected = ""
+                                           
                                            ),
-                              selectInput( "Rank2", "Second", choices = c(""), selected = " "),
-                              selectInput( "Rank3", "Third", choices = c(""), selected = " "),
+                              selectInput( "Rank2", "Second", choices = c("")),
+                              selectInput( "Rank3", "Third", choices = c("")),
                               selectInput( "Rank4", "Fourth", choices = c(""), selected = NULL),
                               selectInput( "Rank5", "Fifth", choices = c(""), selected = NULL),
                               selectInput( "Rank6", "Sixth", choices = c(""), selected = NULL),
