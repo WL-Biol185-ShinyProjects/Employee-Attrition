@@ -16,7 +16,6 @@ dashboardPage(skin = "green",
                  menuItem("About", tabName = "About"),
                  menuItem("SelfHelp", tabName = "SelfHelp"),
                  menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle")
-
                )
                   ),
 
@@ -118,7 +117,8 @@ dashboardPage(skin = "green",
                                                  c( "Non-Travel", 
                                                     "Travel_Rarely", 
                                                     "Travel_Frequently"
-                                                   )
+                                                   ), 
+                                                 
                                                 ),
                                  selectizeInput( "EducationField", 
                                                  "What Field Did You Study?", 
@@ -128,7 +128,8 @@ dashboardPage(skin = "green",
                                                     "Technical Degree", 
                                                     "Human Resources", 
                                                     "Other"
-                                                   )
+                                                   ), 
+                                                 selected = NULL
                                                 ),
                                  sliderInput( "EnvironmentSatisfaction", 
                                               "How Satisfied Are You with Your Job Environment?", 
@@ -141,7 +142,8 @@ dashboardPage(skin = "green",
                                                  "What Is Your Gender?", 
                                                  c( "Male", 
                                                     "Female"
-                                                   )
+                                                   ), 
+                                                 selected = NULL
                                                 ),
                                  sliderInput( "JobSatisfaction", 
                                               "How Satisfied Are You with Your Job?", 
@@ -155,7 +157,8 @@ dashboardPage(skin = "green",
                                                 c( "Single", 
                                                    "Married", 
                                                    "Divorced"
-                                                  )
+                                                  ), 
+                                                selected = NULL
                                                 ),
                                  sliderInput( "MonthlyIncome", 
                                              "What Is Your Monthly Income?", 
@@ -166,7 +169,8 @@ dashboardPage(skin = "green",
                                  selectizeInput( "Overtime", "Do You Work Overtime Often?", 
                                                 c( "Yes", 
                                                    "No"
-                                                  )
+                                                  ), 
+                                                selected = NULL
                                                ),
                                  sliderInput( "PercentSalaryHike",  
                                              "How Much Has Your Salary Increased over Your Career?", 
@@ -204,10 +208,10 @@ dashboardPage(skin = "green",
                                              width = 12
                                ),
               
-                            #h2("Rank How Important Each Item Is to You."),
+                          h2("Rank How Important Each Item Is to You."),
               
-                           box(
-                              selectInput( "Rank1", choices = c( "Age", 
+                          box(
+                              selectInput( "Rank1", "First", choices = c("", "Age", 
                                                                   "BusinessTravel", 
                                                                   "EducationField", 
                                                                   "EnvironmentSatisfaction", 
@@ -221,30 +225,33 @@ dashboardPage(skin = "green",
                                                                   "YearsAtCompany", 
                                                                   "YearsInCurrentRole"
                                                                   ),
-                              selectInput( "Rank2", choices = newChoices),
-                              selectInput( "Rank3", choices = newChoices),
-                              selectInput( "Rank4", choices = newChoices),
-                              selectInput( "Rank5", choices = newChoices),
-                              selectInput( "Rank6", choices = newChoices),
-                              selectInput( "Rank7", choices = newChoices),
-                              selectInput( "Rank8", choices = newChoices),
-                              selectInput( "Rank9", choices = newChoices),
-                              selectInput( "Rank10", choices = newChoices),
-                              selectInput( "Rank11", choices = newChoices),
-                              selectInput( "Rank12", choices = newChoices),
-                              selectInput( "Rank13", choices = newChoices),
-                              selectInput( "Rank14", choices = newChoices),
-                            ),
+                                           selected = ""
+                                           ),
+                              selectInput( "Rank2", "Second", choices = c("")),
+                              selectInput( "Rank3", "Third", choices = c("")),
+                              selectInput( "Rank4", "Fourth", choices = c("")),
+                              selectInput( "Rank5", "Fifth", choices = c("")),
+                              selectInput( "Rank6", "Sixth", choices = c("")),
+                              selectInput( "Rank7", "Seventh", choices = c("")),
+                              selectInput( "Rank8", "Eighth", choices = c("")),
+                              selectInput( "Rank9", "Ninth", choices = c("")),
+                              selectInput( "Rank10", "Tength", choices = c("")),
+                              selectInput( "Rank11", "Eleventh", choices = c("")),
+                              selectInput( "Rank12", "Twelfth", choices = c("")),
+                              selectInput( "Rank13", "Thirteenth", choices = c("")),
+                              selectInput( "Rank14", "Fourteenth", choices = c("")),
               
                            #box(
                                  #textOutput("AttritionEstimation")
                                #),
               
                            h2("What You Can Do to Minimize Burnout")
+<<<<<<< HEAD
                            )
+=======
+                         )
+>>>>>>> ca0cd91e48ded0385bc2e0ba9d7747a0e6d0dab9
                   ),
-                         
-
 
                   tabItem(tabName = "EmployeeLifestyle", 
                     box(plotOutput( "BarBusinessTravel"
@@ -252,6 +259,7 @@ dashboardPage(skin = "green",
                         ), 
                     box(plotOutput( "BarOvertime") 
                        )
+<<<<<<< HEAD
                           ),
 
                   tabItem(tabName = "EmployeeLifestlye", 
@@ -260,11 +268,11 @@ dashboardPage(skin = "green",
                                  )
                        )
                          )
+=======
+                          )
+                  )
+              )
+>>>>>>> ca0cd91e48ded0385bc2e0ba9d7747a0e6d0dab9
             )
-                )
-             )
           )
-
-
-
 

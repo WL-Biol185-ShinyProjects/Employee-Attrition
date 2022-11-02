@@ -57,6 +57,7 @@ server <- function(input, output, session
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
   
+<<<<<<< HEAD
   observeEvent( input$Rank2, 
                 {
       
@@ -71,6 +72,22 @@ server <- function(input, output, session
       
                 }
                )
+=======
+  observeEvent(input$Rank2, 
+               {
+      
+                  newChoices <- setdiff( oldChoices, 
+                                         c(input$Rank1)
+                                        )
+                  if (input$Rank1 != "") {
+                    
+                    updateSelectInput(session, "Rank2", choices = newChoices
+                    )
+                  }
+               }
+  )
+      
+>>>>>>> ca0cd91e48ded0385bc2e0ba9d7747a0e6d0dab9
   observeEvent(input$Rank3, 
                {
                 newChoices <- setdiff( oldChoices, 
@@ -79,10 +96,12 @@ server <- function(input, output, session
                                          )
                                        )
     
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank3", 
                                    choices = newChoices
                                    )
+                 }
                 }
                )
   
@@ -96,10 +115,12 @@ server <- function(input, output, session
                                         )
                                       )
     
-                updateSelectInput(session, 
+                if(input$Rank1 != "") {
+                  updateSelectInput(session, 
                                   "Rank4", 
                                   choices = newChoices
                                   )
+                }
                 }
                )
   
@@ -114,10 +135,12 @@ server <- function(input, output, session
                                          )
                                       )
     
-                updateSelectInput(session, 
+                if(input$Rank1 != "") {
+                  updateSelectInput(session, 
                                   "Rank5", 
                                   choices = newChoices
                                   )
+                }
                 }
               )
   
@@ -133,10 +156,12 @@ server <- function(input, output, session
                                         )
                                       )
     
-                 updateSelectInput(session, 
+                if(input$Rank1 != "") {
+                  updateSelectInput(session, 
                                    "Rank6", 
                                    choices = newChoices
                                    )
+                }
                }
               )
   
@@ -153,10 +178,12 @@ server <- function(input, output, session
                                         )
                                       )
     
-                updateSelectInput(session, 
+                if(input$Rank1 != "") {
+                  updateSelectInput(session, 
                                   "Rank7", 
                                   choices = newChoices
                                   )
+                }
                }
               )
   
@@ -174,10 +201,12 @@ server <- function(input, output, session
                                         )
                                       )
     
-                updateSelectInput(session, 
+                if(input$Rank1 != "") {
+                  updateSelectInput(session, 
                                   "Rank8", 
                                   choices = newChoices
                                   )
+                }
                }
               )
   observeEvent(input$Rank9, 
@@ -195,10 +224,12 @@ server <- function(input, output, session
                                        )
                  )
                  
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank9", 
                                    choices = newChoices
                  )
+                 }
                }
   
               )
@@ -218,10 +249,12 @@ server <- function(input, output, session
                                        )
                  )
                  
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank10", 
                                    choices = newChoices
-                 )
+                  )
+                 }
                }
                
              )
@@ -242,10 +275,12 @@ server <- function(input, output, session
                                        )
                  )
                  
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank11", 
                                    choices = newChoices
                  )
+                 }
                }
                
              )
@@ -267,10 +302,12 @@ server <- function(input, output, session
                                        )
                  )
                  
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank12", 
                                    choices = newChoices
                  )
+                 }
                }
                
             )
@@ -293,10 +330,12 @@ server <- function(input, output, session
                                        )
                  )
                  
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank13", 
                                    choices = newChoices
                  )
+                 }
                }
                
             )
@@ -320,10 +359,12 @@ server <- function(input, output, session
                                        )
                  )
                  
-                 updateSelectInput(session, 
+                 if(input$Rank1 != "") {
+                   updateSelectInput(session, 
                                    "Rank14", 
                                    choices = newChoices
                  )
+                 }
                }
                
              )
