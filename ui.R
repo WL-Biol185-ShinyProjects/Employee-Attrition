@@ -14,8 +14,8 @@ dashboardPage(skin = "green",
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
-                 menuItem("Self-Help", tabName = "Self-Help"),
-                 menuItem("Employee Lifestyle", tabName= "Employee Lifestyle")
+                 menuItem("SelfHelp", tabName = "SelfHelp"),
+                 menuItem("EmployeeLifestyle", tabName= "EmployeeLifestyle")
                )
                   ),
 
@@ -100,7 +100,7 @@ dashboardPage(skin = "green",
                           ),
 
       #The Fourth Tab is the Self-Help Tab          
-                  tabItem( tabName = "Self-Help",
+                  tabItem( tabName = "SelfHelp",
                             h2( "Estimating Your Chance of Quitting! Happiness"),
         #Slider         
                             box(
@@ -137,7 +137,7 @@ dashboardPage(skin = "green",
                                               2, 
                                               step = 1
                                              ),
-                                 selectizeInput( "Gener", 
+                                 selectizeInput( "Gender", 
                                                  "What Is Your Gender?", 
                                                  c( "Male", 
                                                     "Female"
@@ -225,7 +225,6 @@ dashboardPage(skin = "green",
                                                                   "YearsInCurrentRole"
                                                                   ),
                                            selected = ""
-                                           
                                            ),
                               selectInput( "Rank2", "Second", choices = c("")),
                               selectInput( "Rank3", "Third", choices = c("")),
@@ -248,8 +247,7 @@ dashboardPage(skin = "green",
                            h2("What You Can Do to Minimize Burnout")
                          )
                   ),
-
-                  tabItem(tabName = "Employee Lifestlye", 
+                  tabItem(tabName = "EmployeeLifestyle", 
                     box(
                       plotOutput( "barbusinesstravel"
                                  )
@@ -259,3 +257,4 @@ dashboardPage(skin = "green",
             )
           )
         )
+

@@ -59,13 +59,13 @@ server <- function(input, output, session
   
   observeEvent(input$Rank2, 
                {
-      
                   newChoices <- setdiff(oldChoices, c(input$Rank1)
                             )
-      
-                  if( input$Rank1 != "") {
-                    updateSelectInput( session, "Rank2", choices = newChoices
-                        )
+                  if (input$Rank1 != "") {
+                    
+                    updateSelectInput(session, "Rank2", choices = newChoices
+                    )
+                    
                   }
                 }
                )
@@ -74,7 +74,8 @@ server <- function(input, output, session
                {
     
                  newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, input$Rank2
+                                       c(input$Rank1, 
+                                         input$Rank2
                                          )
                                        )
     
@@ -131,7 +132,8 @@ server <- function(input, output, session
     
                 newChoices <- setdiff(oldChoices, 
                                       c(input$Rank1, 
-                                        input$Rank2, input$Rank3, 
+                                        input$Rank2, 
+                                        input$Rank3, 
                                         input$Rank4, 
                                         input$Rank5
                                         )
@@ -238,7 +240,7 @@ server <- function(input, output, session
                  }
                }
                
-            )
+             )
   observeEvent(input$Rank11, 
                {
                  
@@ -264,8 +266,7 @@ server <- function(input, output, session
                  }
                }
                
-            )
-  
+             )
   observeEvent(input$Rank12, 
                {
                  
@@ -293,7 +294,6 @@ server <- function(input, output, session
                }
                
             )
-  
   observeEvent(input$Rank13, 
                {
                  
@@ -322,7 +322,6 @@ server <- function(input, output, session
                }
                
             )
-  
   observeEvent(input$Rank14, 
                {
                  
