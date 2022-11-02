@@ -4,6 +4,7 @@ library(shinydashboard)
 library(ggplot2)
 library(dplyr)
 
+
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "green",
   dashboardHeader(title = "Healthcare Attrition"),
@@ -58,9 +59,9 @@ dashboardPage(skin = "green",
                                      "Choose an X-axis", 
                                       choices = c( "MonthlyIncome", 
                                                    "PercentSalaryHike"
-                                                )
+                                                  )
                                    )
-                     ),
+                      ),
     
                    h2("Scatter Plot"),
 #Scatter Plot
@@ -71,15 +72,15 @@ dashboardPage(skin = "green",
                                      choices = c( "MonthlyIncome", 
                                                   "PercentSalaryHike"
                                                 )
-                                  ),
+                                   ),
                         selectInput( "y_scatter_data", 
                                      "Choose a Y-axis", 
                                      choices = c( "TotalWorkingYears", 
                                                 "YearsAtCompany"
                                                 )
                                    )
-                     )
-                  ),
+                       )
+                     ),
       
 #The Second Tab Is the History Tab
                   tabItem( tabName ="History", 
@@ -89,49 +90,152 @@ dashboardPage(skin = "green",
                          ),
       
 #The Third Tab Is the About Tab
-                  tabItem(tabName = "About", 
+                  tabItem( tabName = "About", 
                     box(
                     
                         )
               
-                      ),
+                          ),
 
       #The Fourth Tab is the Self-Help Tab          
-      tabItem(tabName = "Self-Help",
-              h2("Estimating Your Chance of Quitting! Happiness"),
+                  tabItem( tabName = "Self-Help",
+                            h2( "Estimating Your Chance of Quitting! Happiness"),
+        #Slider         
+                            box(
+                                 sliderInput( "Age", 
+                                              "What is Your Age?", 
+                                              18, 
+                                              60, 
+                                              40, 
+                                              step = 1
+                                             ),
+                                 selectizeInput( "BusinessTravel", 
+                                                 "How Often Do you Travel?", 
+                                                 c( "Non-Travel", 
+                                                    "Travel_Rarely", 
+                                                    "Travel_Frequently"
+                                                   )
+                                                ),
+                                 selectizeInput( "EducationField", 
+                                                 "What Field Did You Study?", 
+                                                 c( "Life Sciences", 
+                                                    "Medical", 
+                                                    "Marketing", 
+                                                    "Technical Degree", 
+                                                    "Human Resources", 
+                                                    "Other"
+                                                   )
+                                                ),
+                                 sliderInput( "EnvironmentSatisfaction", 
+                                              "How Satisfied Are You with Your Job Environment?", 
+                                              1, 
+                                              4, 
+                                              2, 
+                                              step = 1
+                                             ),
+                                 selectizeInput( "Gener", 
+                                                 "What Is Your Gender?", 
+                                                 c( "Male", 
+                                                    "Female"
+                                                   )
+                                                ),
+                                 sliderInput( "JobSatisfaction", 
+                                              "How Satisfied Are You with Your Job?", 
+                                              1, 
+                                              4, 
+                                              2, 
+                                              step = 1
+                                            ),
+                                 selectizeInput( "MaritalStatus", 
+                                                "What's Your Marital Status?", 
+                                                c( "Single", 
+                                                   "Married", 
+                                                   "Divorced"
+                                                  )
+                                                ),
+                                 sliderInput( "MonthlyIncome", 
+                                             "What Is Your Monthly Income?", 
+                                             1000,  
+                                             20000, 
+                                             10000
+                                            ),
+                                 selectizeInput( "Overtime", "Do You Work Overtime Often?", 
+                                                c( "Yes", 
+                                                   "No"
+                                                  )
+                                               ),
+                                 sliderInput( "PercentSalaryHike",  
+                                             "How Much Has Your Salary Increased over Your Career?", 
+                                             10, 
+                                             25, 
+                                             17
+                                            ),
+                                 sliderInput( "TotalWorkingYears", 
+                                             "How Many Years Have You Worked?", 
+                                             0, 
+                                             40, 
+                                             20, 
+                                             step = 1
+                                            ),
+                                 sliderInput( "WorkLifeBalance", 
+                                             "How Is Your Work/Life Balance?", 
+                                             1, 
+                                             4, 
+                                             2, 
+                                             step = 1
+                                            ),
+                                 sliderInput( "YearsAtCompany", 
+                                             "How Many Years Have You Worked at Your Current Company?", 
+                                             0, 
+                                             40, 
+                                             20, 
+                                             step = 1
+                                            ),
+                                 sliderInput( "YearsInCurrentRole", 
+                                             "How Many Years Have You Worked in Your Current Role?", 
+                                             0, 
+                                             20, 
+                                             10, 
+                                             step = 1),
+                                             width = 12
+                               ),
               
-              box(
-                sliderInput("Age", "What is Your Age?", 18, 60, 40, step = 1),
-                selectizeInput("BusinessTravel", "How Often Do you Travel?", c("Non-Travel", "Travel_Rarely", "Travel_Frequently")),
-                selectizeInput("EducationField", "What Field Did You Study?", c("Life Sciences", "Medical", "Marketing", "Technical Degree", "Human Resources", "Other")),
-                sliderInput("EnvironmentSatisfaction", "How Satisfied Are You with Your Job Enivironment?", 1, 4, 2, step = 1),
-                selectizeInput("Gener", "What Is Your Gender?", c("Male", "Female")),
-                sliderInput("JobSatisfaction", "How Satisfied Are You with Your Job?", 1, 4, 2, step = 1),
-                selectizeInput("MaritalStatus", "What's Your Marital Status?", c("Single", "Married", "Divorced")),
-                sliderInput("MonthlyIncome", "What Is Your Monthly Income?", 1000,  20000, 10000),
-                selectizeInput("Overtime", "Do You Work Overtime Often?", c("Yes", "No")),
-                sliderInput("PercentSalaryHike", "How Much Has Your Salary Increased over Your Career?", 10, 25, 17),
-                sliderInput("TotalWorkingYears", "How Many Years Have You Worked?", 0, 40, 20, step = 1),
-                sliderInput("WorkLifeBalance", "How Is Your Work/Life Balance?", 1, 4, 2, step = 1),
-                sliderInput("YearsAtCompany", "How Many Years Have You Worked at Your Current Company?", 0, 40, 20, step = 1),
-                sliderInput("YearsInCurrentRole", "How Many Years Have You Worked in Your Current Role?", 0, 20, 10, step = 1),
-                width = 12
-              ),
+                            h2("Rank How Important Each Item Is to You."),
               
-              #box(
-                #textOutput("AttritionEstimation")
+                           #box(
+                              selectInput( "Rank1", choices = newChoices),
+                              selectInput( "Rank2", choices = newChoices),
+                              selectInput( "Rank3", choices = newChoices),
+                              selectInput( "Rank4", choices = newChoices),
+                              selectInput( "Rank5", choices = newChoices),
+                              selectInput( "Rank6", choices = newChoices),
+                              selectInput( "Rank7", choices = newChoices),
+                              selectInput( "Rank8", choices = newChoices),
+                              selectInput( "Rank9", choices = newChoices),
+                              selectInput( "Rank10", choices = newChoices),
+                              selectInput( "Rank11", choices = newChoices),
+                              selectInput( "Rank12", choices = newChoices),
+                              selectInput( "Rank13", choices = newChoices),
+                              selectInput( "Rank14", choices = newChoices),
+                              #),
               
+                           #box(
+                                 #textOutput("AttritionEstimation")
+                               #),
               
-              h2("What You Can Do to Minimize Burnout")
-      ),
-      tabItem(tabName = "Employee Lifestlye", 
-              box(plotOutput("barbusinesstravel")
+                           h2("What You Can Do to Minimize Burnout")
+                         ),
+
+                  tabItem(tabName = "Employee Lifestlye", 
+                    box(
+                      plotOutput( "barbusinesstravel"
+                                 )
+                        )
+                         )
               )
+            )
+                )
              )
-           )
-                  )
-                )
-                )
 
 
 
