@@ -116,7 +116,8 @@ dashboardPage(skin = "green",
                                                  c( "Non-Travel", 
                                                     "Travel_Rarely", 
                                                     "Travel_Frequently"
-                                                   )
+                                                   ), 
+                                                 selected = " "
                                                 ),
                                  selectizeInput( "EducationField", 
                                                  "What Field Did You Study?", 
@@ -126,7 +127,8 @@ dashboardPage(skin = "green",
                                                     "Technical Degree", 
                                                     "Human Resources", 
                                                     "Other"
-                                                   )
+                                                   ), 
+                                                 selected = NULL
                                                 ),
                                  sliderInput( "EnvironmentSatisfaction", 
                                               "How Satisfied Are You with Your Job Environment?", 
@@ -139,7 +141,8 @@ dashboardPage(skin = "green",
                                                  "What Is Your Gender?", 
                                                  c( "Male", 
                                                     "Female"
-                                                   )
+                                                   ), 
+                                                 selected = NULL
                                                 ),
                                  sliderInput( "JobSatisfaction", 
                                               "How Satisfied Are You with Your Job?", 
@@ -153,7 +156,8 @@ dashboardPage(skin = "green",
                                                 c( "Single", 
                                                    "Married", 
                                                    "Divorced"
-                                                  )
+                                                  ), 
+                                                selected = NULL
                                                 ),
                                  sliderInput( "MonthlyIncome", 
                                              "What Is Your Monthly Income?", 
@@ -164,7 +168,8 @@ dashboardPage(skin = "green",
                                  selectizeInput( "Overtime", "Do You Work Overtime Often?", 
                                                 c( "Yes", 
                                                    "No"
-                                                  )
+                                                  ), 
+                                                selected = NULL
                                                ),
                                  sliderInput( "PercentSalaryHike",  
                                              "How Much Has Your Salary Increased over Your Career?", 
@@ -202,10 +207,10 @@ dashboardPage(skin = "green",
                                              width = 12
                                ),
               
-                            h2("Rank How Important Each Item Is to You."),
+                          h2("Rank How Important Each Item Is to You."),
               
-                           box(
-                              selectInput( "Rank1", choices = c( "Age", 
+                          box(
+                              selectInput( "Rank1", "First", choices = c( "Age", 
                                                                   "BusinessTravel", 
                                                                   "EducationField", 
                                                                   "EnvironmentSatisfaction", 
@@ -217,40 +222,40 @@ dashboardPage(skin = "green",
                                                                   "TotalWorkingYears",
                                                                   "WorkLifeBalance", 
                                                                   "YearsAtCompany", 
-                                                                  "YearsInCurrentRole"
+                                                                  "YearsInCurrentRole",
+                                                                  " "
                                                                   ),
-                              selectInput( "Rank2", choices = c("")),
-                              selectInput( "Rank3", choices = c("")),
-                              selectInput( "Rank4", choices = c("")),
-                              selectInput( "Rank5", choices = c("")),
-                              selectInput( "Rank6", choices = c("")),
-                              selectInput( "Rank7", choices = c("")),
-                              selectInput( "Rank8", choices = c("")),
-                              selectInput( "Rank9", choices = c("")),
-                              selectInput( "Rank10", choices = c("")),
-                              selectInput( "Rank11", choices = c("")),
-                              selectInput( "Rank12", choices = c("")),
-                              selectInput( "Rank13", choices = c("")),
-                              selectInput( "Rank14", choices = c("")),
-                            ),
+                                           selected = " "
+                                           ),
+                              selectInput( "Rank2", "Second", choices = c(""), selected = " "),
+                              selectInput( "Rank3", "Third", choices = c(""), selected = " "),
+                              selectInput( "Rank4", "Fourth", choices = c(""), selected = NULL),
+                              selectInput( "Rank5", "Fifth", choices = c(""), selected = NULL),
+                              selectInput( "Rank6", "Sixth", choices = c(""), selected = NULL),
+                              selectInput( "Rank7", "Seventh", choices = c(""), selected = NULL),
+                              selectInput( "Rank8", "Eighth", choices = c(""), selected = NULL),
+                              selectInput( "Rank9", "Ninth", choices = c(""), selected = NULL),
+                              selectInput( "Rank10", "Tength", choices = c(""), selected = NULL),
+                              selectInput( "Rank11", "Eleventh", choices = c(""), selected = NULL),
+                              selectInput( "Rank12", "Twelfth", choices = c(""), selected = NULL),
+                              selectInput( "Rank13", "Thirteenth", choices = c(""), selected = NULL),
+                              selectInput( "Rank14", "Fourteenth", choices = c(""), selected = NULL),
               
                            #box(
                                  #textOutput("AttritionEstimation")
                                #),
               
                            h2("What You Can Do to Minimize Burnout")
-                         ),
+                         )
+                  ),
 
                   tabItem(tabName = "Employee Lifestlye", 
                     box(
                       plotOutput( "barbusinesstravel"
                                  )
-                        )
-                         )
+                    )
+                  )
               )
             )
-                )
-             )
-
-
-
+          )
+        )
