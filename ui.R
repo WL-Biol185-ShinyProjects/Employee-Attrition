@@ -3,6 +3,7 @@ library(shiny)
 library(shinydashboard)
 library(ggplot2)
 library(dplyr)
+library(tidyverse)
 
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
@@ -203,22 +204,35 @@ dashboardPage(skin = "green",
               
                             h2("Rank How Important Each Item Is to You."),
               
-                           #box(
-                              #selectInput( "Rank1", choices = newChoices),
-                              #selectInput( "Rank2", choices = newChoices),
-                              #selectInput( "Rank3", choices = newChoices),
-                              #selectInput( "Rank4", choices = newChoices),
-                              #selectInput( "Rank5", choices = newChoices),
-                              #selectInput( "Rank6", choices = newChoices),
-                              #selectInput( "Rank7", choices = newChoices),
-                              #selectInput( "Rank8", choices = newChoices),
-                              #selectInput( "Rank9", choices = newChoices),
-                              #selectInput( "Rank10", choices = newChoices),
-                              #selectInput( "Rank11", choices = newChoices),
-                              #selectInput( "Rank12", choices = newChoices),
-                              #selectInput( "Rank13", choices = newChoices),
-                              #selectInput( "Rank14", choices = newChoices),
-                              #),
+                           box(
+                              selectInput( "Rank1", choices = c( "Age", 
+                                                                  "BusinessTravel", 
+                                                                  "EducationField", 
+                                                                  "EnvironmentSatisfaction", 
+                                                                  "Gender", 
+                                                                  "JobSatisfaction", 
+                                                                  "MaritalStatus", 
+                                                                  "OverTime", 
+                                                                  "PercentSalaryHike", 
+                                                                  "TotalWorkingYears",
+                                                                  "WorkLifeBalance", 
+                                                                  "YearsAtCompany", 
+                                                                  "YearsInCurrentRole"
+                                                                  ),
+                              selectInput( "Rank2", choices = c("")),
+                              selectInput( "Rank3", choices = c("")),
+                              selectInput( "Rank4", choices = c("")),
+                              selectInput( "Rank5", choices = c("")),
+                              selectInput( "Rank6", choices = c("")),
+                              selectInput( "Rank7", choices = c("")),
+                              selectInput( "Rank8", choices = c("")),
+                              selectInput( "Rank9", choices = c("")),
+                              selectInput( "Rank10", choices = c("")),
+                              selectInput( "Rank11", choices = c("")),
+                              selectInput( "Rank12", choices = c("")),
+                              selectInput( "Rank13", choices = c("")),
+                              selectInput( "Rank14", choices = c("")),
+                            ),
               
                            #box(
                                  #textOutput("AttritionEstimation")
