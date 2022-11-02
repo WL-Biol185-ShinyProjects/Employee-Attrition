@@ -15,7 +15,7 @@ dashboardPage(skin = "green",
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
                  menuItem("SelfHelp", tabName = "SelfHelp"),
-                 menuItem("EmployeeLifestyle", tabName= "EmployeeLifestyle")
+                 menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle")
                )
                   ),
 
@@ -31,8 +31,8 @@ dashboardPage(skin = "green",
                 tabItem(tabName = "Graphs", 
                   h2("Histogram"),
 #Histogram
-                  box( plotOutput("histogramplot"),
-                       selectInput( "histogram_data", 
+                  box( plotOutput("HistogramPlot"),
+                       selectInput( "HistogramData", 
                                     "Choose an X-axis", 
                                      choices = c( "Age", 
                                                   "BusinessTravel", 
@@ -55,8 +55,8 @@ dashboardPage(skin = "green",
                    h2("Density Plot"),
               
 #Density Plot 
-                   box( plotOutput( "densityplot"),
-                        selectInput( "density_data", 
+                   box( plotOutput( "DensityPlot"),
+                        selectInput( "DensityData", 
                                      "Choose an X-axis", 
                                       choices = c( "MonthlyIncome", 
                                                    "PercentSalaryHike"
@@ -67,14 +67,14 @@ dashboardPage(skin = "green",
                    h2("Scatter Plot"),
 #Scatter Plot
               
-                   box( plotOutput("scatterplot"), 
-                        selectInput( "x_scatter_data", 
+                   box( plotOutput("ScatterPlot"), 
+                        selectInput( "XScatterData", 
                                     "Choose an X-axis", 
                                      choices = c( "MonthlyIncome", 
                                                   "PercentSalaryHike"
                                                 )
                                    ),
-                        selectInput( "y_scatter_data", 
+                        selectInput( "YScatterData", 
                                      "Choose a Y-axis", 
                                      choices = c( "TotalWorkingYears", 
                                                 "YearsAtCompany"
@@ -98,6 +98,7 @@ dashboardPage(skin = "green",
                     
               
                           ),
+
 
       #The Fourth Tab is the Self-Help Tab          
                   tabItem( tabName = "SelfHelp",
@@ -228,17 +229,17 @@ dashboardPage(skin = "green",
                                            ),
                               selectInput( "Rank2", "Second", choices = c("")),
                               selectInput( "Rank3", "Third", choices = c("")),
-                              selectInput( "Rank4", "Fourth", choices = c(""), selected = NULL),
-                              selectInput( "Rank5", "Fifth", choices = c(""), selected = NULL),
-                              selectInput( "Rank6", "Sixth", choices = c(""), selected = NULL),
-                              selectInput( "Rank7", "Seventh", choices = c(""), selected = NULL),
-                              selectInput( "Rank8", "Eighth", choices = c(""), selected = NULL),
-                              selectInput( "Rank9", "Ninth", choices = c(""), selected = NULL),
-                              selectInput( "Rank10", "Tength", choices = c(""), selected = NULL),
-                              selectInput( "Rank11", "Eleventh", choices = c(""), selected = NULL),
-                              selectInput( "Rank12", "Twelfth", choices = c(""), selected = NULL),
-                              selectInput( "Rank13", "Thirteenth", choices = c(""), selected = NULL),
-                              selectInput( "Rank14", "Fourteenth", choices = c(""), selected = NULL),
+                              selectInput( "Rank4", "Fourth", choices = c("")),
+                              selectInput( "Rank5", "Fifth", choices = c("")),
+                              selectInput( "Rank6", "Sixth", choices = c("")),
+                              selectInput( "Rank7", "Seventh", choices = c("")),
+                              selectInput( "Rank8", "Eighth", choices = c("")),
+                              selectInput( "Rank9", "Ninth", choices = c("")),
+                              selectInput( "Rank10", "Tength", choices = c("")),
+                              selectInput( "Rank11", "Eleventh", choices = c("")),
+                              selectInput( "Rank12", "Twelfth", choices = c("")),
+                              selectInput( "Rank13", "Thirteenth", choices = c("")),
+                              selectInput( "Rank14", "Fourteenth", choices = c("")),
               
                            #box(
                                  #textOutput("AttritionEstimation")
@@ -247,14 +248,16 @@ dashboardPage(skin = "green",
                            h2("What You Can Do to Minimize Burnout")
                          )
                   ),
+
                   tabItem(tabName = "EmployeeLifestyle", 
-                    box(
-                      plotOutput( "barbusinesstravel"
-                                 )
-                    )
+                    box(plotOutput( "BarBusinessTravel"
+                                  )
+                        ), 
+                    box(plotOutput( "BarOvertime") 
+                       )
+                          )
                   )
               )
             )
           )
-        )
 
