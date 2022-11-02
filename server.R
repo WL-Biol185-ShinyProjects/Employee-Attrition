@@ -57,35 +57,25 @@ server <- function(input, output, session
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
   
-  observeEvent(input$Rank2, 
-               {
-<<<<<<< HEAD
-                  newChoices <- setdiff(oldChoices, input$Rank1
-                            )
-                  updateSelectInput(sesson, "Rank2", choices = newChoices
-                        )
-=======
+  observeEvent( input$Rank2, 
+                {
       
-                  newChoices <- setdiff(oldChoices, 
-                                        c(input$Rank1)
+                  newChoices <- setdiff( oldChoices, 
+                                         c(input$Rank1)
                             )
                   if (input$Rank1 != "") {
                     
-                    updateSelectInput(session, "Rank2", choices = newChoices
-                    )
-                    
-                  } 
+                    updateSelectInput( session, "Rank2", choices = newChoices
+                                     )
+                                         } 
       
-                  
->>>>>>> c147174eeb5d08be41ab7e96023d20c5d78623fe
                 }
                )
   observeEvent(input$Rank3, 
                {
-    
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2
+                newChoices <- setdiff( oldChoices, 
+                                        c( input$Rank1, 
+                                           input$Rank2
                                          )
                                        )
     

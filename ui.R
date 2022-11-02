@@ -241,6 +241,7 @@ dashboardPage(skin = "green",
                                #),
               
                            h2("What You Can Do to Minimize Burnout")
+                           )
                   ),
                          
 
@@ -257,9 +258,8 @@ dashboardPage(skin = "green",
                     box(
                       plotOutput( "barbusinesstravel"
                                  )
-                        )
+                       )
                          )
-              )
             )
                 )
              )
