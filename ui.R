@@ -13,8 +13,8 @@ dashboardPage(skin = "green",
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
-                 menuItem("Self-Help", tabName = "Self-Help"),
-                 menuItem("Employee Lifestyle", tabName= "Employee Lifestyle")
+                 menuItem("SelfHelp", tabName = "SelfHelp"),
+                 menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle")
                )
                   ),
 
@@ -98,8 +98,8 @@ dashboardPage(skin = "green",
               
                           ),
 
-      #The Fourth Tab is the Self-Help Tab          
-                  tabItem( tabName = "Self-Help",
+      #The Fourth Tab is the SelfHelp Tab          
+                  tabItem( tabName = "SelfHelp",
                             h2( "Estimating Your Chance of Quitting! Happiness"),
         #Slider         
                             box(
@@ -201,7 +201,7 @@ dashboardPage(skin = "green",
                                              width = 12
                                ),
               
-                            h2("Rank How Important Each Item Is to You."),
+                            #h2("Rank How Important Each Item Is to You."),
               
                            #box(
                               #selectInput( "Rank1", choices = newChoices),
@@ -225,14 +225,16 @@ dashboardPage(skin = "green",
                                #),
               
                            h2("What You Can Do to Minimize Burnout")
-                         ),
+                  ),
+                         
 
-                  tabItem(tabName = "Employee Lifestyle", 
-                    box(
-                      plotOutput( "barbusinesstravel"
-                                 )
-                        )
-                         )
+                  tabItem(tabName = "EmployeeLifestyle", 
+                    box(plotOutput( "barbusinesstravel"
+                                  )
+                        ), 
+                    box(plotOutput( "BarOvertime") 
+                       )
+                          )
               )
             )
                 )
