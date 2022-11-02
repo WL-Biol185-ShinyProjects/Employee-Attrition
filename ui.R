@@ -246,11 +246,9 @@ dashboardPage(skin = "green",
                                #),
               
                            h2("What You Can Do to Minimize Burnout")
-<<<<<<< HEAD
-                           )
-=======
+
                          )
->>>>>>> ca0cd91e48ded0385bc2e0ba9d7747a0e6d0dab9
+
                   ),
 
                   tabItem(tabName = "EmployeeLifestyle", 
@@ -259,20 +257,11 @@ dashboardPage(skin = "green",
                         ), 
                     box(plotOutput( "BarOvertime") 
                        )
-<<<<<<< HEAD
-                          ),
 
-                  tabItem(tabName = "EmployeeLifestlye", 
-                    box(
-                      plotOutput( "barbusinesstravel"
-                                 )
-                       )
-                         )
-=======
                           )
                   )
               )
->>>>>>> ca0cd91e48ded0385bc2e0ba9d7747a0e6d0dab9
+
             )
           )
 
