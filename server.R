@@ -191,6 +191,7 @@ server <- function(input, output, session
                 position = position_stack(vjust = 0.5), size = 3) +
       scale_x_discrete(breaks = c("Travel_Rarely", "Travel_Frequently", "Non-Travel"),
                        labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
+      labs(title = "Travel Frequency and Attrition", x = "Travel Frequency", y = "Percentage") +
       scale_fill_manual(values = c("#fde725", "#21918c"))
     }
                                         )
