@@ -60,7 +60,8 @@ server <- function(input, output, session
   observeEvent(input$Rank2, 
                {
       
-                  newChoices <- setdiff(oldChoices, input$Rank1
+                  newChoices <- setdiff(oldChoices, 
+                                        c(input$Rank1)
                             )
       
                   updateSelectInput(session, "Rank2", choices = newChoices
