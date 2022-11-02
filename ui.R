@@ -240,13 +240,16 @@ dashboardPage(skin = "green",
                               selectInput( "Rank12", "Twelfth", choices = c("")),
                               selectInput( "Rank13", "Thirteenth", choices = c("")),
                               selectInput( "Rank14", "Fourteenth", choices = c("")),
+                              width = 6
+                          ),
               
-                           #box(
+                           box(
+                             h2("Your Likelihood of Quitting Is..."),
                                  #textOutput("AttritionEstimation")
-                               #),
+                             width = 6
+                               ),
               
                            h2("What You Can Do to Minimize Burnout")
-                         )
                   ),
 
                   tabItem(tabName = "EmployeeLifestyle", 
