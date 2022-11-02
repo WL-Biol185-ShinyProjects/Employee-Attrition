@@ -14,8 +14,8 @@ dashboardPage(skin = "green",
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
-                 menuItem("Self-Help", tabName = "Self-Help"),
-                 menuItem("Employee Lifestyle", tabName= "Employee Lifestyle")
+                 menuItem("Self-Help", tabName = "SelfHelp"),
+                 menuItem("Employee Lifestyle", tabName= "EmployeeLifestyle")
                )
                   ),
 
@@ -135,7 +135,7 @@ dashboardPage(skin = "green",
                                               2, 
                                               step = 1
                                              ),
-                                 selectizeInput( "Gener", 
+                                 selectizeInput( "Gender", 
                                                  "What Is Your Gender?", 
                                                  c( "Male", 
                                                     "Female"
@@ -219,19 +219,19 @@ dashboardPage(skin = "green",
                                                                   "YearsAtCompany", 
                                                                   "YearsInCurrentRole"
                                                                   ),
-                              selectInput( "Rank2", choices = c("")),
-                              selectInput( "Rank3", choices = c("")),
-                              selectInput( "Rank4", choices = c("")),
-                              selectInput( "Rank5", choices = c("")),
-                              selectInput( "Rank6", choices = c("")),
-                              selectInput( "Rank7", choices = c("")),
-                              selectInput( "Rank8", choices = c("")),
-                              selectInput( "Rank9", choices = c("")),
-                              selectInput( "Rank10", choices = c("")),
-                              selectInput( "Rank11", choices = c("")),
-                              selectInput( "Rank12", choices = c("")),
-                              selectInput( "Rank13", choices = c("")),
-                              selectInput( "Rank14", choices = c("")),
+                              selectInput( "Rank2", choices = newChoices),
+                              selectInput( "Rank3", choices = newChoices),
+                              selectInput( "Rank4", choices = newChoices),
+                              selectInput( "Rank5", choices = newChoices),
+                              selectInput( "Rank6", choices = newChoices),
+                              selectInput( "Rank7", choices = newChoices),
+                              selectInput( "Rank8", choices = newChoices),
+                              selectInput( "Rank9", choices = newChoices),
+                              selectInput( "Rank10", choices = newChoices),
+                              selectInput( "Rank11", choices = newChoices),
+                              selectInput( "Rank12", choices = newChoices),
+                              selectInput( "Rank13", choices = newChoices),
+                              selectInput( "Rank14", choices = newChoices),
                             ),
               
                            #box(
@@ -251,6 +251,8 @@ dashboardPage(skin = "green",
             )
                 )
              )
+          )
+
 
 
 
