@@ -11,10 +11,10 @@ server <- function(input, output, session
                                                    )
   
   #Output for Histogram
-  output$histogramplot <- renderPlot(
+  output$HistogramPlot <- renderPlot(
     {
       ggplot(watson_healthcare_clean,
-           aes_string(input$histogram_data, 
+           aes_string(input$HistogramData, 
                       fill = watson_healthcare_clean$Attrition
                       )
            ) +
@@ -26,10 +26,10 @@ server <- function(input, output, session
                                        )
   
   #Output for Density Plot 
-  output$densityplot <- renderPlot(
+  output$DensityPlot <- renderPlot(
     {
       ggplot(watson_healthcare_clean, 
-          aes_string(input$density_data, 
+          aes_string(input$DensityData, 
           fill = watson_healthcare_clean$Attrition
                      )
           ) +
@@ -40,10 +40,10 @@ server <- function(input, output, session
                                    )
   
   #Output for Scatter Plot 
-  output$scatterplot  <- renderPlot(
+  output$ScatterPlot <- renderPlot(
     {
       ggplot(watson_healthcare_clean, 
-           aes_string(input$x_scatter_data, input$y_scatter_data)) +
+           aes_string(input$XScatterData, input$YScatterData)) +
            geom_point(stat = "identity")
      }
                                    )
@@ -175,7 +175,7 @@ server <- function(input, output, session
               )
   
   #Output for Bar Graphs 
-  output$barbusinesstravel <- renderPlot({
+  output$BarBusinessTravel <- renderPlot({
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, 
                                                levels = c("Yes", 
                                                           "No"

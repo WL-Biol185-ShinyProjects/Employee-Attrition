@@ -30,8 +30,8 @@ dashboardPage(skin = "green",
                 tabItem(tabName = "Graphs", 
                   h2("Histogram"),
 #Histogram
-                  box( plotOutput("histogramplot"),
-                       selectInput( "histogram_data", 
+                  box( plotOutput("HistogramPlot"),
+                       selectInput( "HistogramData", 
                                     "Choose an X-axis", 
                                      choices = c( "Age", 
                                                   "BusinessTravel", 
@@ -54,8 +54,8 @@ dashboardPage(skin = "green",
                    h2("Density Plot"),
               
 #Density Plot 
-                   box( plotOutput( "densityplot"),
-                        selectInput( "density_data", 
+                   box( plotOutput( "DensityPlot"),
+                        selectInput( "DensityData", 
                                      "Choose an X-axis", 
                                       choices = c( "MonthlyIncome", 
                                                    "PercentSalaryHike"
@@ -66,14 +66,14 @@ dashboardPage(skin = "green",
                    h2("Scatter Plot"),
 #Scatter Plot
               
-                   box( plotOutput("scatterplot"), 
-                        selectInput( "x_scatter_data", 
+                   box( plotOutput("ScatterPlot"), 
+                        selectInput( "XScatterData", 
                                     "Choose an X-axis", 
                                      choices = c( "MonthlyIncome", 
                                                   "PercentSalaryHike"
                                                 )
                                    ),
-                        selectInput( "y_scatter_data", 
+                        selectInput( "YScatterData", 
                                      "Choose a Y-axis", 
                                      choices = c( "TotalWorkingYears", 
                                                 "YearsAtCompany"
@@ -229,7 +229,7 @@ dashboardPage(skin = "green",
                          
 
                   tabItem(tabName = "EmployeeLifestyle", 
-                    box(plotOutput( "barbusinesstravel"
+                    box(plotOutput( "BarBusinessTravel"
                                   )
                         ), 
                     box(plotOutput( "BarOvertime") 
