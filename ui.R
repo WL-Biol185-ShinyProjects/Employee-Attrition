@@ -3,6 +3,7 @@ library(shiny)
 library(shinydashboard)
 library(ggplot2)
 library(dplyr)
+library(tidyverse)
 
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
@@ -15,6 +16,7 @@ dashboardPage(skin = "green",
                  menuItem("About", tabName = "About"),
                  menuItem("SelfHelp", tabName = "SelfHelp"),
                  menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle")
+
                )
                   ),
 
@@ -98,7 +100,8 @@ dashboardPage(skin = "green",
               
                           ),
 
-      #The Fourth Tab is the SelfHelp Tab          
+
+      #The Fourth Tab is the Self-Help Tab          
                   tabItem( tabName = "SelfHelp",
                             h2( "Estimating Your Chance of Quitting! Happiness"),
         #Slider         
@@ -134,7 +137,7 @@ dashboardPage(skin = "green",
                                               2, 
                                               step = 1
                                              ),
-                                 selectizeInput( "Gener", 
+                                 selectizeInput( "Gender", 
                                                  "What Is Your Gender?", 
                                                  c( "Male", 
                                                     "Female"
@@ -203,22 +206,35 @@ dashboardPage(skin = "green",
               
                             #h2("Rank How Important Each Item Is to You."),
               
-                           #box(
-                              #selectInput( "Rank1", choices = newChoices),
-                              #selectInput( "Rank2", choices = newChoices),
-                              #selectInput( "Rank3", choices = newChoices),
-                              #selectInput( "Rank4", choices = newChoices),
-                              #selectInput( "Rank5", choices = newChoices),
-                              #selectInput( "Rank6", choices = newChoices),
-                              #selectInput( "Rank7", choices = newChoices),
-                              #selectInput( "Rank8", choices = newChoices),
-                              #selectInput( "Rank9", choices = newChoices),
-                              #selectInput( "Rank10", choices = newChoices),
-                              #selectInput( "Rank11", choices = newChoices),
-                              #selectInput( "Rank12", choices = newChoices),
-                              #selectInput( "Rank13", choices = newChoices),
-                              #selectInput( "Rank14", choices = newChoices),
-                              #),
+                           box(
+                              selectInput( "Rank1", choices = c( "Age", 
+                                                                  "BusinessTravel", 
+                                                                  "EducationField", 
+                                                                  "EnvironmentSatisfaction", 
+                                                                  "Gender", 
+                                                                  "JobSatisfaction", 
+                                                                  "MaritalStatus", 
+                                                                  "OverTime", 
+                                                                  "PercentSalaryHike", 
+                                                                  "TotalWorkingYears",
+                                                                  "WorkLifeBalance", 
+                                                                  "YearsAtCompany", 
+                                                                  "YearsInCurrentRole"
+                                                                  ),
+                              selectInput( "Rank2", choices = newChoices),
+                              selectInput( "Rank3", choices = newChoices),
+                              selectInput( "Rank4", choices = newChoices),
+                              selectInput( "Rank5", choices = newChoices),
+                              selectInput( "Rank6", choices = newChoices),
+                              selectInput( "Rank7", choices = newChoices),
+                              selectInput( "Rank8", choices = newChoices),
+                              selectInput( "Rank9", choices = newChoices),
+                              selectInput( "Rank10", choices = newChoices),
+                              selectInput( "Rank11", choices = newChoices),
+                              selectInput( "Rank12", choices = newChoices),
+                              selectInput( "Rank13", choices = newChoices),
+                              selectInput( "Rank14", choices = newChoices),
+                            ),
               
                            #box(
                                  #textOutput("AttritionEstimation")
@@ -228,17 +244,27 @@ dashboardPage(skin = "green",
                   ),
                          
 
+
                   tabItem(tabName = "EmployeeLifestyle", 
                     box(plotOutput( "BarBusinessTravel"
                                   )
                         ), 
                     box(plotOutput( "BarOvertime") 
                        )
-                          )
+                          ),
+
+                  tabItem(tabName = "EmployeeLifestlye", 
+                    box(
+                      plotOutput( "barbusinesstravel"
+                                 )
+                        )
+                         )
               )
             )
                 )
              )
+          )
+
 
 
 
