@@ -94,7 +94,7 @@ dashboardPage(skin = "green",
                   tabItem( tabName = "About", 
                     h2("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley"),
                     h3("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", "kaggle"),
-                       "and pertains to healthcare employees quitting their jobs")
+                       "and pertains to healthcare employees quitting their jobs.")
                     
               
                           ),
