@@ -63,9 +63,14 @@ server <- function(input, output, session
                   newChoices <- setdiff(oldChoices, 
                                         c(input$Rank1)
                             )
+                  if (input$Rank1 != "") {
+                    
+                    updateSelectInput(session, "Rank2", choices = newChoices
+                    )
+                    
+                  } 
       
-                  updateSelectInput(session, "Rank2", choices = newChoices
-                        )
+                  
                 }
                )
   
