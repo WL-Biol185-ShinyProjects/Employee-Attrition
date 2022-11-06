@@ -101,7 +101,7 @@ dashboardPage(skin = "green",
 
 
       #The Fourth Tab is the Self-Help Tab          
-                  tabItem( tabName = "SelfHelp",
+                    tabItem( tabName = "SelfHelp",
                             h2( "Estimating Your Chance of Quitting! Happiness"),
         #Slider         
                             box(
@@ -240,10 +240,14 @@ dashboardPage(skin = "green",
                               selectInput( "Rank12", "Twelfth", choices = c("")),
                               selectInput( "Rank13", "Thirteenth", choices = c("")),
                               selectInput( "Rank14", "Fourteenth", choices = c("")),
+                              width = 6
+                          ),
               
-                           #box(
+                           box(
+                             h2("Your Likelihood of Quitting Is..."),
                                  #textOutput("AttritionEstimation")
-                               #),
+                             width = 6
+                               ),
               
                            h2("What You Can Do to Minimize Burnout")
 
@@ -263,5 +267,6 @@ dashboardPage(skin = "green",
               )
 
             )
+
           )
 
