@@ -101,10 +101,7 @@ dashboardPage(skin = "green",
 
 
       #The Fourth Tab is the Self-Help Tab          
-<<<<<<< HEAD
-                  
-=======
-                  tabItem( tabName = "SelfHelp",
+                    tabItem( tabName = "SelfHelp",
                             h2( "Estimating Your Chance of Quitting! Happiness"),
         #Slider         
                             box(
@@ -265,5 +262,6 @@ dashboardPage(skin = "green",
                   )
               )
             )
+
           )
 
