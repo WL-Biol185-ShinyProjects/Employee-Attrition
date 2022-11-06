@@ -55,136 +55,7 @@ server <- function(input, output, session
   #})
   
   #Updating the ranking input choices
-  oldChoices <- colnames(watson_healthcare_clean)
-  
-  observeEvent(input$Rank2, 
-               {
-      
-                  newChoices <- setdiff(oldChoices, input$Rank1
-                            )
-      
-                  updateSelectInput(sesson, "Rank2", choices = newChoices
-                        )
-                }
-               )
-  
-  observeEvent(input$Rank3, 
-               {
-    
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, input$Rank2
-                                         )
-                                       )
-    
-                 updateSelectInput(sesson, 
-                                   "Rank3", 
-                                   choices = newChoices
-                                   )
-                }
-               )
-  
-  observeEvent(input$Rank4, 
-               {
-    
-                newChoices <- setdiff(oldChoices, 
-                                      c(input$Rank1, 
-                                        input$Rank2, 
-                                        input$Rank3
-                                        )
-                                      )
-    
-                updateSelectInput(sesson, 
-                                  "Rank4", 
-                                  choices = newChoices
-                                  )
-                }
-               )
-  
-  observeEvent(input$Rank5, 
-               {
-    
-                newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2, 
-                                         input$Rank3, 
-                                         input$Rank4
-                                         )
-                                      )
-    
-                updateSelectInput(sesson, 
-                                  "Rank5", 
-                                  choices = newChoices
-                                  )
-                }
-              )
-  
-  observeEvent(input$Rank6, 
-               {
-    
-                newChoices <- setdiff(oldChoices, 
-                                      c(input$Rank1, 
-                                        input$Rank2, input$Rank3, 
-                                        input$Rank4, 
-                                        input$Rank5
-                                        )
-                                      )
-    
-                 updateSelectInput(sesson, 
-                                   "Rank6", 
-                                   choices = newChoices
-                                   )
-               }
-              )
-  
-  observeEvent(input$Rank7, 
-               {
-    
-                newChoices <- setdiff(oldChoices, 
-                                      c(input$Rank1, 
-                                        input$Rank2, 
-                                        input$Rank3, 
-                                        input$Rank4, 
-                                        input$Rank5, 
-                                        input$Rank6
-                                        )
-                                      )
-    
-                updateSelectInput(sesson, 
-                                  "Rank7", 
-                                  choices = newChoices
-                                  )
-               }
-              )
-  
-  observeEvent(input$Rank8, 
-               {
-    
-                newChoices <- setdiff(oldChoices, 
-                                      c(input$Rank1, 
-                                        input$Rank2, 
-                                        input$Rank3, 
-                                        input$Rank4, 
-                                        input$Rank5, 
-                                        input$Rank6, 
-                                        input$Rank7
-                                        )
-                                      )
-    
-                updateSelectInput(sesson, 
-                                  "Rank8", 
-                                  choices = newChoices
-                                  )
-               }
-              )
-  
-  #Output for Bar Graphs 
-  output$barbusinesstravel <- renderPlot(
-    {
-     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, 
-                                               levels = c("Yes", 
-                                                          "No"
-                                                          )
-                                               )
+
      watson_healthcare_clean %>%
       group_by(BusinessTravel, Attrition) %>%
       summarise(cnt = n()) %>%
@@ -197,7 +68,7 @@ server <- function(input, output, session
                        labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
       scale_fill_manual(values = c("#fde725", "#21918c"))
     }
-                                        )
-}
+                                        
+
   
 
