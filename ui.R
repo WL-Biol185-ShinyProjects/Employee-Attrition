@@ -248,10 +248,10 @@ dashboardPage(skin = "green",
                                  #textOutput("AttritionEstimation")
                              width = 6
                                ),
-              
-                           h2("What You Can Do to Minimize Burnout")
 
-                         )
+                           h2("What You Can Do to Minimize Burnout"
+                              
+                              )
 
                   ),
 
