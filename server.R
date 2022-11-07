@@ -439,7 +439,7 @@ server <- function(input, output, session
     
                                            )
     
-  output$WorkLifeBalance <- renderPlot({
+  output$BarWorkLifeBalance <- renderPlot({
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
     watson_healthcare_clean$WorkLifeBalance = factor(hr_data$WorkLifeBalance, levels = c("Bad",
                                                                                          "Good",

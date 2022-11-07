@@ -259,8 +259,18 @@ dashboardPage(skin = "green",
                     box(plotOutput( "BarBusinessTravel"
                                   )
                         ), 
-                    box(plotOutput( "BarOvertime") 
-                       )
+                    box(plotOutput( "BarOvertime"
+                                  ) 
+                       ),
+                    box(plotOutput("BarEnvirSatisfaction"
+                                   )
+                        ),
+                    box(plotOutput("BarJobSatisfaction"
+                                   )
+                        ),
+                    box(plotOutput("BarWorkLifeBalance"
+                                   )
+                        )
 
                           )
                   )
