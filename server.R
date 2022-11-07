@@ -44,7 +44,8 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
            aes_string(input$XScatterData, input$YScatterData)) +
-           geom_point(stat = "identity")
+           geom_point(stat = "identity") +
+           geom_smooth()
      }
                                    )
   
