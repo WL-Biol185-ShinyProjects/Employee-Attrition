@@ -393,4 +393,22 @@ server <- function(input, output, session
                                     }
   
                                    )
+  
+  output$BarEnvirSatisfaction <- renderPlot({
+    watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
+    
+    watson_healthcare_clean %>% 
+      group_by(EnvironmentSatisfaction, Attrition) %>% 
+      summarise(cnt = n()) %>% 
+      mutate(freq = (cnt / sum(cnt))*100) %>% 
+      ggplot(aes(x = EnvironmentSatisfaction, y = freq, fill = Attrition)) +
+      geom_bar(position = position_stack(), stat = "identity", width = .7) +
+      geom_text(aes(label = paste0(round(freq,0), "%")), 
+                position = position_stack(vjust = 0.5), size = 3) +
+      scale_y_continuous(labels = function(x) paste0(x, "%")) +
+      labs(title = "Environment Satisfaction and Attrition", x = "Environment Satisfaction", y = "Percentage") +
+      scale_fill_manual(values = c("#fde725",  "#21918c"))
+                                             }
+                                            )
+    
 }
