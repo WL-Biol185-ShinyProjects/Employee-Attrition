@@ -276,7 +276,12 @@ dashboardPage(skin = "green",
                                    )
                         )
 
-                          )
+                          ),
+                    tabItem( tabname = "Which Employee Characteristics Matter the Most?",
+                             box(plotOutput( "BarCategoricalComparison"
+                                           )
+                                 )
+                            )
                   )
               )
 
