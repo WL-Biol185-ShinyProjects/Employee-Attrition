@@ -57,7 +57,7 @@ server <- function(input, output, session
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
   
-  observeEvent(input$Rank2, 
+  observeEvent(input$Rank1, 
                {
       
                   newChoices <- setdiff( oldChoices, 
@@ -72,7 +72,7 @@ server <- function(input, output, session
   )
       
 
-  observeEvent(input$Rank3, 
+  observeEvent( c(input$Rank1, input$Rank2), 
                {
                 newChoices <- setdiff( oldChoices, 
                                         c( input$Rank1, 
@@ -89,7 +89,7 @@ server <- function(input, output, session
                 }
                )
   
-  observeEvent(input$Rank4, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3), 
                {
     
                 newChoices <- setdiff(oldChoices, 
@@ -108,7 +108,7 @@ server <- function(input, output, session
                 }
                )
   
-  observeEvent(input$Rank5, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4), 
                {
     
                 newChoices <- setdiff(oldChoices, 
@@ -128,7 +128,7 @@ server <- function(input, output, session
                 }
               )
   
-  observeEvent(input$Rank6, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5), 
                {
     
                 newChoices <- setdiff(oldChoices, 
@@ -149,7 +149,7 @@ server <- function(input, output, session
                }
               )
   
-  observeEvent(input$Rank7, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6), 
                {
     
                 newChoices <- setdiff(oldChoices, 
@@ -171,7 +171,7 @@ server <- function(input, output, session
                }
               )
   
-  observeEvent(input$Rank8, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7), 
                {
     
                 newChoices <- setdiff(oldChoices, 
@@ -193,7 +193,7 @@ server <- function(input, output, session
                 }
                }
               )
-  observeEvent(input$Rank9, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8), 
                {
                  
                  newChoices <- setdiff(oldChoices, 
@@ -217,7 +217,7 @@ server <- function(input, output, session
                }
   
               )
-  observeEvent(input$Rank10, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9), 
                {
                  
                  newChoices <- setdiff(oldChoices, 
@@ -242,7 +242,7 @@ server <- function(input, output, session
                }
                
              )
-  observeEvent(input$Rank11, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10), 
                {
                  
                  newChoices <- setdiff(oldChoices, 
@@ -268,7 +268,7 @@ server <- function(input, output, session
                }
                
              )
-  observeEvent(input$Rank12, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10, input$Rank11), 
                {
                  
                  newChoices <- setdiff(oldChoices, 
@@ -295,7 +295,7 @@ server <- function(input, output, session
                }
                
             )
-  observeEvent(input$Rank13, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10, input$Rank11, input$Rank12), 
                {
                  
                  newChoices <- setdiff(oldChoices, 
@@ -323,7 +323,7 @@ server <- function(input, output, session
                }
                
             )
-  observeEvent(input$Rank14, 
+  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10, input$Rank11, input$Rank12, input$Rank13), 
                {
                  
                  newChoices <- setdiff(oldChoices, 

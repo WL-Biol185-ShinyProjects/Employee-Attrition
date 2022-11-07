@@ -208,9 +208,8 @@ dashboardPage(skin = "green",
                                              width = 12
                                ),
               
-                          h2("Rank How Important Each Item Is to You."),
-              
                           box(
+                              h2("Rank How Important Each Item Is to You."),
                               selectInput( "Rank1", "First", choices = c("", "Age", 
                                                                   "BusinessTravel", 
                                                                   "EducationField", 
