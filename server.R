@@ -396,7 +396,7 @@ server <- function(input, output, session
   
   output$BarEnvirSatisfaction <- renderPlot({
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
-    watson_healthcare_clean$EnvironmentSatisfaction = factor(hr_data$EnvironmentSatisfaction, levels = c("Low",
+    watson_healthcare_clean$EnvironmentSatisfaction = factor(watson_healthcare_clean$EnvironmentSatisfaction, levels = c("Low",
                                                                                                          "Medium",
                                                                                                          "High",
                                                                                                          "Very High"))
@@ -418,7 +418,7 @@ server <- function(input, output, session
   
   output$BarJobSatisfaction <- renderPlot({
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
-    watson_healthcare_clean$JobSatisfaction = factor(hr_data$JobSatisfaction, levels = c("Low",
+    watson_healthcare_clean$JobSatisfaction = factor(watson_healthcare_clean$JobSatisfaction, levels = c("Low",
                                                                                          "Medium",
                                                                                          "High",
                                                                                          "Very High"))
@@ -441,7 +441,7 @@ server <- function(input, output, session
     
   output$BarWorkLifeBalance <- renderPlot({
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
-    watson_healthcare_clean$WorkLifeBalance = factor(hr_data$WorkLifeBalance, levels = c("Bad",
+    watson_healthcare_clean$WorkLifeBalance = factor(watson_healthcare_clean$WorkLifeBalance, levels = c("Bad",
                                                                                          "Good",
                                                                                          "Better",
                                                                                          "Best"))
