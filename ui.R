@@ -106,7 +106,7 @@ dashboardPage(skin = "green",
 
 
       #The Fourth Tab is the Self-Help Tab          
-                  tabItem( tabName = "SelfHelp",
+                    tabItem( tabName = "SelfHelp",
                             h2( "Estimating Your Chance of Quitting! Happiness"),
         #Slider         
                             box(
@@ -253,19 +253,35 @@ dashboardPage(skin = "green",
                                  #textOutput("AttritionEstimation")
                              width = 6
                                ),
-              
-                           h2("What You Can Do to Minimize Burnout")
+
+                           h2("What You Can Do to Minimize Burnout"
+                              
+                              )
+
                   ),
 
                   tabItem(tabName = "EmployeeLifestyle", 
                     box(plotOutput( "BarBusinessTravel"
                                   )
                         ), 
-                    box(plotOutput( "BarOvertime") 
-                       )
+                    box(plotOutput( "BarOvertime"
+                                  ) 
+                       ),
+                    box(plotOutput("BarEnvirSatisfaction"
+                                   )
+                        ),
+                    box(plotOutput("BarJobSatisfaction"
+                                   )
+                        ),
+                    box(plotOutput("BarWorkLifeBalance"
+                                   )
+                        )
+
                           )
                   )
               )
+
             )
+
           )
 
