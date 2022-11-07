@@ -99,10 +99,7 @@ dashboardPage(skin = "green",
                                                   "kaggle"),
                        "and pertains to healthcare employees quitting their jobs."
                           )
-                       
-                    
-              
-                          ),
+                         ),
 
 
       #The Fourth Tab is the Self-Help Tab          
