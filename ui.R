@@ -29,9 +29,10 @@ dashboardPage(skin = "green",
 #The first tab is the graphs tab
       tabItems(
                 tabItem(tabName = "Graphs", 
-                  h2("Histogram"),
+                  
 #Histogram
-                  box( plotOutput("HistogramPlot"),
+                  box( h2("Histogram"),
+                       plotOutput("HistogramPlot"),
                        selectInput( "HistogramData", 
                                     "Choose an X-axis", 
                                      choices = c( "Age", 
@@ -52,10 +53,11 @@ dashboardPage(skin = "green",
                             
                       ),
               
-                   h2("Density Plot"),
+                   
               
 #Density Plot 
-                   box( plotOutput( "DensityPlot"),
+                   box( h2("Density Plot"),
+                        plotOutput( "DensityPlot"),
                         selectInput( "DensityData", 
                                      "Choose an X-axis", 
                                       choices = c( "MonthlyIncome", 
