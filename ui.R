@@ -321,20 +321,19 @@ dashboardPage(skin = "blue",
                         )
 
                           ),
-                    tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
-                             box( plotOutput("BarCategoricalComparison"
-                                             ),
-                                   selectInput( "XCategoricalComparisonData",
-                                               "Choose an X-axis",
-                                                 choices = c( "BusinessTravel",
-                                                              "Education",
-                                                              "Education Field",
-                                                              "EnvironmentalSatisfaction",
-                                                              "Gender",
-                                                              "JobSatisfaction",
-                                                              "MaritalStatus", 
-                                                              "WorkLifeBalance",
-                                                             )
+                     tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
+                              box( plotOutput("BarCategoricalComparison"
+                                              ),
+                                    selectInput( "XCategoricalComparisonData",
+                                                "Choose an X-axis",
+                                                  choices = c( "BusinessTravel",
+                                                               "EducationField",
+                                                               "EnvironmentSatisfaction",
+                                                               "Gender",
+                                                               "JobSatisfaction",
+                                                               "MaritalStatus", 
+                                                               "WorkLifeBalance"
+                                                              )
                                                )
                                   )             
                                 )

@@ -410,14 +410,13 @@ server <- function(input, output, session
  #Output for Categorical Comparison Bar Graph
   output$BarCategoricalComparison <- renderPlot(
                                                {
-CountYes <- watson_healthcare_clean$Attrition == "Yes" 
 
     watson_healthcare_clean %>%
-    group_by_at(XCategoricalComparisonData) %>%
-    summarize(AttritionByCategory = (sum(CountYes)) / n()) %>%
-    ggplot(PercentAttrition, aes(BarCategoricalComparisonData, AttritionByCategory) +
+    group_by_at(input$XCategoricalComparisonData) %>%
+    summarize(AttritionByCategory = (sum(Attrition == "Yes")) / n()) %>%
+    ggplot(aes_string(input$XCategoricalComparisonData, "AttritionByCategory")) +
     geom_bar(stat = 'identity')
-          )
+          
                                                }
                                                )
 }
