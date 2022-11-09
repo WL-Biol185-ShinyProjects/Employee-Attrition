@@ -301,19 +301,19 @@ dashboardPage(skin = "blue",
                           ),
                     tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
                              box( plotOutput("BarCategoricalComparison"
-                                             )
-                                  # selectInput( "XCategoricalComparisonData",
-                                  #              "Choose an X-axis",
-                                  #               choices = c( "BusinessTravel",
-                                  #                            "Education",
-                                  #                            "Education Field",
-                                  #                            "EnvironmentalSatisfaction",
-                                  #                            "Gender",
-                                  #                            "JobSatisfaction",
-                                  #                            "MaritalStatus", 
-                                  #                            "WorkLifeBalance",
-                                  #                           )
-                                  #             )
+                                             ),
+                                   selectInput( "XCategoricalComparisonData",
+                                               "Choose an X-axis",
+                                                 choices = c( "BusinessTravel",
+                                                              "Education",
+                                                              "Education Field",
+                                                              "EnvironmentalSatisfaction",
+                                                              "Gender",
+                                                              "JobSatisfaction",
+                                                              "MaritalStatus", 
+                                                              "WorkLifeBalance",
+                                                             )
+                                               )
                                   )             
                                 )
                            )
