@@ -80,8 +80,30 @@ dashboardPage(skin = "green",
                                                 "YearsAtCompany"
                                                 )
                                    )
-                       )
-                     ),
+                       ),
+                     
+                  h2("Summary Table"),
+#Summary Table
+                  box( tableOutput("SummaryTable"),
+                      selectInput(inputId = "SummaryData",
+                                  "Choose an x-axis",
+                      choices = c( "Age", 
+                                   "BusinessTravel", 
+                                   "EducationField", 
+                                   "EnvironmentSatisfaction", 
+                                   "Gender", 
+                                   "JobSatisfaction", 
+                                   "MaritalStatus", 
+                                   "OverTime", 
+                                   "PercentSalaryHike", 
+                                   "TotalWorkingYears",
+                                   "WorkLifeBalance", 
+                                   "YearsAtCompany", 
+                                   "YearsInCurrentRole"
+                                  )
+                                )
+                  )
+),
       
 #The Second Tab Is the History Tab
                   tabItem( tabName ="History", 
@@ -119,8 +141,8 @@ dashboardPage(skin = "green",
                                                  c( "Non-Travel", 
                                                     "Travel_Rarely", 
                                                     "Travel_Frequently"
-                                                   ), 
-                                                 
+                                                   ),
+                                                 selected = NULL
                                                 ),
                                  selectizeInput( "EducationField", 
                                                  "What Field Did You Study?", 
@@ -281,4 +303,5 @@ dashboardPage(skin = "green",
             )
 
           )
+        
 

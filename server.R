@@ -30,7 +30,8 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
           aes_string(input$DensityData, 
-          fill = watson_healthcare_clean$Attrition
+          fill = watson_healthcare_clean$Attrition,
+          alpha = .5
                      )
           ) +
           geom_density(
@@ -48,6 +49,17 @@ server <- function(input, output, session
            geom_smooth()
      }
                                    )
+#Output for Summary Table
+  output$SummaryTable <- renderTable(
+    {
+    CountYes <- watson_healthcare_clean$Attrition == "Yes"      
+    watson_healthcare_clean %>%
+      group_by_at(input$SummaryData) %>%
+      summarise(rows = n()) %>%
+      mutate(PercentAttrition = sum(CountYes)/rows) %>%
+      arrange(desc(PercentAttrition))
+     }
+                                        )
   
   #Output for Estimation Feature
   #output$AttritionEstimation <- renderText({
