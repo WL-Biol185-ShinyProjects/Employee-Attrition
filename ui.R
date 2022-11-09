@@ -7,7 +7,7 @@ library(tidyverse)
 
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
-dashboardPage(skin = "green",
+dashboardPage(skin = "blue",
   dashboardHeader(title = "Healthcare Attrition"),
   dashboardSidebar(
     sidebarMenu(
@@ -15,7 +15,8 @@ dashboardPage(skin = "green",
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
                  menuItem("SelfHelp", tabName = "SelfHelp"),
-                 menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle")
+                 menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle"),
+                 menuItem("WhichEmployeeCharacteristicsMatterTheMost", tabName = "WhichEmployeeCharacteristicsMatterTheMost")
                )
                   ),
 
@@ -29,9 +30,10 @@ dashboardPage(skin = "green",
 #The first tab is the graphs tab
       tabItems(
                 tabItem(tabName = "Graphs", 
-                  h2("Histogram"),
+                  
 #Histogram
-                  box( plotOutput("HistogramPlot"),
+                  box( h2("Histogram"),
+                       plotOutput("HistogramPlot"),
                        selectInput( "HistogramData", 
                                     "Choose an X-axis", 
                                      choices = c( "Age", 
@@ -52,10 +54,11 @@ dashboardPage(skin = "green",
                             
                       ),
               
-                   h2("Density Plot"),
+                   
               
 #Density Plot 
-                   box( plotOutput( "DensityPlot"),
+                   box( h2("Density Plot"),
+                        plotOutput( "DensityPlot"),
                         selectInput( "DensityData", 
                                      "Choose an X-axis", 
                                       choices = c( "MonthlyIncome", 
@@ -77,7 +80,7 @@ dashboardPage(skin = "green",
                         selectInput( "YScatterData", 
                                      "Choose a Y-axis", 
                                      choices = c( "TotalWorkingYears", 
-                                                "YearsAtCompany"
+                                                  "YearsAtCompany"
                                                 )
                                    )
                        )
@@ -295,11 +298,30 @@ dashboardPage(skin = "green",
                                    )
                         )
 
-                          )
+                          ),
+                    tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
+                             box( plotOutput("BarCategoricalComparison"
+                                             )
+                                  # selectInput( "XCategoricalComparisonData",
+                                  #              "Choose an X-axis",
+                                  #               choices = c( "BusinessTravel",
+                                  #                            "Education",
+                                  #                            "Education Field",
+                                  #                            "EnvironmentalSatisfaction",
+                                  #                            "Gender",
+                                  #                            "JobSatisfaction",
+                                  #                            "MaritalStatus", 
+                                  #                            "WorkLifeBalance",
+                                  #                           )
+                                  #             )
+                                  )             
+                                )
+                           )
+                    )
                   )
               )
 
-            )
+            
 
-          )
+          
 
