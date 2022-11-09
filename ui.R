@@ -86,8 +86,29 @@ dashboardPage(skin = "green",
 #The Second Tab Is the History Tab
                   tabItem( tabName ="History", 
                            h2("Let's learn some history"), 
-                           h3("In the United States, healthcare employees experience some of the highest rates of burnout of any industry. This is due to long hours and sad outcomes."
-                              )
+                           h4("In the United States, healthcare employees experience some of the highest rates of burnout of any industry. 
+                           Healthcare burnout was a crisis long before the coronavirus pandemic hit. 
+                           Rooted in the healthcare system, these systemic shortfalls include escalating workloads, inadequate support, underinvestment in public health infrastructure, etc.  
+                           Burnout symptoms include “insomnia, depression, anxiety, post-traumatic stress disorder, and other mental health challenges (Murthy, 2022, N Engl J Med).” 
+                           According to the New England Journal of Medicine, “some 52% of nurses (according to the American Nurses Foundation and 20% of doctors (Mayo Clinic Proceedings) say they are planning to leave their clinical practices (2022).”  
+                           The coronavirus pandemic escalated burnout symptoms in health care workers and left many of them on the brink of quitting. 
+                           The pandemic caused acute staffing shortages, intensified safety protocol, increased uncertainty around available resources, and increased workloads. 
+                           The Delta and Omicron surges sent many unvaccinated patients into hospitals where health care employees were already emotionally and physically exhausted from the last 18 months of the pandemic. 
+                           Additionally, health care workers had to make unprecedented decisions, risk infection for themselves and their families, and experience the pain of losing many patients."), 
+                           h4("“In the first year of the pandemic, prior to the Delta and Omicron surges, a systematic review and meta-analysis of health care workers’ mental health identified a high prevalence (22%) of moderate depression, anxiety, and post-traumatic stress disorder (Rotenstein, 2022, JAMA).” 
+                           This data set shows the critical need for changes to the healthcare system. 
+                           Health care workers need to be protected and valued. 
+                           This involves ensuring proper PPE, which was not available during the beginning of the pandemic, adequate sick leave, and protection of staff from verbal and physical abuse. 
+                           We need to help reduce the administrative burdens. 
+                           According to one study, “outpatient physicians spend nearly 2 hours on the electronic health record and desk work during the day for every 1 hours spent with patients (Arndt, et al., 2017, Ann Fam Med).” 
+                           This takes valuable time that could be spent with patients. 
+                           Additionally, we need to increase access to mental healthcare. 
+                           Due to their lack of schedule flexibility for visits and long hours, many health care workers do not prioritize their mental health. 
+                           We also need public investments in health infrastructure that focus on addressing the social determinants of health which would reduce the demands on the healthcare system. 
+                           Lastly, we need to change the narrative that suffering is just an essential component of health professions. 
+                           Health care workers should be able to voice their mental health concerns or seek help without feeling isolated or embarrassed (Murthy, 2022, N Engl J Med)."
+                              ) 
+
                          ),
       
 #The Third Tab Is the About Tab
