@@ -413,7 +413,7 @@ server <- function(input, output, session
 
     watson_healthcare_clean %>%
     group_by_at(input$XCategoricalComparisonData) %>%
-    summarize(AttritionByCategory = (sum(Attrition == "Yes")) / n()) %>%
+    summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) %>%
     ggplot(aes_string(input$XCategoricalComparisonData, "AttritionByCategory")) +
     geom_bar(stat = 'identity')
           
