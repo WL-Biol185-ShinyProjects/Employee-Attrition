@@ -30,7 +30,7 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
           aes_string(input$DensityData, 
-          fill = watson_healthcare_clean$Attrition,
+          fill = watson_healthcare_clean$Attrition
         
                      )
           ) +
@@ -416,8 +416,8 @@ server <- function(input, output, session
     watson_healthcare_clean %>%
     group_by_at(input$XCategoricalComparisonData) %>%
     summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) %>%
-    arrange("AttritionByCategory") %>%
-    mutate(input$XCategoricalComparisonData = factor(input$XCategoricalComparisonData, levels = input$XCategoricalComparisonData, ordered = TRUE)) %>%
+    # arrange("AttritionByCategory") %>%
+    # mutate(input$XCategoricalComparisonData = factor(input$XCategoricalComparisonData, levels = input$XCategoricalComparisonData, ordered = TRUE)) %>%
     ggplot(aes_string(input$XCategoricalComparisonData, "AttritionByCategory")) +
     geom_bar(stat = 'identity') + 
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"

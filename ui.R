@@ -340,22 +340,6 @@ dashboardPage(skin = "blue",
                         )
 
                           ),
-<<<<<<< HEAD
-                    tabItem( tabName = "SoWhoQuits?",
-                             box( plotOutput("BarCategoricalComparison"
-                                             ),
-                                   selectInput( "XCategoricalComparisonData",
-                                               "Choose an X-axis",
-                                                 choices = c( "BusinessTravel",
-                                                              "Education",
-                                                              "Education Field",
-                                                              "EnvironmentalSatisfaction",
-                                                              "Gender",
-                                                              "JobSatisfaction",
-                                                              "MaritalStatus", 
-                                                              "WorkLifeBalance"
-                                                             )
-=======
                      tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
                               box( plotOutput("BarCategoricalComparison"
                                               ),
@@ -369,7 +353,6 @@ dashboardPage(skin = "blue",
                                                                "MaritalStatus", 
                                                                "WorkLifeBalance"
                                                               )
->>>>>>> 1033269973b6fda071013277b04bfba829dbda6c
                                                )
                                   )             
                                 )
