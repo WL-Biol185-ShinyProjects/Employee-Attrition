@@ -30,7 +30,7 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
           aes_string(input$DensityData, 
-          fill = watson_healthcare_clean$Attrition,
+          fill = watson_healthcare_clean$Attrition
         
                      )
           ) +
@@ -52,11 +52,10 @@ server <- function(input, output, session
 #Output for Summary Table
   output$SummaryTable <- renderTable(
     {
-    CountYes <- watson_healthcare_clean$Attrition == "Yes"      
+    # CountYes <- watson_healthcare_clean$Attrition == "Yes"      
     watson_healthcare_clean %>%
       group_by_at(input$SummaryData) %>%
-      summarise(rows = n()) %>%
-      mutate(PercentAttrition = sum(CountYes)/rows) %>%
+      summarize(PercentAttrition = ((sum(Attrition == "Yes")) / n())*100) %>%
       arrange(desc(PercentAttrition))
      }
                                         )
@@ -121,7 +120,9 @@ server <- function(input, output, session
                                         )
                   if (input$Rank1 != "") {
                     
-                    updateSelectInput(session, "Rank2", choices = newChoices
+                    updateSelectInput(session, 
+                                      "Rank2", 
+                                      choices = newChoices
                     )
                   }
                }
@@ -130,20 +131,21 @@ server <- function(input, output, session
 
   observeEvent( c(input$Rank1, input$Rank2), 
                {
-                newChoices <- setdiff( oldChoices, 
-                                        c( input$Rank1, 
-                                           input$Rank2
-                                         )
+                 
+                 newChoices <- setdiff(oldChoices, 
+                                       c(input$Rank1, 
+                                         input$Rank2
                                        )
-    
+                 )
+                 
                  if(input$Rank1 != "") {
                    updateSelectInput(session, 
-                                   "Rank3", 
-                                   choices = newChoices
-                                   )
+                                     "Rank3", 
+                                     choices = newChoices
+                   )
                  }
-                }
-               )
+               }
+  )
   
   observeEvent( c(input$Rank1, input$Rank2, input$Rank3), 
                {
@@ -457,8 +459,8 @@ server <- function(input, output, session
     watson_healthcare_clean %>%
     group_by_at(input$XCategoricalComparisonData) %>%
     summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) %>%
-    arrange("AttritionByCategory") %>%
-    mutate(input$XCategoricalComparisonData = factor(input$XCategoricalComparisonData, levels = input$XCategoricalComparisonData, ordered = TRUE)) %>%
+    # arrange("AttritionByCategory") %>%
+    # mutate(input$XCategoricalComparisonData = factor(input$XCategoricalComparisonData, levels = input$XCategoricalComparisonData, ordered = TRUE)) %>%
     ggplot(aes_string(input$XCategoricalComparisonData, "AttritionByCategory")) +
     geom_bar(stat = 'identity') + 
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"

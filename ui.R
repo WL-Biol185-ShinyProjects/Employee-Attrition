@@ -16,7 +16,7 @@ dashboardPage(skin = "blue",
                  menuItem("About", tabName = "About"),
                  menuItem("SelfHelp", tabName = "SelfHelp"),
                  menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle"),
-                 menuItem("WhichEmployeeCharacteristicsMatterTheMost", tabName = "WhichEmployeeCharacteristicsMatterTheMost")
+                 menuItem("SoWhoQuits?", tabName = "SoWhoQuits?")
                )
                   ),
 
@@ -143,7 +143,11 @@ dashboardPage(skin = "blue",
                                         )
                                  
                                    ),
-                               
+                               box(
+                                 title = "Consequences of Burnout on Health Care Workers", background = "blue", width = 12, height = 450, status = "primary",
+                                 tags$img(src="consequencesofhealthcareattrition.png",height = "200px", width = "300px", alt ="Something went wrong", deleteFile=FALSE),
+                                 p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
+                               )
                                      )
                                         )
                           ),
