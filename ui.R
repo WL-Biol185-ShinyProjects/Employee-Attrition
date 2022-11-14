@@ -66,11 +66,11 @@ dashboardPage(skin = "blue",
                                                   )
                                    )
                       ),
-    
-                   h2("Scatter Plot"),
+
 #Scatter Plot
               
-                   box( plotOutput("ScatterPlot"), 
+                   box( h2("Scatter Plot"),
+                        plotOutput("ScatterPlot"), 
                         selectInput( "XScatterData", 
                                     "Choose an X-axis", 
                                      choices = c( "MonthlyIncome", 
@@ -85,9 +85,9 @@ dashboardPage(skin = "blue",
                                    )
                        ),
                      
-                  h2("Summary Table"),
 #Summary Table
-                  box( tableOutput("SummaryTable"),
+                  box( h2("Summary Table"),
+                       tableOutput("SummaryTable"),
                       selectInput(inputId = "SummaryData",
                                   "Choose an x-axis",
                       choices = c( "Age", 
