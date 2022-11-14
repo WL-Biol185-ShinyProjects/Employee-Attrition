@@ -11,12 +11,14 @@ dashboardPage(skin = "blue",
   dashboardHeader(title = "Healthcare Attrition"),
   dashboardSidebar(
     sidebarMenu(
+                 menuItem("Home", tabName = "Home"), 
+                 menuItem("Who Quits?", tabName = "WhoQuits"),
+                 menuItem("Self Help", tabName = "SelfHelp"),
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
-                 menuItem("SelfHelp", tabName = "SelfHelp"),
-                 menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle"),
-                 menuItem("SoWhoQuits?", tabName = "SoWhoQuits?")
+                 menuItem("Employee Lifestyle", tabName = "EmployeeLifestyle")
+                
                )
                   ),
 
@@ -27,8 +29,18 @@ dashboardPage(skin = "blue",
   
     
 #Below tabs are named and their contents is specified
-#The first tab is the graphs tab
+#The first tab is the home tab
       tabItems(
+                tabItem(tabName = "Home",
+                  box(
+                    title = "Welcome!",
+                    background = "blue",
+                    p("Healthcare employee attrition is a growing problem in the United States")
+                  
+                     )
+                        ),
+                
+                
                 tabItem(tabName = "Graphs", 
                   
 #Histogram
@@ -340,7 +352,7 @@ dashboardPage(skin = "blue",
                         )
 
                           ),
-                     tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
+                     tabItem( tabName = "WhoQuits",
                               box( plotOutput("BarCategoricalComparison"
                                               ),
                                     selectInput( "XCategoricalComparisonData",
