@@ -7,7 +7,7 @@ library(tidyverse)
 
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
-dashboardPage(skin = "blue",
+dashboardPage(skin = "blue", 
   dashboardHeader(title = "Healthcare Attrition"),
   dashboardSidebar(
     sidebarMenu(
@@ -83,15 +83,73 @@ dashboardPage(skin = "blue",
                                                   "YearsAtCompany"
                                                 )
                                    )
-                       )
-                     ),
+                       ),
+                     
+                  h2("Summary Table"),
+#Summary Table
+                  box( tableOutput("SummaryTable"),
+                      selectInput(inputId = "SummaryData",
+                                  "Choose an x-axis",
+                      choices = c( "Age", 
+                                   "BusinessTravel", 
+                                   "EducationField", 
+                                   "EnvironmentSatisfaction", 
+                                   "Gender", 
+                                   "JobSatisfaction", 
+                                   "MaritalStatus", 
+                                   "OverTime", 
+                                   "PercentSalaryHike", 
+                                   "TotalWorkingYears",
+                                   "WorkLifeBalance", 
+                                   "YearsAtCompany", 
+                                   "YearsInCurrentRole"
+                                  )
+                                )
+                  )
+),
       
 #The Second Tab Is the History Tab
                   tabItem( tabName ="History", 
-                           h2("Let's learn some history"), 
-                           h3("In the United States, healthcare employees experience some of the highest rates of burnout of any industry. This is due to long hours and sad outcomes."
-                              )
-                         ),
+                           dashboardBody(
+                             fluidRow(
+                               box(
+                                 title = "COVID-19 and Healthcare Attrition:", background = "teal", solidHeader = TRUE, width = 12,  height = 400, status = "primary",
+                                 tags$ul(
+                                 tags$li("Healthcare burnout was a crisis long before the coronavirus pandemic hit.
+                                   Rooted in the healthcare system, these systemic shortfalls include escalating workloads, inadequate support, underinvestment in public health infrastructure, etc.  "),
+                                 tags$li("Burnout symptoms include “insomnia, depression, anxiety, post-traumatic stress disorder, and other mental health challenges (Murthy, 2022, N Engl J Med).” 
+                                   According to the New England Journal of Medicine, “some 52% of nurses (according to the American Nurses Foundation and 20% of doctors (Mayo Clinic Proceedings) say they are planning to leave their clinical practices (2022).”"),
+                                 tags$li("The coronavirus pandemic escalated burnout symptoms in health care workers and left many of them on the brink of quitting. 
+                                   The pandemic caused acute staffing shortages, intensified safety protocol, increased uncertainty around available resources, and increased workloads. "),
+                                 tags$li("The Delta and Omicron surges sent many unvaccinated patients into hospitals where health care employees were already emotionally and physically exhausted from the last 18 months of the pandemic. 
+                                 Additionally, health care workers had to make unprecedented decisions, risk infection for themselves and their families, and experience the pain of losing many patients.") 
+                                         )
+                                  ),
+                               
+                               box(
+                                 title = "Steps to Take:", background = "green", width = 12, height = 450, status = "primary",
+                                 tags$ol(
+                                   tags$li(tags$b("This data set shows the critical need for changes to the healthcare system.")),
+                                   tags$li(tags$b("Health care workers need to be protected and valued."), 
+                                             "This involves ensuring proper PPE, which was not available during the beginning of the pandemic, adequate sick leave, and protection of staff from verbal and physical abuse."),
+                                   tags$li(tags$b("We need to help reduce the administrative burdens."), 
+                                             "According to one study, “outpatient physicians spend nearly 2 hours on the electronic health record and desk work during the day for every 1 hours spent with patients (Arndt, et al., 2017, Ann Fam Med). 
+                                             This takes away valuable time that could be spent with patients."),
+                                   tags$li(tags$b("We need to increase access to mental healthcare."), 
+                                           "Due to their lack of schedule flexibility for visits and long working hours, many health care workers do not prioritize their mental health. "),
+                                   tags$li(tags$b("We need public investments in health infrastructure"), "that focus on addressing the social determinants of health which would reduce the demands on the healthcare system. "),
+                                   tags$li(tags$b("We need to change the narrative that suffering is just an essential component of health professions."), 
+                                             "Health care workers should be able to voice their mental health concerns or seek help without feeling isolated or embarrassed (Murthy, 2022, N Engl J Med). ")
+                                        )
+                                 
+                                   ),
+                               
+                                     )
+                                        )
+                          ),
+                           
+                           
+                           
       
 #The Third Tab Is the About Tab
                   tabItem( tabName = "About", 
@@ -122,8 +180,8 @@ dashboardPage(skin = "blue",
                                                  c( "Non-Travel", 
                                                     "Travel_Rarely", 
                                                     "Travel_Frequently"
-                                                   ), 
-                                                 
+                                                   ),
+                                                 selected = NULL
                                                 ),
                                  selectizeInput( "EducationField", 
                                                  "What Field Did You Study?", 
@@ -277,21 +335,20 @@ dashboardPage(skin = "blue",
                         )
 
                           ),
-                    tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
-                             box( plotOutput("BarCategoricalComparison"
-                                             )
-                                  # selectInput( "XCategoricalComparisonData",
-                                  #              "Choose an X-axis",
-                                  #               choices = c( "BusinessTravel",
-                                  #                            "Education",
-                                  #                            "Education Field",
-                                  #                            "EnvironmentalSatisfaction",
-                                  #                            "Gender",
-                                  #                            "JobSatisfaction",
-                                  #                            "MaritalStatus", 
-                                  #                            "WorkLifeBalance",
-                                  #                           )
-                                  #             )
+                     tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
+                              box( plotOutput("BarCategoricalComparison"
+                                              ),
+                                    selectInput( "XCategoricalComparisonData",
+                                                "Choose an X-axis",
+                                                  choices = c( "BusinessTravel",
+                                                               "EducationField",
+                                                               "EnvironmentSatisfaction",
+                                                               "Gender",
+                                                               "JobSatisfaction",
+                                                               "MaritalStatus", 
+                                                               "WorkLifeBalance"
+                                                              )
+                                               )
                                   )             
                                 )
                            )
@@ -299,7 +356,4 @@ dashboardPage(skin = "blue",
                   )
               )
 
-            
-
-          
 

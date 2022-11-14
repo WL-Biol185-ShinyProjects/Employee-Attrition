@@ -30,10 +30,11 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
           aes_string(input$DensityData, 
-          fill = watson_healthcare_clean$Attrition
+          fill = watson_healthcare_clean$Attrition,
+        
                      )
           ) +
-          geom_density(
+          geom_density(alpha = 0.3
           ) +
           ggtitle("Density of Employee Attrition Versus Various Employee Characteristics")
      }
@@ -44,9 +45,21 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
            aes_string(input$XScatterData, input$YScatterData)) +
-           geom_point(stat = "identity")
+           geom_point(stat = "identity") +
+           geom_smooth()
      }
                                    )
+#Output for Summary Table
+  output$SummaryTable <- renderTable(
+    {
+    CountYes <- watson_healthcare_clean$Attrition == "Yes"      
+    watson_healthcare_clean %>%
+      group_by_at(input$SummaryData) %>%
+      summarise(rows = n()) %>%
+      mutate(PercentAttrition = sum(CountYes)/rows) %>%
+      arrange(desc(PercentAttrition))
+     }
+                                        )
   
   #Output for Estimation Feature
   # total_people <- nrow(watson_healthcare_clean)
@@ -418,7 +431,8 @@ server <- function(input, output, session
                                         }
                                        )
   
-  output$BarOvertime <- renderPlot({
+  output$BarOvertime <- renderPlot(
+                                  {
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
     
     watson_healthcare_clean %>% 
@@ -432,18 +446,24 @@ server <- function(input, output, session
       scale_y_continuous(labels = function(x) paste0(x, "%")) +
       labs(title = "Over Time and Attrition", x = "Over Time", y = "Percentage") +
       scale_fill_manual(values = c("#fde725",  "#21918c"))
-    
                                     }
+                                    )
   
-                                   )
+    
  #Output for Categorical Comparison Bar Graph
-  output$BarCategoricalComparison <- renderPlot({
-    CountYes <- watson_healthcare_clean$Attrition == "Yes"
-    AttritionByCategory <- group_by_at(watson_healthcare_clean$Gender)
-    PercentAttrition <- summarize(AttritionByCategory = (sum(CountYes)) / n()) 
-    ggplot(PercentAttrition, aes(BarCategoricalComparisonData, AttritionByCategory) +
-    geom_bar(stat = 'identity')
-          )
+  output$BarCategoricalComparison <- renderPlot(
+                                               {
+
+    watson_healthcare_clean %>%
+    group_by_at(input$XCategoricalComparisonData) %>%
+    summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) %>%
+    arrange("AttritionByCategory") %>%
+    mutate(input$XCategoricalComparisonData = factor(input$XCategoricalComparisonData, levels = input$XCategoricalComparisonData, ordered = TRUE)) %>%
+    ggplot(aes_string(input$XCategoricalComparisonData, "AttritionByCategory")) +
+    geom_bar(stat = 'identity') + 
+    labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
+        )
+          
                                                }
                                                )
 }
