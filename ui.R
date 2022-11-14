@@ -16,7 +16,7 @@ dashboardPage(skin = "blue",
                  menuItem("About", tabName = "About"),
                  menuItem("SelfHelp", tabName = "SelfHelp"),
                  menuItem("EmployeeLifestyle", tabName = "EmployeeLifestyle"),
-                 menuItem("WhichEmployeeCharacteristicsMatterTheMost", tabName = "WhichEmployeeCharacteristicsMatterTheMost")
+                 menuItem("SoWhoQuits?", tabName = "SoWhoQuits?")
                )
                   ),
 
@@ -321,7 +321,7 @@ dashboardPage(skin = "blue",
                         )
 
                           ),
-                    tabItem( tabName = "WhichEmployeeCharacteristicsMatterTheMost",
+                    tabItem( tabName = "SoWhoQuits?",
                              box( plotOutput("BarCategoricalComparison"
                                              ),
                                    selectInput( "XCategoricalComparisonData",
@@ -333,7 +333,7 @@ dashboardPage(skin = "blue",
                                                               "Gender",
                                                               "JobSatisfaction",
                                                               "MaritalStatus", 
-                                                              "WorkLifeBalance",
+                                                              "WorkLifeBalance"
                                                              )
                                                )
                                   )             
