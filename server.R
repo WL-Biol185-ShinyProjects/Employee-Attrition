@@ -60,55 +60,6 @@ server <- function(input, output, session
      }
                                         )
   
-  #Output for Estimation Feature
-  # total_people <- nrow(watson_healthcare_clean)
-  # 
-  # weight_factors <- c(10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.4, 6.9, 6.4, 5.9, 5.4, 4.9, 4.4, 3.9)
-  # 
-  # ranked_columns < - c(input$Rank1, 
-  #                      input$Rank2,
-  #                      input$Rank3, 
-  #                      input$Rank4,
-  #                      input$Rank5, 
-  #                      input$Rank6, 
-  #                      input$Rank7, 
-  #                      input$Rank8, 
-  #                      input$Rank9,
-  #                      input$Rank10, 
-  #                      input$Rank11, 
-  #                      input$Rank12, 
-  #                      input$Rank13,
-  #                      input$Rank14
-  #                      )
-  # 
-  # user_inputs <- c(input$Age, 
-  #                  input$BusinessTravel, 
-  #                  input$EducationField, 
-  #                  input$EnvironmentSatisfaction, 
-  #                  input$Gender, 
-  #                  input$JobSatisfaction, 
-  #                  input$MaritalStatus, 
-  #                  input$MonthlyIncome, 
-  #                  input$Overtime, 
-  #                  input$PercentSalaryHike, 
-  #                  input$TotalWorkingYears, 
-  #                  input$WorkLifeBalance, 
-  #                  input$YearsAtCompany, 
-  #                  input$YearsInCurrentRole
-  #                  )
-  # 
-  # names(user_inputs) <- colnames(watson_healthcare_clean[2:14])
-  # 
-  # output$AttritionEstimation <- renderText({
-  #   sapply(ranked_columns, function(x) {
-  #     watson_healthcare_clean %>%
-  #       filter( x == user_inputs[x], Attrition == "Yes") %>%
-  #       length <- nrow()
-  #     
-  #     (length / total_people) * weight_factors
-  #   })
-  # })
-  
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
   
@@ -410,6 +361,67 @@ server <- function(input, output, session
                }
                
              )
+  
+  #Output for Estimation Feature
+  
+  # weight_factors <- c(10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.4, 6.9, 6.4, 5.9, 5.4, 4.9, 4.4, 3.9)
+  # 
+  # ranked_columns <- c(input$Rank1,
+  #                     input$Rank2,
+  #                     input$Rank3,
+  #                     input$Rank4,
+  #                     input$Rank5,
+  #                     input$Rank6,
+  #                     input$Rank7,
+  #                     input$Rank8,
+  #                     input$Rank9,
+  #                     input$Rank10,
+  #                     input$Rank11,
+  #                     input$Rank12,
+  #                     input$Rank13,
+  #                     input$Rank14
+  # )
+  # 
+  # user_inputs <- c(input$Age,
+  #                  input$BusinessTravel,
+  #                  input$EducationField,
+  #                  input$EnvironmentSatisfaction,
+  #                  input$Gender,
+  #                  input$JobSatisfaction,
+  #                  input$MaritalStatus,
+  #                  input$MonthlyIncome,
+  #                  input$Overtime,
+  #                  input$PercentSalaryHike,
+  #                  input$TotalWorkingYears,
+  #                  input$WorkLifeBalance,
+  #                  input$YearsAtCompany,
+  #                  input$YearsInCurrentRole
+  # )
+  # 
+  # names(user_inputs) <- colnames(watson_healthcare_clean[2:15])
+  # 
+  # inputsByRank <- select(user_inputs, all_of(ranked_columns))
+  # 
+  # whc <- watson_healthcare_clean[2:16]
+  # 
+  # output$AttritionEstimation <- renderText({
+  #   
+  #   groupedOnRank1 <- group_by_at(whc, ranked_columns[1])
+  #   summarizedByRank1 <- summarize(groupedOnRank1, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+  #   inputValue1 <- inputsByRank[1,1]
+  #   percent <- filter(summarizedByRank1, ranked_columns[1] == inputValue1)
+  #   percent1 <- percent$AttritionPercent[1]
+  #   percents <- append(percents, percent1)
+  #   attrition <- percents * weight_factors[1]
+  #   attrition
+  #   #   sapply(ranked_columns, function(x) {
+  #   #     watson_healthcare_clean %>%
+  #   #       filter( x == user_inputs[x], Attrition == "Yes") %>%
+  #   #       length <- nrow()
+  #   #     
+  #   #     (length / total_people) * weight_factors
+  #   #   })
+  # })
   
   #Output for Bar Graphs 
   output$BarBusinessTravel <- renderPlot({
