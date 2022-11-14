@@ -110,10 +110,9 @@ dashboardPage(skin = "blue",
       
 #The Second Tab Is the History Tab
                   tabItem( tabName ="History", 
-                           dashboardBody(
                              fluidRow(
                                box(
-                                 title = "COVID-19 and Healthcare Attrition:", background = "teal", solidHeader = TRUE, width = 12,  height = 400, status = "primary",
+                                 title = "COVID-19 and Healthcare Attrition:", background = "teal", solidHeader = TRUE, width = 6,  height = 500, status = "primary",
                                  tags$ul(
                                  tags$li("Healthcare burnout was a crisis long before the coronavirus pandemic hit.
                                    Rooted in the healthcare system, these systemic shortfalls include escalating workloads, inadequate support, underinvestment in public health infrastructure, etc.  "),
@@ -127,7 +126,7 @@ dashboardPage(skin = "blue",
                                   ),
                                
                                box(
-                                 title = "Steps to Take:", background = "green", width = 12, height = 450, status = "primary",
+                                 title = "Steps to Take:", background = "green", width = 6, height = 500, status = "primary",
                                  tags$ol(
                                    tags$li(tags$b("This data set shows the critical need for changes to the healthcare system.")),
                                    tags$li(tags$b("Health care workers need to be protected and valued."), 
@@ -144,12 +143,12 @@ dashboardPage(skin = "blue",
                                  
                                    ),
                                box(
-                                 title = "Consequences of Burnout on Health Care Workers", background = "blue", width = 12, height = 450, status = "primary",
-                                 tags$img(src="consequencesofhealthcareattrition.png",height = "200px", width = "300px", alt ="Something went wrong", deleteFile=FALSE),
+                                 title = "Consequences of Burnout on Health Care Workers:", background = "blue", width = "8", status = "primary",
+                                 tags$img(src="consequencesofhealthcareattrition.png",height = "500px", width = "700px", alt ="Something went wrong", deleteFile=FALSE),
                                  p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
                                )
                                      )
-                                        )
+                                        
                           ),
                            
                            
