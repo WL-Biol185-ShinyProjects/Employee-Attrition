@@ -35,7 +35,8 @@ dashboardPage(skin = "blue",
                             box(
                               title = "Welcome!",
                               background = "blue",
-                              p("Healthcare employee attrition is a growing problem in the United States")
+                              p("Healthcare employee attrition is a growing problem in the United States."),
+                              p("Explore around our page to find information about whaat characteristics")
                               
                             )
                     ),
@@ -342,27 +343,7 @@ dashboardPage(skin = "blue",
                                                    )
                                       )
                                       ),
-                                      h2("Summary Table"),
-                                      #Summary Table
-                                      box( tableOutput("SummaryTable"),
-                                           selectInput(inputId = "SummaryData",
-                                                       "Choose an x-axis",
-                                                       choices = c( "Age", 
-                                                                    "BusinessTravel", 
-                                                                    "EducationField", 
-                                                                    "EnvironmentSatisfaction", 
-                                                                    "Gender", 
-                                                                    "JobSatisfaction", 
-                                                                    "MaritalStatus", 
-                                                                    "OverTime", 
-                                                                    "PercentSalaryHike", 
-                                                                    "TotalWorkingYears",
-                                                                    "WorkLifeBalance", 
-                                                                    "YearsAtCompany", 
-                                                                    "YearsInCurrentRole"
-                                                       )
-                                           )
-                                      )
+                                      
                                       
                              )
                     )
