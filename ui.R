@@ -25,7 +25,7 @@ dashboardPage(skin = "blue",
       
 #Boxes need to be put in a row (or column)
     fluidRow(
-  
+      
     
 #Below tabs are named and their contents is specified
 #The first tab is the home tab
@@ -33,11 +33,17 @@ dashboardPage(skin = "blue",
                 tabItem(tabName = "Home",
                   box(
                     title = "Welcome!",
-                    background = "blue",
-                    p("Healthcare employee attrition is a growing problem in the United States")
-                  
+                    background = "red",
+                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."),
+                    br(),
+                    p("Healthcare employee attrition is a growing problem in the United States."),
+                    p("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
+                                                       "kaggle"),
+                       "and pertains to healthcare employees quitting their jobs."
                      )
-                        ),
+                      )
+                      )
+                          ),
                 
 #The second tab is Who Quits
 tabItem( tabName = "WhoQuits",
@@ -392,10 +398,10 @@ tabItem(tabName = "EmployeeLifestyle",
             )
                )
               )
+
                            
                            
-                           
-      
+
                     
 
   
