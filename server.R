@@ -52,15 +52,12 @@ server <- function(input, output, session
 #Output for Summary Table
   output$SummaryTable <- renderTable(
     {
-    CountYes <- watson_healthcare_clean$Attrition == "Yes"      
     watson_healthcare_clean %>%
       group_by_at(input$SummaryData) %>%
-      summarise(rows = n()) %>%
-      mutate(PercentAttrition = sum(CountYes)/rows) %>%
+      summarise(PercentAttrition = ((sum(Attrition == "Yes")) / n()) * 100) %>%
       arrange(desc(PercentAttrition))
      }
                                         )
-  
   #Output for Estimation Feature
   #output$AttritionEstimation <- renderText({
   #  watson_healthcare_clean %>%

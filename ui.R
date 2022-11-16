@@ -343,6 +343,27 @@ dashboardPage(skin = "blue",
                                                    )
                                       )
                                       ),
+                                      h2("Summary Table"),
+                                      #Summary Table
+                                      box( tableOutput("SummaryTable"),
+                                           selectInput(inputId = "SummaryData",
+                                                       "Choose an x-axis",
+                                                       choices = c( "Age", 
+                                                                    "BusinessTravel", 
+                                                                    "EducationField", 
+                                                                    "EnvironmentSatisfaction", 
+                                                                    "Gender", 
+                                                                    "JobSatisfaction", 
+                                                                    "MaritalStatus", 
+                                                                    "OverTime", 
+                                                                    "PercentSalaryHike", 
+                                                                    "TotalWorkingYears",
+                                                                    "WorkLifeBalance", 
+                                                                    "YearsAtCompany", 
+                                                                    "YearsInCurrentRole"
+                                                       )
+                                           )
+                                      )
                                       
                                       
                              )
