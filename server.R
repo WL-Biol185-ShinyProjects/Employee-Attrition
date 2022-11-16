@@ -364,6 +364,56 @@ server <- function(input, output, session
   
   #Output for Estimation Feature
   
+  output$AttritionEstimation <- renderText({
+    
+    ranked_columns <- c(input$Rank1,
+                        input$Rank2,
+                        input$Rank3,
+                        input$Rank4,
+                        input$Rank5,
+                        input$Rank6,
+                        input$Rank7,
+                        input$Rank8,
+                        input$Rank9,
+                        input$Rank10,
+                        input$Rank11,
+                        input$Rank12,
+                        input$Rank13,
+                        input$Rank14
+    )
+    
+    weight_factors <- c(10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.4, 6.9, 6.4, 5.9, 5.4, 4.9, 4.4, 3.9)
+    
+    names(weight_factors) <- ranked_columns
+    
+    whc_length <- nrow(watson_healthcare_clean)
+    
+    percents <- c()
+    
+    groupedOnAge <- group_by_at(watson_healthcare_clean, "Age")
+    summarizedByAge <- summarize(groupedOnAge, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent <- filter(summarizedByAge, Age == input$Age)
+    percentAge <- percent$AttritionPercent[1]
+    weightedPercentAge <- percentAge * weight_factors["Age"]
+    percents <- append(percents, weightedPercentAge)
+    
+    groupedOnBT <- group_by_at(watson_healthcare_clean, "BusinessTravel")
+    summarizedByBT <- summarize(groupedOnBT, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent <- filter(summarizedByBT, BusinessTravel == input$BusinessTravel)
+    percentBT <- percent$AttritionPercent[1]
+    weightedPercentBT <- percentBT * weight_factors["BusinessTravel"]
+    percents <- append(percents, weightedPercentBT)
+    
+    #attrition <- mean(percents)
+    
+    # filtered <- filter(watson_healthcare_clean, Age == input$Age & Attrition == "Yes")
+    # filtered_length <- nrow(filtered)
+    # percent <- filtered_length / whc_length
+    # weighted_percent <- percent * weight_factors["Age"]
+    # weighted_percent
+    
+  })
+  
   # weight_factors <- c(10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.4, 6.9, 6.4, 5.9, 5.4, 4.9, 4.4, 3.9)
   # 
   # ranked_columns <- c(input$Rank1,
