@@ -415,11 +415,11 @@ server <- function(input, output, session
     group_by_at(input$XCategoricalComparisonData) %>%
     summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) 
   
- colnames(sum)[1] <- "PercentAttrition"
+ colnames(sum) [1] <- "PercentAttrition"
  
  sum %>%      
     arrange(AttritionByCategory) %>%
-    mutate(PercentAttrition = factor(PercentAttrition, levels = "PercentAttrition", ordered = TRUE)) %>%
+    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
     ggplot(aes("PercentAttrition", "AttritionByCategory")) +
     geom_bar(stat = 'identity') +
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
