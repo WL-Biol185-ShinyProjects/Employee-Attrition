@@ -14,6 +14,7 @@ dashboardPage(skin = "blue",
                  menuItem("Home", tabName = "Home"), 
                  menuItem("Who Quits?", tabName = "WhoQuits"),
                  menuItem("Self Help", tabName = "SelfHelp"),
+                 menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
                  menuItem("Employee Lifestyle", tabName = "EmployeeLifestyle")
@@ -248,6 +249,10 @@ tabItem( tabName = "SelfHelp",
            )
          
        ),
+tabItem( tabName = "WhatFactorsMattertheMost",
+         box(tableOutput("CategoricalRegression")
+             )
+        ),
 
 #The fourth tab is the Graphs                
 tabItem(tabName = "Graphs", 
@@ -403,7 +408,4 @@ tabItem(tabName = "EmployeeLifestyle",
                            
 
                     
-
-  
-
 
