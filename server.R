@@ -424,7 +424,17 @@ server <- function(input, output, session
     geom_bar(stat = 'identity') +
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
         )
-          
                                                }
-                                               )
+  )
+ 
+ #Output for Regressions
+ # output$CategoricalRegression <- renderTable(
+ #                                            {
+ #    # watson_healthcare_clean$Attrition <- as.numeric(watson_healthcare_clean$Attrition)
+ #    # modelEdu <- lm(Attrition ~ EducationField, data = watson_healthcare_clean)
+ #    # summary(modelEdu)
+ #     
+ #                                            }
+ #                                            )
+                                               
 }

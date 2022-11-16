@@ -14,6 +14,7 @@ dashboardPage(skin = "blue",
                  menuItem("Home", tabName = "Home"), 
                  menuItem("Who Quits?", tabName = "WhoQuits"),
                  menuItem("Self Help", tabName = "SelfHelp"),
+                 menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
                  menuItem("About", tabName = "About"),
@@ -367,7 +368,11 @@ dashboardPage(skin = "blue",
                                                               )
                                                )
                                   )             
-                                )
+                                ),
+                      tabItem( tabName = "WhatFactorsMattertheMost",
+                               box(tableOutput("CategoricalRegression")
+                                   )
+                              )
                            )
                     )
                   )
