@@ -411,16 +411,16 @@ server <- function(input, output, session
   output$BarCategoricalComparison <- renderPlot(
                                                {
 
- sum <-  watson_healthcare_clean %>%
+ sum1 <-  watson_healthcare_clean %>%
     group_by_at(input$XCategoricalComparisonData) %>%
     summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) 
   
- colnames(sum) [1] <- "PercentAttrition"
+ colnames(sum1) [1] <- "PercentAttrition"
  
- sum %>%      
+ sum1 %>%      
     arrange(AttritionByCategory) %>%
     mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
-    ggplot(aes("PercentAttrition", "AttritionByCategory")) +
+    ggplot(aes(PercentAttrition, AttritionByCategory)) +
     geom_bar(stat = 'identity') +
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
         )
