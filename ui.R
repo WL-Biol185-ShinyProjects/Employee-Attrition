@@ -17,7 +17,6 @@ dashboardPage(skin = "blue",
                  menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
-                 menuItem("About", tabName = "About"),
                  menuItem("Employee Lifestyle", tabName = "EmployeeLifestyle")
                 
                )
@@ -41,91 +40,300 @@ dashboardPage(skin = "blue",
                      )
                         ),
                 
-                
-                tabItem(tabName = "Graphs", 
-                  
-#Histogram
-                  box( h2("Histogram"),
-                       plotOutput("HistogramPlot"),
-                       selectInput( "HistogramData", 
-                                    "Choose an X-axis", 
-                                     choices = c( "Age", 
-                                                  "BusinessTravel", 
-                                                  "EducationField", 
-                                                  "EnvironmentSatisfaction", 
-                                                  "Gender", 
-                                                  "JobSatisfaction", 
-                                                  "MaritalStatus", 
-                                                  "OverTime", 
-                                                  "PercentSalaryHike", 
-                                                  "TotalWorkingYears",
-                                                  "WorkLifeBalance", 
-                                                  "YearsAtCompany", 
-                                                  "YearsInCurrentRole"
-                                               )
-                                  )
-                            
-                      ),
-              
-                   
-              
-#Density Plot 
-                   box( h2("Density Plot"),
-                        plotOutput( "DensityPlot"),
-                        selectInput( "DensityData", 
-                                     "Choose an X-axis", 
-                                      choices = c( "MonthlyIncome", 
-                                                   "PercentSalaryHike"
-                                                  )
-                                   )
-                      ),
-    
-                   h2("Scatter Plot"),
-#Scatter Plot
-              
-                   box( plotOutput("ScatterPlot"), 
-                        selectInput( "XScatterData", 
-                                    "Choose an X-axis", 
-                                     choices = c( "MonthlyIncome", 
-                                                  "PercentSalaryHike"
-                                                )
-                                   ),
-                        selectInput( "YScatterData", 
-                                     "Choose a Y-axis", 
-                                     choices = c( "TotalWorkingYears", 
-                                                  "YearsAtCompany"
-                                                )
-                                   )
-                       ),
-                     
-                  h2("Summary Table"),
-#Summary Table
-                  box( tableOutput("SummaryTable"),
-                      selectInput(inputId = "SummaryData",
-                                  "Choose an x-axis",
-                      choices = c( "Age", 
-                                   "BusinessTravel", 
-                                   "EducationField", 
-                                   "EnvironmentSatisfaction", 
-                                   "Gender", 
-                                   "JobSatisfaction", 
+#The second tab is Who Quits
+tabItem( tabName = "WhoQuits",
+         box( plotOutput("BarCategoricalComparison"
+         ),
+         selectInput( "XCategoricalComparisonData",
+                      "Choose an X-axis",
+                      choices = c( "BusinessTravel",
+                                   "EducationField",
+                                   "EnvironmentSatisfaction",
+                                   "Gender",
+                                   "JobSatisfaction",
                                    "MaritalStatus", 
-                                   "OverTime", 
-                                   "PercentSalaryHike", 
-                                   "TotalWorkingYears",
-                                   "WorkLifeBalance", 
-                                   "YearsAtCompany", 
-                                   "YearsInCurrentRole"
-                                  )
-                                )
-                  )
+                                   "WorkLifeBalance"
+                      )
+         )
+         )             
 ),
-      
-#The Second Tab Is the History Tab
+
+
+#The third tab is the self-help tab          
+tabItem( tabName = "SelfHelp",
+         h2( "Estimating Your Chance of Quitting! Happiness"
+            ),
+         #Slider         
+         box(
+           sliderInput( "Age", 
+                        "What is Your Age?", 
+                        18, 
+                        60, 
+                        40, 
+                        step = 1
+                      ),
+           selectizeInput( "BusinessTravel", 
+                           "How Often Do you Travel?", 
+                           c( "Non-Travel", 
+                              "Travel_Rarely", 
+                              "Travel_Frequently"
+                             ),
+                           selected = NULL
+                          ),
+           selectizeInput( "EducationField", 
+                           "What Field Did You Study?", 
+                           c( "Life Sciences", 
+                              "Medical", 
+                              "Marketing", 
+                              "Technical Degree", 
+                              "Human Resources", 
+                              "Other"
+                             ), 
+                           selected = NULL
+                           ),
+           sliderInput( "EnvironmentSatisfaction", 
+                        "How Satisfied Are You with Your Job Environment?", 
+                        1, 
+                        4, 
+                        2, 
+                        step = 1
+                       ),
+           selectizeInput( "Gender", 
+                           "What Is Your Gender?", 
+                           c( "Male", 
+                              "Female"
+                             ), 
+                           selected = NULL
+                          ),
+           sliderInput( "JobSatisfaction", 
+                        "How Satisfied Are You with Your Job?", 
+                        1, 
+                        4, 
+                        2, 
+                        step = 1
+                       ),
+           selectizeInput( "MaritalStatus", 
+                           "What's Your Marital Status?", 
+                           c( "Single", 
+                              "Married", 
+                              "Divorced"
+                             ), 
+                           selected = NULL
+                          ),
+           sliderInput( "MonthlyIncome", 
+                        "What Is Your Monthly Income?", 
+                        1000,  
+                        20000, 
+                        10000
+                       ),
+           selectizeInput( "Overtime", "Do You Work Overtime Often?", 
+                           c( "Yes", 
+                              "No"
+                           ), 
+                           selected = NULL
+                          ),
+           sliderInput( "PercentSalaryHike",  
+                        "How Much Has Your Salary Increased over Your Career?", 
+                        10, 
+                        25, 
+                        17
+                       ),
+           sliderInput( "TotalWorkingYears", 
+                        "How Many Years Have You Worked?", 
+                        0, 
+                        40, 
+                        20, 
+                        step = 1
+                       ),
+           sliderInput( "WorkLifeBalance", 
+                        "How Is Your Work/Life Balance?", 
+                        1, 
+                        4, 
+                        2, 
+                        step = 1
+                       ),
+           sliderInput( "YearsAtCompany", 
+                        "How Many Years Have You Worked at Your Current Company?", 
+                        0, 
+                        40, 
+                        20, 
+                        step = 1
+                       ),
+           sliderInput( "YearsInCurrentRole", 
+                        "How Many Years Have You Worked in Your Current Role?", 
+                        0, 
+                        20, 
+                        10, 
+                        step = 1
+                        ),
+           width = 12
+            ),
+         
+         h2("Rank How Important Each Item Is to You."
+            ),
+         
+         box(
+           selectInput( "Rank1", "First", choices = c("", "Age", 
+                                                      "BusinessTravel", 
+                                                      "EducationField", 
+                                                      "EnvironmentSatisfaction", 
+                                                      "Gender", 
+                                                      "JobSatisfaction", 
+                                                      "MaritalStatus", 
+                                                      "OverTime", 
+                                                      "PercentSalaryHike", 
+                                                      "TotalWorkingYears",
+                                                      "WorkLifeBalance", 
+                                                      "YearsAtCompany", 
+                                                      "YearsInCurrentRole"
+                                                     ),
+           selected = ""
+                      ),
+           selectInput( "Rank2", "Second", choices = c(""
+                                                       )
+                       ),
+           selectInput( "Rank3", "Third", choices = c(""
+                                                      )
+                       ),
+           selectInput( "Rank4", "Fourth", choices = c(""
+                                                       )
+                       ),
+           selectInput( "Rank5", "Fifth", choices = c(""
+                                                      )
+                       ),
+           selectInput( "Rank6", "Sixth", choices = c(""
+                                                      )
+                       ),
+           selectInput( "Rank7", "Seventh", choices = c(""
+                                                        )
+                       ),
+           selectInput( "Rank8", "Eighth", choices = c(""
+                                                       )
+                       ),
+           selectInput( "Rank9", "Ninth", choices = c(""
+                                                      )
+                       ),
+           selectInput( "Rank10", "Tength", choices = c(""
+                                                        )
+                       ),
+           selectInput( "Rank11", "Eleventh", choices = c(""
+                                                          )
+                       ),
+           selectInput( "Rank12", "Twelfth", choices = c(""
+                                                         )
+                       ),
+           selectInput( "Rank13", "Thirteenth", choices = c(""
+                                                            )
+                       ),
+           selectInput( "Rank14", "Fourteenth", choices = c(""
+                                                            )
+                       ),
+           width = 6
+            ),
+         
+         box(
+           h2("Your Likelihood of Quitting Is..."
+              ),
+           #textOutput("AttritionEstimation")
+           width = 6
+            ),
+         
+         h2("What You Can Do to Minimize Burnout"
+            
+           )
+         
+       ),
+tabItem( tabName = "WhatFactorsMattertheMost",
+         box(tableOutput("CategoricalRegression")
+             )
+        ),
+
+#The fourth tab is the Graphs                
+tabItem(tabName = "Graphs", 
+        
+        #Histogram
+        box( h2("Histogram"),
+             plotOutput("HistogramPlot"),
+             selectInput( "HistogramData", 
+                          "Choose an X-axis", 
+                          choices = c( "Age", 
+                                       "BusinessTravel", 
+                                       "EducationField", 
+                                       "EnvironmentSatisfaction", 
+                                       "Gender", 
+                                       "JobSatisfaction", 
+                                       "MaritalStatus", 
+                                       "OverTime", 
+                                       "PercentSalaryHike", 
+                                       "TotalWorkingYears",
+                                       "WorkLifeBalance", 
+                                       "YearsAtCompany", 
+                                       "YearsInCurrentRole"
+                          )
+             )
+             
+        ),
+        
+        
+        
+        #Density Plot 
+        box( h2("Density Plot"),
+             plotOutput( "DensityPlot"),
+             selectInput( "DensityData", 
+                          "Choose an X-axis", 
+                          choices = c( "MonthlyIncome", 
+                                       "PercentSalaryHike"
+                          )
+             )
+        ),
+        
+        h2("Scatter Plot"),
+        #Scatter Plot
+        
+        box( plotOutput("ScatterPlot"), 
+             selectInput( "XScatterData", 
+                          "Choose an X-axis", 
+                          choices = c( "MonthlyIncome", 
+                                       "PercentSalaryHike"
+                          )
+             ),
+             selectInput( "YScatterData", 
+                          "Choose a Y-axis", 
+                          choices = c( "TotalWorkingYears", 
+                                       "YearsAtCompany"
+                          )
+             )
+        ),
+        
+        h2("Summary Table"),
+        #Summary Table
+        box( tableOutput("SummaryTable"),
+             selectInput(inputId = "SummaryData",
+                         "Choose an x-axis",
+                         choices = c( "Age", 
+                                      "BusinessTravel", 
+                                      "EducationField", 
+                                      "EnvironmentSatisfaction", 
+                                      "Gender", 
+                                      "JobSatisfaction", 
+                                      "MaritalStatus", 
+                                      "OverTime", 
+                                      "PercentSalaryHike", 
+                                      "TotalWorkingYears",
+                                      "WorkLifeBalance", 
+                                      "YearsAtCompany", 
+                                      "YearsInCurrentRole"
+                         )
+             )
+        )
+),
+
+
+       
+#The fifth tab is the history tab
                   tabItem( tabName ="History", 
-                           fixedPage(
                                box(
-                                 title = "COVID-19 and Healthcare Attrition:", background = "teal", solidHeader = TRUE, width = 6,  height = 500, status = "primary", 
+                                 title = "COVID-19 and Healthcare Attrition:", background = "teal", solidHeader = TRUE, width = 6, status = "primary", 
                                  tags$ul(
                                  tags$li("Healthcare burnout was a crisis long before the coronavirus pandemic hit.
                                    Rooted in the healthcare system, these systemic shortfalls include escalating workloads, inadequate support, underinvestment in public health infrastructure, etc.  "),
@@ -136,11 +344,11 @@ dashboardPage(skin = "blue",
                                  tags$li("The Delta and Omicron surges sent many unvaccinated patients into hospitals where health care employees were already emotionally and physically exhausted from the last 18 months of the pandemic. 
                                  Additionally, health care workers had to make unprecedented decisions, risk infection for themselves and their families, and experience the pain of losing many patients.") 
                                          )
-                                  )
                                     ),
+                                
                                
                                box(
-                                 title = "Steps to Take:", background = "green", width = 6, height = 500, status = "primary",
+                                 title = "Steps to Take:", background = "green", width = 6, status = "primary",
                                  tags$ol(
                                    tags$li(tags$b("This data set shows the critical need for changes to the healthcare system.")),
                                    tags$li(tags$b("Health care workers need to be protected and valued."), 
@@ -157,225 +365,41 @@ dashboardPage(skin = "blue",
                                  
                                    ),
                                box(
-                                 title = "Consequences of Burnout on Health Care Workers:", background = "blue", width = "8", status = "primary",
-                                 tags$img(src="consequencesofhealthcareattrition.png",height = "500px", width = "700px", alt ="Something went wrong", deleteFile=FALSE),
+                                 title = "Consequences of Burnout on Health Care Workers:", background = "blue", width = "12", status = "primary",
+                                 HTML('<center><img src="consequencesofhealthcareattrition.png" width="800"></center>'
+                                      ),
+                                 br(),
                                  p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
-                               )
+                                   )
+                                
+                         ),
                                   
-                                        
-                          ),
+#The sixth tab is the Employee Lifestyle tab
+tabItem(tabName = "EmployeeLifestyle", 
+        box(plotOutput( "BarBusinessTravel"
+                       )
+            ), 
+        box(plotOutput( "BarOvertime"
+                      ) 
+           ),
+        box(plotOutput("BarEnvirSatisfaction"
+                       )
+            ),
+        box(plotOutput("BarJobSatisfaction"
+                       )
+           ),
+        box(plotOutput("BarWorkLifeBalance"
+                       )
+           )
+        
+       )                                      
+               )
+            )
+               )
+              )
                            
                            
                            
       
-#The Third Tab Is the About Tab
-                  tabItem( tabName = "About",
-                    box(h2("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley"
-                       )
-                       ),
-                     h3("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
-                                                  "kaggle"),
-                       "and pertains to healthcare employees quitting their jobs."
-                          )
-                         ),
-
-
-      #The Fourth Tab is the Self-Help Tab          
-                    tabItem( tabName = "SelfHelp",
-                            h2( "Estimating Your Chance of Quitting! Happiness"),
-        #Slider         
-                            box(
-                                 sliderInput( "Age", 
-                                              "What is Your Age?", 
-                                              18, 
-                                              60, 
-                                              40, 
-                                              step = 1
-                                             ),
-                                 selectizeInput( "BusinessTravel", 
-                                                 "How Often Do you Travel?", 
-                                                 c( "Non-Travel", 
-                                                    "Travel_Rarely", 
-                                                    "Travel_Frequently"
-                                                   ),
-                                                 selected = NULL
-                                                ),
-                                 selectizeInput( "EducationField", 
-                                                 "What Field Did You Study?", 
-                                                 c( "Life Sciences", 
-                                                    "Medical", 
-                                                    "Marketing", 
-                                                    "Technical Degree", 
-                                                    "Human Resources", 
-                                                    "Other"
-                                                   ), 
-                                                 selected = NULL
-                                                ),
-                                 sliderInput( "EnvironmentSatisfaction", 
-                                              "How Satisfied Are You with Your Job Environment?", 
-                                              1, 
-                                              4, 
-                                              2, 
-                                              step = 1
-                                             ),
-                                 selectizeInput( "Gender", 
-                                                 "What Is Your Gender?", 
-                                                 c( "Male", 
-                                                    "Female"
-                                                   ), 
-                                                 selected = NULL
-                                                ),
-                                 sliderInput( "JobSatisfaction", 
-                                              "How Satisfied Are You with Your Job?", 
-                                              1, 
-                                              4, 
-                                              2, 
-                                              step = 1
-                                            ),
-                                 selectizeInput( "MaritalStatus", 
-                                                "What's Your Marital Status?", 
-                                                c( "Single", 
-                                                   "Married", 
-                                                   "Divorced"
-                                                  ), 
-                                                selected = NULL
-                                                ),
-                                 sliderInput( "MonthlyIncome", 
-                                             "What Is Your Monthly Income?", 
-                                             1000,  
-                                             20000, 
-                                             10000
-                                            ),
-                                 selectizeInput( "Overtime", "Do You Work Overtime Often?", 
-                                                c( "Yes", 
-                                                   "No"
-                                                  ), 
-                                                selected = NULL
-                                               ),
-                                 sliderInput( "PercentSalaryHike",  
-                                             "How Much Has Your Salary Increased over Your Career?", 
-                                             10, 
-                                             25, 
-                                             17
-                                            ),
-                                 sliderInput( "TotalWorkingYears", 
-                                             "How Many Years Have You Worked?", 
-                                             0, 
-                                             40, 
-                                             20, 
-                                             step = 1
-                                            ),
-                                 sliderInput( "WorkLifeBalance", 
-                                             "How Is Your Work/Life Balance?", 
-                                             1, 
-                                             4, 
-                                             2, 
-                                             step = 1
-                                            ),
-                                 sliderInput( "YearsAtCompany", 
-                                             "How Many Years Have You Worked at Your Current Company?", 
-                                             0, 
-                                             40, 
-                                             20, 
-                                             step = 1
-                                            ),
-                                 sliderInput( "YearsInCurrentRole", 
-                                             "How Many Years Have You Worked in Your Current Role?", 
-                                             0, 
-                                             20, 
-                                             10, 
-                                             step = 1),
-                                             width = 12
-                               ),
-              
-                          h2("Rank How Important Each Item Is to You."),
-              
-                          box(
-                              selectInput( "Rank1", "First", choices = c("", "Age", 
-                                                                  "BusinessTravel", 
-                                                                  "EducationField", 
-                                                                  "EnvironmentSatisfaction", 
-                                                                  "Gender", 
-                                                                  "JobSatisfaction", 
-                                                                  "MaritalStatus", 
-                                                                  "OverTime", 
-                                                                  "PercentSalaryHike", 
-                                                                  "TotalWorkingYears",
-                                                                  "WorkLifeBalance", 
-                                                                  "YearsAtCompany", 
-                                                                  "YearsInCurrentRole"
-                                                                  ),
-                                           selected = ""
-                                           ),
-                              selectInput( "Rank2", "Second", choices = c("")),
-                              selectInput( "Rank3", "Third", choices = c("")),
-                              selectInput( "Rank4", "Fourth", choices = c("")),
-                              selectInput( "Rank5", "Fifth", choices = c("")),
-                              selectInput( "Rank6", "Sixth", choices = c("")),
-                              selectInput( "Rank7", "Seventh", choices = c("")),
-                              selectInput( "Rank8", "Eighth", choices = c("")),
-                              selectInput( "Rank9", "Ninth", choices = c("")),
-                              selectInput( "Rank10", "Tength", choices = c("")),
-                              selectInput( "Rank11", "Eleventh", choices = c("")),
-                              selectInput( "Rank12", "Twelfth", choices = c("")),
-                              selectInput( "Rank13", "Thirteenth", choices = c("")),
-                              selectInput( "Rank14", "Fourteenth", choices = c("")),
-                              width = 6
-                          ),
-              
-                           box(
-                             h2("Your Likelihood of Quitting Is..."),
-                                 #textOutput("AttritionEstimation")
-                             width = 6
-                               ),
-
-                           h2("What You Can Do to Minimize Burnout"
-                              
-                              )
-
-                  ),
-
-                  tabItem(tabName = "EmployeeLifestyle", 
-                    box(plotOutput( "BarBusinessTravel"
-                                  )
-                        ), 
-                    box(plotOutput( "BarOvertime"
-                                  ) 
-                       ),
-                    box(plotOutput("BarEnvirSatisfaction"
-                                   )
-                        ),
-                    box(plotOutput("BarJobSatisfaction"
-                                   )
-                        ),
-                    box(plotOutput("BarWorkLifeBalance"
-                                   )
-                        )
-
-                          ),
-                     tabItem( tabName = "WhoQuits",
-                              box( plotOutput("BarCategoricalComparison"
-                                              ),
-                                    selectInput( "XCategoricalComparisonData",
-                                                "Choose an X-axis",
-                                                  choices = c( "BusinessTravel",
-                                                               "EducationField",
-                                                               "EnvironmentSatisfaction",
-                                                               "Gender",
-                                                               "JobSatisfaction",
-                                                               "MaritalStatus", 
-                                                               "WorkLifeBalance"
-                                                              )
-                                               )
-                                  )             
-                                ),
-                      tabItem( tabName = "WhatFactorsMattertheMost",
-                               box(tableOutput("CategoricalRegression")
-                                   )
-                              )
-                           )
-                    )
-                  )
-              )
-
+                    
 
