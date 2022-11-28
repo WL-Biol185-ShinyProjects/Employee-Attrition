@@ -460,6 +460,13 @@ server <- function(input, output, session
     weightedPercentPSH <- percentPSH * weight_factors["PercentSalaryHike"]
     percents <- append(percents, weightedPercentPSH)
     
+    groupedOnTWY <- group_by_at(watson_healthcare_clean, "TotalWorkingYears")
+    summarizedByTWY <- summarize(groupedOnTWY, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent11 <- filter(summarizedByTWY, TotalWorkingYears == input$TotalWorkingYears)
+    percentTWY <- percent11$AttritionPercent[1]
+    weightedPercentTWY <- percentTWY * weight_factors["TotalWorkingYears"]
+    percents <- append(percents, weightedPercentTWY)
+    
     #attrition <- mean(percents)
     
     # filtered <- filter(watson_healthcare_clean, Age == input$Age & Attrition == "Yes")
