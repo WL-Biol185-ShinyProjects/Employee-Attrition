@@ -233,7 +233,7 @@ dashboardPage(skin = "blue",
                                              1000,  
                                              20000,
                                             ),
-                                 selectizeInput( "Overtime", "Do You Work Overtime Often?", 
+                                 selectizeInput( "OverTime", "Do You Work Overtime Often?", 
                                                 c( "Yes", 
                                                    "No"
                                                   ), 
