@@ -476,10 +476,17 @@ server <- function(input, output, session
     
     groupedOnYAC <- group_by_at(watson_healthcare_clean, "YearsAtCompany")
     summarizedByYAC <- summarize(groupedOnYAC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent13 <- filter(summarizedByYAC, WorkLifeBalance == input$YearsAtCompany)
+    percent13 <- filter(summarizedByYAC, YearsAtCompany == input$YearsAtCompany)
     percentYAC <- percent13$AttritionPercent[1]
     weightedPercentYAC <- percentYAC * weight_factors["YearsAtCompany"]
     percents <- append(percents, weightedPercentYAC)
+    
+    groupedOnYCR <- group_by_at(watson_healthcare_clean, "YearsInCurrentRole")
+    summarizedByYCR <- summarize(groupedOnYCR, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent14 <- filter(summarizedByYCR, YearsInCurrentRole == input$YearsInCurrentRole)
+    percentYCR <- percent14$AttritionPercent[1]
+    weightedPercentYCR <- percentYCR * weight_factors["YearsInCurrentRole"]
+    percents <- append(percents, weightedPercentYCR)
     
     #attrition <- mean(percents)
     
