@@ -474,6 +474,13 @@ server <- function(input, output, session
     weightedPercentWLB <- percentWLB * weight_factors["WorkLifeBalance"]
     percents <- append(percents, weightedPercentWLB)
     
+    groupedOnYAC <- group_by_at(watson_healthcare_clean, "YearsAtCompany")
+    summarizedByYAC <- summarize(groupedOnYAC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent13 <- filter(summarizedByYAC, WorkLifeBalance == input$YearsAtCompany)
+    percentYAC <- percent13$AttritionPercent[1]
+    weightedPercentYAC <- percentYAC * weight_factors["YearsAtCompany"]
+    percents <- append(percents, weightedPercentYAC)
+    
     #attrition <- mean(percents)
     
   })
