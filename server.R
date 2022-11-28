@@ -439,6 +439,13 @@ server <- function(input, output, session
     weightedPercentMS <- percentMS * weight_factors["MaritalStatus"]
     percents <- append(percents, weightedPercentMS)
     
+    groupedOnMI <- group_by_at(watson_healthcare_clean, "MonthlyIncome")
+    summarizedByMI <- summarize(groupedOnMI, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent8 <- filter(summarizedByMI, MonthlyIncome == input$MonthlyIncome)
+    percentMI <- percent8$AttritionPercent[1]
+    weightedPercentMI <- percentMI * weight_factors["MonthlyIncome"]
+    percents <- append(percents, weightedPercentMI)
+    
     #attrition <- mean(percents)
     
     # filtered <- filter(watson_healthcare_clean, Age == input$Age & Attrition == "Yes")
