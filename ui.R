@@ -36,11 +36,23 @@ dashboardPage(skin = "blue",
                           title = "Welcome!", background = "red", width = "12", status = "primary",
                           HTML('<center><img src="group picture.jpeg" width="800"></center>'
                           ),
-                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."),
-                    br(),
-                    p("Healthcare employee attrition is a growing problem in the United States.Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
+                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley.")), 
+                         tags$ul(
+                            tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
+                            br(),
+                            tags$li("According to the 2022 NSI report, the 2021 turnover by position was:"),
+                            br(),
+                            tags$li("Staff RNs:", tags$b("27.1%")),
+                            tags$li("Certified Nursing Assistant:", tags$b("35.5%")),
+                            tags$li("Physician Assistant:", tags$b("10.7%")),
+                            tags$li("Physical Therapist:", tags$b("13.6%")),
+                            tags$li("Pharmacist:", tags$b("10%")),
+                            tags$li("Patient Care Tech:", tags$b("38.1%")),
+                            tags$li("Radiologic Technologist:", tags$b("17.5%")),
+                            br(),
+                            tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
                                                        "kaggle"),
-                       "and pertains to healthcare employees quitting their jobs."
+                            "and pertains to healthcare employees quitting their jobs."
                      )
                       )
                       )

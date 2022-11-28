@@ -421,7 +421,7 @@ server <- function(input, output, session
     arrange(AttritionByCategory) %>%
     mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
     ggplot(aes(PercentAttrition, AttritionByCategory)) +
-    geom_bar(stat = 'identity') +
+    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
         )
                                                }
