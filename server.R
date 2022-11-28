@@ -453,6 +453,13 @@ server <- function(input, output, session
     weightedPercentOT <- percentOT * weight_factors["OverTime"]
     percents <- append(percents, weightedPercentOT)
     
+    groupedOnPSH <- group_by_at(watson_healthcare_clean, "PercentSalaryHike")
+    summarizedByPSH <- summarize(groupedOnPSH, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent10 <- filter(summarizedByPSH, PercentSalaryHike == input$PercentSalaryHike)
+    percentPSH <- percent10$AttritionPercent[1]
+    weightedPercentPSH <- percentPSH * weight_factors["PercentSalaryHike"]
+    percents <- append(percents, weightedPercentPSH)
+    
     #attrition <- mean(percents)
     
     # filtered <- filter(watson_healthcare_clean, Age == input$Age & Attrition == "Yes")
