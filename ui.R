@@ -32,13 +32,13 @@ dashboardPage(skin = "blue",
 #The first tab is the home tab
       tabItems(
                 tabItem(tabName = "Home",
-                  box(
-                    title = "Welcome!",
-                    background = "red",
+                        box(
+                          title = "Welcome!", background = "red", width = "12", status = "primary",
+                          HTML('<center><img src="group picture.jpeg" width="800"></center>'
+                          ),
                     h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."),
                     br(),
-                    p("Healthcare employee attrition is a growing problem in the United States."),
-                    p("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
+                    p("Healthcare employee attrition is a growing problem in the United States.Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
                                                        "kaggle"),
                        "and pertains to healthcare employees quitting their jobs."
                      )
