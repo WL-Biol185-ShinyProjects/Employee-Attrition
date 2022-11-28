@@ -425,16 +425,21 @@ server <- function(input, output, session
     labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
         )
                                                }
-  )
- 
- #Output for Regressions
- # output$CategoricalRegression <- renderTable(
- #                                            {
- #    # watson_healthcare_clean$Attrition <- as.numeric(watson_healthcare_clean$Attrition)
- #    # modelEdu <- lm(Attrition ~ EducationField, data = watson_healthcare_clean)
- #    # summary(modelEdu)
- #     
- #                                            }
- #                                            )
+                                               )
+  modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
+  coef(modelGender)
+  modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
+  coef(modelEdu)
+  
+#Output for Regressions
+  watson_healthcare_reg$Attrition <- TRUE
+  output$CategoricalRegression <- renderPlot(
+                                             {
+plot.new()
+abline(a = 1.000000e+00, b = 6.703746e-17)
+
+
+                                             }
+                                             )
                                                
 }
