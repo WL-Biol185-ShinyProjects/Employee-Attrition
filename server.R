@@ -20,8 +20,9 @@ server <- function(input, output, session
            ) +
        geom_histogram(stat = "count"
                           ) + 
-       ggtitle("Potential Predictors of Healthcare Employee Attrition"
-                   )
+        labs(title = "Employee Attrition Count", y = "Count")
+        
+                   
      }
                                        )
   
@@ -422,24 +423,25 @@ server <- function(input, output, session
     mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
     ggplot(aes(PercentAttrition, AttritionByCategory)) +
     geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
-    labs(title = "Employee Attrition by Category", x = "Category", y = "Attrition Count"
+    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
         )
                                                }
                                                )
-  modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-  coef(modelGender)
-  modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-  coef(modelEdu)
-  
+   modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
+   coef(modelGender)
+   modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
+   coef(modelEdu)
+
 #Output for Regressions
-  watson_healthcare_reg$Attrition <- TRUE
-  output$CategoricalRegression <- renderPlot(
+   watson_healthcare_reg$Attrition <- TRUE
+   output$CategoricalRegression <- renderPlot(
                                              {
-plot.new()
-abline(a = 1.000000e+00, b = 6.703746e-17)
+   ggplot() +
+   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
+  
 
 
-                                             }
-                                             )
+                                              }
+                                              )
                                                
 }
