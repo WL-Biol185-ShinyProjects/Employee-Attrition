@@ -429,8 +429,15 @@ server <- function(input, output, session
     summarizedByJS <- summarize(groupedOnJS, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
     percent6 <- filter(summarizedByJS, JobSatisfaction == input$JobSatisfaction)
     percentJS <- percent6$AttritionPercent[1]
-    weightedPercentJS <- percentJS * weight_factors["Job Satisfaction"]
+    weightedPercentJS <- percentJS * weight_factors["JobSatisfaction"]
     percents <- append(percents, weightedPercentJS)
+    
+    groupedOnMS <- group_by_at(watson_healthcare_clean, "MaritalStatus")
+    summarizedByMS <- summarize(groupedOnMS, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent7 <- filter(summarizedByMS, MaritalStatus == input$MaritalStatus)
+    percentMS <- percent7$AttritionPercent[1]
+    weightedPercentMS <- percentMS * weight_factors["MaritalStatus"]
+    percents <- append(percents, weightedPercentMS)
     
     #attrition <- mean(percents)
     
