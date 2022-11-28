@@ -392,17 +392,45 @@ server <- function(input, output, session
     
     groupedOnAge <- group_by_at(watson_healthcare_clean, "Age")
     summarizedByAge <- summarize(groupedOnAge, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent <- filter(summarizedByAge, Age == input$Age)
-    percentAge <- percent$AttritionPercent[1]
+    percent1 <- filter(summarizedByAge, Age == input$Age)
+    percentAge <- percent1$AttritionPercent[1]
     weightedPercentAge <- percentAge * weight_factors["Age"]
     percents <- append(percents, weightedPercentAge)
     
     groupedOnBT <- group_by_at(watson_healthcare_clean, "BusinessTravel")
     summarizedByBT <- summarize(groupedOnBT, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent <- filter(summarizedByBT, BusinessTravel == input$BusinessTravel)
-    percentBT <- percent$AttritionPercent[1]
+    percent2 <- filter(summarizedByBT, BusinessTravel == input$BusinessTravel)
+    percentBT <- percent2$AttritionPercent[1]
     weightedPercentBT <- percentBT * weight_factors["BusinessTravel"]
     percents <- append(percents, weightedPercentBT)
+    
+    groupedOnEF <- group_by_at(watson_healthcare_clean, "EducationField")
+    summarizedByEF <- summarize(groupedOnEF, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent3 <- filter(summarizedByEF, EducationField == input$EducationField)
+    percentEF <- percent3$AttritionPercent[1]
+    weightedPercentEF <- percentEF * weight_factors["EducationField"]
+    percents <- append(percents, weightedPercentEF)
+    
+    groupedOnES <- group_by_at(watson_healthcare_clean, "EnvironmentSatisfaction")
+    summarizedByES <- summarize(groupedOnES, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent4 <- filter(summarizedByES, EnvironmentSatisfaction == input$EnvironmentSatisfaction)
+    percentES <- percent4$AttritionPercent[1]
+    weightedPercentES <- percentES * weight_factors["EnvironmentSatisfaction"]
+    percents <- append(percents, weightedPercentES)
+    
+    groupedOnGen <- group_by_at(watson_healthcare_clean, "Gender")
+    summarizedByGen <- summarize(groupedOnGen, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent5 <- filter(summarizedByGen, Gender == input$Gender)
+    percentGen <- percent5$AttritionPercent[1]
+    weightedPercentGen <- percentGen * weight_factors["Gender"]
+    percents <- append(percents, weightedPercentGen)
+    
+    groupedOnJS <- group_by_at(watson_healthcare_clean, "JobSatisfaction")
+    summarizedByJS <- summarize(groupedOnJS, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent6 <- filter(summarizedByJS, JobSatisfaction == input$JobSatisfaction)
+    percentJS <- percent6$AttritionPercent[1]
+    weightedPercentJS <- percentJS * weight_factors["Job Satisfaction"]
+    percents <- append(percents, weightedPercentJS)
     
     #attrition <- mean(percents)
     
@@ -413,65 +441,6 @@ server <- function(input, output, session
     # weighted_percent
     
   })
-  
-  # weight_factors <- c(10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.4, 6.9, 6.4, 5.9, 5.4, 4.9, 4.4, 3.9)
-  # 
-  # ranked_columns <- c(input$Rank1,
-  #                     input$Rank2,
-  #                     input$Rank3,
-  #                     input$Rank4,
-  #                     input$Rank5,
-  #                     input$Rank6,
-  #                     input$Rank7,
-  #                     input$Rank8,
-  #                     input$Rank9,
-  #                     input$Rank10,
-  #                     input$Rank11,
-  #                     input$Rank12,
-  #                     input$Rank13,
-  #                     input$Rank14
-  # )
-  # 
-  # user_inputs <- c(input$Age,
-  #                  input$BusinessTravel,
-  #                  input$EducationField,
-  #                  input$EnvironmentSatisfaction,
-  #                  input$Gender,
-  #                  input$JobSatisfaction,
-  #                  input$MaritalStatus,
-  #                  input$MonthlyIncome,
-  #                  input$Overtime,
-  #                  input$PercentSalaryHike,
-  #                  input$TotalWorkingYears,
-  #                  input$WorkLifeBalance,
-  #                  input$YearsAtCompany,
-  #                  input$YearsInCurrentRole
-  # )
-  # 
-  # names(user_inputs) <- colnames(watson_healthcare_clean[2:15])
-  # 
-  # inputsByRank <- select(user_inputs, all_of(ranked_columns))
-  # 
-  # whc <- watson_healthcare_clean[2:16]
-  # 
-  # output$AttritionEstimation <- renderText({
-  #   
-  #   groupedOnRank1 <- group_by_at(whc, ranked_columns[1])
-  #   summarizedByRank1 <- summarize(groupedOnRank1, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-  #   inputValue1 <- inputsByRank[1,1]
-  #   percent <- filter(summarizedByRank1, ranked_columns[1] == inputValue1)
-  #   percent1 <- percent$AttritionPercent[1]
-  #   percents <- append(percents, percent1)
-  #   attrition <- percents * weight_factors[1]
-  #   attrition
-  #   #   sapply(ranked_columns, function(x) {
-  #   #     watson_healthcare_clean %>%
-  #   #       filter( x == user_inputs[x], Attrition == "Yes") %>%
-  #   #       length <- nrow()
-  #   #     
-  #   #     (length / total_people) * weight_factors
-  #   #   })
-  # })
   
   #Output for Bar Graphs 
   output$BarBusinessTravel <- renderPlot({
