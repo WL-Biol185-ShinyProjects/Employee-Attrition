@@ -467,13 +467,14 @@ server <- function(input, output, session
     weightedPercentTWY <- percentTWY * weight_factors["TotalWorkingYears"]
     percents <- append(percents, weightedPercentTWY)
     
-    #attrition <- mean(percents)
+    groupedOnWLB <- group_by_at(watson_healthcare_clean, "WorkLifeBalance")
+    summarizedByWLB <- summarize(groupedOnWLB, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent12 <- filter(summarizedByWLB, WorkLifeBalance == input$WorkLifeBalance)
+    percentWLB <- percent12$AttritionPercent[1]
+    weightedPercentWLB <- percentWLB * weight_factors["WorkLifeBalance"]
+    percents <- append(percents, weightedPercentWLB)
     
-    # filtered <- filter(watson_healthcare_clean, Age == input$Age & Attrition == "Yes")
-    # filtered_length <- nrow(filtered)
-    # percent <- filtered_length / whc_length
-    # weighted_percent <- percent * weight_factors["Age"]
-    # weighted_percent
+    #attrition <- mean(percents)
     
   })
   
