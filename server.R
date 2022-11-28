@@ -426,18 +426,21 @@ server <- function(input, output, session
     labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
         )
                                                }
-                                               )
+   watson_healthcare_reg$Attrition <- TRUE                                            )
    modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
    coef(modelGender)
    modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
    coef(modelEdu)
 
 #Output for Regressions
-   watson_healthcare_reg$Attrition <- TRUE
    output$CategoricalRegression <- renderPlot(
                                              {
-   ggplot() +
-   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
+   watson_healthcare_reg %>%
+   ggplot(aes(Gender, Attrition)) +
+   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17) 
+   
+   
+                                               
   
 
 
