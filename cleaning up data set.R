@@ -12,3 +12,4 @@ watson_healthcare_reg <- watson_healthcare_modified %>%
   select ( c( "Age", "BusinessTravel", "EducationField", "EnvironmentSatisfaction", "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", "OverTime", "PercentSalaryHike", "TotalWorkingYears", "WorkLifeBalance", "YearsAtCompany", "YearsInCurrentRole"
               , "Attrition"))
 
+write.csv(watson_healthcare_reg, file = "watson_healthcare_reg.csv")
