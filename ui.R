@@ -4,11 +4,7 @@ library(shinydashboard)
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
-<<<<<<< HEAD
 
-=======
-library(DescTools)
->>>>>>> 8720a2f1d7b6c884186357e7d882fcf2fd67b05b
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "blue", 
