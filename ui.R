@@ -4,6 +4,7 @@ library(ggplot2)
 library(dplyr)
 library(tidyverse)
 
+
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "blue", 
   dashboardHeader(title = "Healthcare Attrition"),
@@ -59,7 +60,7 @@ dashboardPage(skin = "blue",
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
                              box( plotOutput("BarCategoricalComparison"
-                             ),
+                                            ),
                              selectInput( "XCategoricalComparisonData",
                                           "Choose an X-axis",
                                           choices = c( "BusinessTravel",
@@ -94,10 +95,6 @@ dashboardPage(skin = "blue",
                                   )
                              )
                     ),
-                    
-                    
-                             )             
-                    ),
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
                              h2( "Estimating Your Chance of Quitting! Happiness"
@@ -108,7 +105,8 @@ dashboardPage(skin = "blue",
                                             "What is Your Age?", 
                                             18, 
                                             60, 
-                                            40, 
+                                            40
+                               ),
                                numericInput( "Age", 
                                             "What is Your Age?",
                                             40,
@@ -139,7 +137,8 @@ dashboardPage(skin = "blue",
                                             "How Satisfied Are You with Your Job Environment?", 
                                             1, 
                                             4, 
-                                            2, 
+                                            2
+                               ),
                                numericInput( "EnvironmentSatisfaction", 
                                             "How Satisfied Are You with Your Job Environment?", 
                                             2,
@@ -158,7 +157,8 @@ dashboardPage(skin = "blue",
                                             "How Satisfied Are You with Your Job?", 
                                             1, 
                                             4, 
-                                            2, 
+                                            2
+                               ),
                                numericInput( "JobSatisfaction", 
                                             "How Satisfied Are You with Your Job?", 
                                             2,
@@ -185,7 +185,7 @@ dashboardPage(skin = "blue",
                                             "What Is Your Monthly Income?", 
                                             10000,
                                             1000,  
-                                            20000,
+                                            20000
                                ),
                                selectizeInput( "OverTime", "Do You Work Overtime Often?", 
                                                c( "Yes", 
@@ -224,12 +224,13 @@ dashboardPage(skin = "blue",
                                             "How Many Years Have You Worked in Your Current Role?", 
                                             0, 
                                             20, 
-                                            10, 
+                                            10
+                               ),
                                numericInput( "PercentSalaryHike",  
                                             "How Much Has Your Salary Increased over Your Career?", 
                                             17,
                                             10, 
-                                            25,
+                                            25
                                ),
                                numericInput( "TotalWorkingYears", 
                                             "How Many Years Have You Worked?", 
@@ -399,33 +400,7 @@ dashboardPage(skin = "blue",
                                  )
 
                             )
-                           
-                    ),
-                    
 
-                            ),
-                            
-                            h2("Summary Table"),
-                            #Summary Table
-                            box( tableOutput("SummaryTable"),
-                                 selectInput(inputId = "SummaryData",
-                                             "Choose an x-axis",
-                                             choices = c( "Age", 
-                                                          "BusinessTravel", 
-                                                          "EducationField", 
-                                                          "EnvironmentSatisfaction", 
-                                                          "Gender", 
-                                                          "JobSatisfaction", 
-                                                          "MaritalStatus", 
-                                                          "OverTime", 
-                                                          "PercentSalaryHike", 
-                                                          "TotalWorkingYears",
-                                                          "WorkLifeBalance", 
-                                                          "YearsAtCompany", 
-                                                          "YearsInCurrentRole"
-                                             )
-                                 )
-                            )
                     ),
 
                     #The fifth tab is the history tab
@@ -496,4 +471,5 @@ dashboardPage(skin = "blue",
               )
 )
 )
+
 
