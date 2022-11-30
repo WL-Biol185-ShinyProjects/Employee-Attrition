@@ -182,10 +182,7 @@ dashboardPage(skin = "blue",
                                             20000, 
                                             10000
                                ),
-<<<<<<< HEAD
-                               
-=======
->>>>>>> e3b05001ca1612ce7f367936bb07fcb390336c26
+
                                numericInput( "MonthlyIncome", 
                                             "What Is Your Monthly Income?", 
                                             10000,
@@ -475,10 +472,7 @@ dashboardPage(skin = "blue",
               
               )
   )
-<<<<<<< HEAD
   )
   )
-=======
 
->>>>>>> e3b05001ca1612ce7f367936bb07fcb390336c26
 
