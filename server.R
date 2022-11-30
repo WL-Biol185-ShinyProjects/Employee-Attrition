@@ -623,7 +623,7 @@ server <- function(input, output, session
                                                ) 
   
   
-                                               )
+                                              
    watson_healthcare_reg$Attrition <- TRUE                                            
    modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
    coef(modelGender)
@@ -639,8 +639,9 @@ server <- function(input, output, session
    ggplot(aes(Gender, Attrition)) +
    geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
 
-                                              }
-                                              )
+                                             }
+                                            )
+                                              
 
                                                
 
