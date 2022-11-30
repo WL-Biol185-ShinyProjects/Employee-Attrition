@@ -620,15 +620,13 @@ server <- function(input, output, session
         )
                                                }
 
-                                               ) 
-  
-  
-                                              
-   watson_healthcare_reg$Attrition <- TRUE                                            
-   modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-   coef(modelGender)
-   modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-   coef(modelEdu)
+                                               )
+   # watson_healthcare_reg$Attrition <- TRUE                                            
+   # modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
+   # coef(modelGender)
+   # modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
+   # coef(modelEdu)
+
 
 
   
