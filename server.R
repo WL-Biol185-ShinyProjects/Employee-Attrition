@@ -598,7 +598,21 @@ server <- function(input, output, session
                                          )
 }  
   
-                                              
+
+ colnames(sum1) [1] <- "PercentAttrition"
+ 
+ sum1 %>%      
+    arrange(AttritionByCategory) %>%
+    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
+    ggplot(aes(PercentAttrition, AttritionByCategory)) +
+    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
+    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
+        )
+                                               }
+                                               )
+
+#Output for bar G\graph that displays R squared values
+ 
 
                                                
 
