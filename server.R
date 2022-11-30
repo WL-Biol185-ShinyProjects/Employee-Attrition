@@ -79,7 +79,7 @@ server <- function(input, output, session
   )
       
 
-  #observeEvent( c(input$Rank1, input$Rank2), 
+  observeEvent( c(input$Rank1, input$Rank2), 
                {
                 newChoices <- setdiff( oldChoices, 
                                         c( input$Rank1, 
@@ -94,7 +94,7 @@ server <- function(input, output, session
                                    )
                  }
                 }
-               
+  )       
   
   observeEvent( c(input$Rank1, input$Rank2, input$Rank3), 
                {
@@ -493,7 +493,8 @@ server <- function(input, output, session
   #Output for Bar Graphs 
   
   #Business Travel and Attrition
-   output$BarBusinessTravel <- renderPlot({
+   output$BarBusinessTravel <- renderPlot(
+                                         {
      watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, 
                                                 levels = c("Yes", 
                                                            "No"
@@ -510,7 +511,7 @@ server <- function(input, output, session
        labs(title = "Business Travel and Attrition", x = "Business Travel", y = "Percentage") +
        scale_x_discrete(breaks = c("Travel_Rarely", "Travel_Frequently", "Non-Travel"),
                         labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
-       scale_fill_manual(values = c("#fde725", "#21918c"))
+       scale_fill_manual(values = c("blue", "red"))
      
                                          }
                                         )
@@ -528,18 +529,14 @@ server <- function(input, output, session
       geom_text(aes(label = paste0(round(freq,0), "%")), 
                 position = position_stack(vjust = 0.5), size = 3) +
       labs(title = "Over Time and Attrition", x = "Over Time", y = "Percentage") +
-      scale_fill_manual(values = c("#fde725",  "#21918c"))
+      scale_fill_manual(values = c("blue",  "red"))
                                     }
                                     )
+
   #Environment Satisfaction and Attrition
   output$BarEnvirSatisfaction <- renderPlot(
                                            {
   watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
-  
-  watson_healthcare_clean$EnvironmentSatisfaction = factor(watson_healthcare_clean$EnvironmentSatisfaction, levels = c("Low",
-                                                                                                                       "Medium",
-                                                                                                                       "High",
-                                                                                                                       "Very High"))
   
   
   watson_healthcare_clean %>% 
@@ -551,7 +548,9 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Environment Satisfaction and Attrition", x = "Environment Satisfaction", y = "Percentage") +
-    scale_fill_manual(values = c("#fde725",  "#21918c"))
+    scale_x_discrete(breaks = c("Low", "Medium", "High", "Very High"),
+                    labels = c("Low", "Medium", "High", "Very High")) +
+    scale_fill_manual(values = c("blue",  "red"))
                                            }
                                            )
     
@@ -560,10 +559,7 @@ server <- function(input, output, session
   output$BarJobSatisfaction <- renderPlot(
                                          {
   watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
-  watson_healthcare_clean$JobSatisfaction = factor(watson_healthcare_clean$JobSatisfaction, levels = c("Low",
-                                                                                                       "Medium",
-                                                                                                       "High",
-                                                                                                       "Very High"))
+
   
   watson_healthcare_clean %>% 
     group_by(JobSatisfaction, Attrition) %>% 
@@ -574,7 +570,9 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Job Satisfaction and Attrition", x = "Job Satisfaction", y = "Percentage") +
-    scale_fill_manual(values = c("#fde725",  "#21918c"))
+    scale_x_discrete(breaks = c("Low", "Medium", "High", "Very High"),
+                     labels = c("Low", "Medium", "High", "Very High")) +
+    scale_fill_manual(values = c("blue",  "red"))
                                          }
                                          )
   
@@ -582,10 +580,7 @@ server <- function(input, output, session
   output$BarWorkLifeBalance <- renderPlot(
                                          {
   watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
-  watson_healthcare_clean$WorkLifeBalance = factor(watson_healthcare_clean$WorkLifeBalance, levels = c("Bad",
-                                                                                                       "Good",
-                                                                                                       "Better",
-                                                                                                       "Best"))
+ 
   
   watson_healthcare_clean %>% 
     group_by(WorkLifeBalance, Attrition) %>% 
@@ -596,49 +591,13 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Work Life Balance and Attrition", x = "Work Life Balance", y = "Percentage") +
-    scale_fill_manual(values = c("#fde725",  "#21918c"))
+    scale_x_discrete(breaks = c("Bad", "Good", "Better", "Best"),
+                     labels = c("Bad", "Good", "Better", "Best")) +
+    scale_fill_manual(values = c("blue",  "red"))
                                          }
                                          )
+}  
   
-  
- #Output for Categorical Comparison Bar Graph
-  output$BarCategoricalComparison <- renderPlot(
-                                               {
-
- sum1 <-  watson_healthcare_clean %>%
-    group_by_at(input$XCategoricalComparisonData) %>%
-    summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100) 
-  
- colnames(sum1) [1] <- "PercentAttrition"
- 
- sum1 %>%      
-    arrange(AttritionByCategory) %>%
-    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
-    ggplot(aes(PercentAttrition, AttritionByCategory)) +
-    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
-    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
-        )
-                                               }
-
-                                               )
-   # watson_healthcare_reg$Attrition <- TRUE                                            
-   # modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-   # coef(modelGender)
-   # modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-   # coef(modelEdu)
-
-
-
-  
-#Output for Regressions
-   output$CategoricalRegression <- renderPlot(
-                                             {
-   watson_healthcare_reg %>%
-   ggplot(aes(Gender, Attrition)) +
-   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
-
-                                             }
-                                            )
                                               
 
                                                

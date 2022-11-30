@@ -51,9 +51,9 @@ dashboardPage(skin = "blue",
                             tags$li("Radiologic Technologist:", tags$b("17.5%")),
 
                             br(),
-                            tags$li("Our data was obtained from kaggle"),
-                            "and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on dataset explored:"))
-                            ),
+                            tags$li("Our data was obtained from kaggle and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on dataset explored:"))
+                        )    
+                    ),
                           
 
                     
@@ -474,7 +474,9 @@ dashboardPage(skin = "blue",
   )
 
   )
-  )
+)
+
+  
 
 
 
