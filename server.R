@@ -561,12 +561,7 @@ server <- function(input, output, session
                                              {
    watson_healthcare_reg %>%
    ggplot(aes(Gender, Attrition)) +
-   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17) 
-   
-   
-                                               
-  
-
+   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
 
                                               }
                                               )

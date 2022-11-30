@@ -4,11 +4,6 @@ library(shinydashboard)
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
-<<<<<<< HEAD
-
-=======
-library(DescTools)
->>>>>>> 8720a2f1d7b6c884186357e7d882fcf2fd67b05b
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "blue", 
@@ -29,7 +24,7 @@ dashboardPage(skin = "blue",
   dashboardBody(
       
 #Boxes need to be put in a row (or column)
-    fluidRow(
+       fluidRow(
       
     
 #Below tabs are named and their contents is specified
@@ -39,8 +34,10 @@ dashboardPage(skin = "blue",
                         box(
                           title = "Welcome!", background = "red", width = "12", status = "primary",
                           HTML('<center><img src="group picture.jpeg" width="800"></center>'
-                          ),
-                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley.")), 
+                              ),
+                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."
+                         )
+                      ), 
                          tags$ul(
                             tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
                             br(),
@@ -54,13 +51,13 @@ dashboardPage(skin = "blue",
                             tags$li("Patient Care Tech:", tags$b("38.1%")),
                             tags$li("Radiologic Technologist:", tags$b("17.5%")),
                             br(),
-                            tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
-                                                       "kaggle"),
-                            "and pertains to healthcare employees quitting their jobs."
-                     )
-                      )
-                      )
-                          ),
+                            # tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
+                            #                            "kaggle"),
+                            # "and pertains to healthcare employees quitting their jobs."
+                               )
+                          )
+                      ),
+                          
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
@@ -75,14 +72,14 @@ dashboardPage(skin = "blue",
                                                        "JobSatisfaction",
                                                        "MaritalStatus", 
                                                        "WorkLifeBalance"
-                                          )
-                             )
-                             )             
-                    ),
+                                                     )
+                                        )
+                                )             
+                          ),
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
                              h2( "Estimating Your Chance of Quitting! Happiness"
-                             ),
+                                ),
                              #Slider         
                              box(
                                numericInput( "Age", 
@@ -406,14 +403,14 @@ dashboardPage(skin = "blue",
                             )
                             ),
                             box(plotOutput("BarWorkLifeBalance"
-                            )
-                            )
+                                          )
+                               )
                             
-                    )                                      
-                  )
-                )
+                          )                                      
               )
-)
+              )
+              )
+  )
 
                            
                            
