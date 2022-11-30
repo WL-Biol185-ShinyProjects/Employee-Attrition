@@ -610,7 +610,14 @@ server <- function(input, output, session
                                                }
                                                )
 
-#Output for bar G\graph that displays R squared values
+#Output for bar graph that displays R squared values
+ output$CategoricalRegression <- renderPlot(
+                                           {
+ regressionData %>%
+    ggplot(aes(Category, AdjustedRSquared)) +
+    geom_bar(stat = "identity")
+                                           }
+                                           )
  
                                                
 }

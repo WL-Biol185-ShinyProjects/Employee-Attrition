@@ -341,7 +341,7 @@ dashboardPage(skin = "blue",
                              
                     ),
                     tabItem( tabName = "WhatFactorsMattertheMost",
-                             box(tableOutput("CategoricalRegression")
+                             box(plotOutput("CategoricalRegression")
                              )
                     ),
 
