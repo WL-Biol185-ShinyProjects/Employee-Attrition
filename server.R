@@ -51,6 +51,7 @@ server <- function(input, output, session
      }
                                    )
 #Output for Summary Table
+<<<<<<< HEAD
    output$SummaryTable <- renderTable(
      {
      CountYes <- watson_healthcare_clean$Attrition == "Yes"      
@@ -61,6 +62,17 @@ server <- function(input, output, session
        arrange(desc(PercentAttrition))
       }
                                          )
+=======
+  output$SummaryTable <- renderTable(
+    {
+    watson_healthcare_clean %>%
+      group_by_at(input$SummaryData) %>%
+      summarise(PercentAttrition = ((sum(Attrition == "Yes")) / n()) * 100) %>%
+      arrange(desc(PercentAttrition))
+     }
+                                        )
+
+>>>>>>> 8cc1782269b48db4bed303886a8b6207bdf40baa
   
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
@@ -620,26 +632,29 @@ server <- function(input, output, session
     labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
         )
                                                }
+
                                                ) 
   
   
-  #  watson_healthcare_reg$Attrition <- TRUE                                            )
-   # modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-   # coef(modelGender)
-   # modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-   # coef(modelEdu)
+                                               )
+   watson_healthcare_reg$Attrition <- TRUE                                            
+   modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
+   coef(modelGender)
+   modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
+   coef(modelEdu)
+
 
   
 #Output for Regressions
-    output$CategoricalRegression <- renderPlot(
-                                              {
-    watson_healthcare_reg %>%
-    ggplot(aes(Gender, Attrition)) +
-    geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17) 
-    
-                                               )
-                                                }
-                                               
+   output$CategoricalRegression <- renderPlot(
+                                             {
+   watson_healthcare_reg %>%
+   ggplot(aes(Gender, Attrition)) +
+   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
+
+                                              }
+                                              )
+
                                                
 
     

@@ -1,10 +1,8 @@
-
 library(shiny)
 library(shinydashboard)
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
-
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "blue", 
@@ -25,7 +23,7 @@ dashboardPage(skin = "blue",
   dashboardBody(
       
 #Boxes need to be put in a row (or column)
-    fluidRow(
+       fluidRow(
       
     
 #Below tabs are named and their contents is specified
@@ -35,8 +33,10 @@ dashboardPage(skin = "blue",
                         box(
                           title = "Welcome!", background = "red", width = "12", status = "primary",
                           HTML('<center><img src="group picture.jpeg" width="800"></center>'
-                          ),
-                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley.")), 
+                              ),
+                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."
+                         )
+                      ), 
                          tags$ul(
                             tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
                             br(),
@@ -49,16 +49,18 @@ dashboardPage(skin = "blue",
                             tags$li("Pharmacist:", tags$b("10%")),
                             tags$li("Patient Care Tech:", tags$b("38.1%")),
                             tags$li("Radiologic Technologist:", tags$b("17.5%")),
+
                             br(),
                             tags$li("Our data was obtained from kaggle"),
                             "and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on dataset explored:"))
                             ),
                           
+
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
                              box( plotOutput("BarCategoricalComparison"
-                             ),
+                                            ),
                              selectInput( "XCategoricalComparisonData",
                                           "Choose an X-axis",
                                           choices = c( "BusinessTravel",
@@ -70,14 +72,42 @@ dashboardPage(skin = "blue",
                                                        "WorkLifeBalance"
                                           )
                              )
-                             )             
+                             ),
+                             h2("Summary Table"),
+                             #Summary Table
+                             box( tableOutput("SummaryTable"),
+                                  selectInput(inputId = "SummaryData",
+                                              "Choose an x-axis",
+                                              choices = c( "Age", 
+                                                           "BusinessTravel", 
+                                                           "EducationField", 
+                                                           "EnvironmentSatisfaction", 
+                                                           "Gender", 
+                                                           "JobSatisfaction", 
+                                                           "MaritalStatus", 
+                                                           "OverTime", 
+                                                           "PercentSalaryHike", 
+                                                           "TotalWorkingYears",
+                                                           "WorkLifeBalance", 
+                                                           "YearsAtCompany", 
+                                                           "YearsInCurrentRole"
+                                              )
+                                  )
+                             )
                     ),
+
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
                              h2( "Estimating Your Chance of Quitting! Happiness"
-                             ),
+                                ),
                              #Slider         
                              box(
+                               sliderInput( "Age", 
+                                            "What is Your Age?", 
+                                            18, 
+                                            60, 
+                                            40
+                               ),
                                numericInput( "Age", 
                                             "What is Your Age?",
                                             40,
@@ -104,6 +134,12 @@ dashboardPage(skin = "blue",
                                                ), 
                                                selected = NULL
                                ),
+                               sliderInput( "EnvironmentSatisfaction", 
+                                            "How Satisfied Are You with Your Job Environment?", 
+                                            1, 
+                                            4, 
+                                            2
+                               ),
                                numericInput( "EnvironmentSatisfaction", 
                                             "How Satisfied Are You with Your Job Environment?", 
                                             2,
@@ -117,6 +153,12 @@ dashboardPage(skin = "blue",
                                                   "Female"
                                                ), 
                                                selected = NULL
+                               ),
+                               sliderInput( "JobSatisfaction", 
+                                            "How Satisfied Are You with Your Job?", 
+                                            1, 
+                                            4, 
+                                            2
                                ),
                                numericInput( "JobSatisfaction", 
                                             "How Satisfied Are You with Your Job?", 
@@ -133,6 +175,13 @@ dashboardPage(skin = "blue",
                                                ), 
                                                selected = NULL
                                ),
+                               sliderInput( "MonthlyIncome", 
+                                            "What Is Your Monthly Income?", 
+                                            1000,  
+                                            20000, 
+                                            10000
+                               ),
+
                                numericInput( "MonthlyIncome", 
                                             "What Is Your Monthly Income?", 
                                             10000,
@@ -144,6 +193,39 @@ dashboardPage(skin = "blue",
                                                   "No"
                                                ), 
                                                selected = NULL
+                               ),
+                               sliderInput( "PercentSalaryHike",  
+                                            "How Much Has Your Salary Increased over Your Career?", 
+                                            10, 
+                                            25, 
+                                            17
+                               ),
+                               sliderInput( "TotalWorkingYears", 
+                                            "How Many Years Have You Worked?", 
+                                            0, 
+                                            40, 
+                                            20, 
+                                            step = 1
+                               ),
+                               sliderInput( "WorkLifeBalance", 
+                                            "How Is Your Work/Life Balance?", 
+                                            1, 
+                                            4, 
+                                            2, 
+                                            step = 1
+                               ),
+                               sliderInput( "YearsAtCompany", 
+                                            "How Many Years Have You Worked at Your Current Company?", 
+                                            0, 
+                                            40, 
+                                            20, 
+                                            step = 1
+                               ),
+                               sliderInput( "YearsInCurrentRole", 
+                                            "How Many Years Have You Worked in Your Current Role?", 
+                                            0, 
+                                            20, 
+                                            10
                                ),
                                numericInput( "PercentSalaryHike",  
                                             "How Much Has Your Salary Increased over Your Career?", 
@@ -247,6 +329,7 @@ dashboardPage(skin = "blue",
                              box(
                                h2("Your Likelihood of Quitting Is..."
                                ),
+                               #textOutput("AttritionEstimation")
                                textOutput("AttritionEstimation"),
                                width = 6
                              ),
@@ -260,6 +343,7 @@ dashboardPage(skin = "blue",
                              box(tableOutput("CategoricalRegression")
                              )
                     ),
+
                     #The fourth tab is the Graphs                
                     tabItem(tabName = "Graphs", 
                             
@@ -315,31 +399,11 @@ dashboardPage(skin = "blue",
                                                            "YearsAtCompany"
                                               )
                                  )
-                            ),
-                            
-                            h2("Summary Table"),
-                            #Summary Table
-                            box( tableOutput("SummaryTable"),
-                                 selectInput(inputId = "SummaryData",
-                                             "Choose an x-axis",
-                                             choices = c( "Age", 
-                                                          "BusinessTravel", 
-                                                          "EducationField", 
-                                                          "EnvironmentSatisfaction", 
-                                                          "Gender", 
-                                                          "JobSatisfaction", 
-                                                          "MaritalStatus", 
-                                                          "OverTime", 
-                                                          "PercentSalaryHike", 
-                                                          "TotalWorkingYears",
-                                                          "WorkLifeBalance", 
-                                                          "YearsAtCompany", 
-                                                          "YearsInCurrentRole"
-                                             )
-                                 )
+
                             )
+
                     ),
-                    
+
                     #The fifth tab is the history tab
                     tabItem( tabName ="History", 
                              box(
@@ -380,7 +444,7 @@ dashboardPage(skin = "blue",
                                ),
                                br(),
                                p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
-                             )
+                                )
                              
                     ),
                     
@@ -400,15 +464,12 @@ dashboardPage(skin = "blue",
                             ),
                             box(plotOutput("BarWorkLifeBalance"
                                           )
-                                )
+
+                               )
                             
                           )                                      
-                  )
-                  )
-                  )
-) 
               
+              
+              )
+  )
 
-
-                           
-                           
