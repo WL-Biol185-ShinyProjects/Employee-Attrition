@@ -6,53 +6,55 @@ library(tidyverse)
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "blue", 
-              dashboardHeader(title = "Healthcare Attrition"),
-              dashboardSidebar(
-                sidebarMenu(
-                  menuItem("Home", tabName = "Home"), 
-                  menuItem("Who Quits?", tabName = "WhoQuits"),
-                  menuItem("Self Help", tabName = "SelfHelp"),
-                  menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
-                  menuItem("Graphs", tabName = "Graphs"),
-                  menuItem("History", tabName = "History"),
-                  menuItem("Employee Lifestyle", tabName = "EmployeeLifestyle")
-                  
-                )
-              ),
-              
-              dashboardBody(
+  dashboardHeader(title = "Healthcare Attrition"),
+  dashboardSidebar(
+    sidebarMenu(
+                 menuItem("Home", tabName = "Home"), 
+                 menuItem("Who Quits?", tabName = "WhoQuits"),
+                 menuItem("Self Help", tabName = "SelfHelp"),
+                 menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
+                 menuItem("Graphs", tabName = "Graphs"),
+                 menuItem("History", tabName = "History"),
+                 menuItem("Employee Lifestyle", tabName = "EmployeeLifestyle")
                 
-                #Boxes need to be put in a row (or column)
-                fluidRow(
-                  
-                  
-                  #Below tabs are named and their contents is specified
-                  #The first tab is the home tab
-                  tabItems(
-                    tabItem(tabName = "Home",
-                            box(
-                              title = "Welcome!", background = "red", width = "12", status = "primary",
-                              HTML('<center><img src="group picture.jpeg" width="800"></center>'
-                              ),
-                              h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley.")), 
-                              tags$ul(
-                                tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
-                                br(),
-                                tags$li("According to the 2022 NSI report, the 2021 turnover by position was:"),
-                                br(),
-                                tags$li("Staff RNs:", tags$b("27.1%")),
-                                tags$li("Certified Nursing Assistant:", tags$b("35.5%")),
-                                tags$li("Physician Assistant:", tags$b("10.7%")),
-                                tags$li("Physical Therapist:", tags$b("13.6%")),
-                                tags$li("Pharmacist:", tags$b("10%")),
-                                tags$li("Patient Care Tech:", tags$b("38.1%")),
-                                tags$li("Radiologic Technologist:", tags$b("17.5%")),
-                                br(),
-                                tags$li("Our data was obtained from kaggle and pertains to healthcare employees quitting their jobs."
-                                )
-                              )
-                            )
-                    ),
+               )
+                  ),
+
+  dashboardBody(
+      
+#Boxes need to be put in a row (or column)
+    fluidRow(
+      
+    
+#Below tabs are named and their contents is specified
+#The first tab is the home tab
+      tabItems(
+                tabItem(tabName = "Home",
+                        box(
+                          title = "Welcome!", background = "red", width = "12", status = "primary",
+                          HTML('<center><img src="group picture.jpeg" width="800"></center>'
+                          ),
+                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley.")), 
+                         tags$ul(
+                            tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
+                            br(),
+                            tags$li("According to the 2022 NSI report, the 2021 turnover by position was:"),
+                            br(),
+                            tags$li("Staff RNs:", tags$b("27.1%")),
+                            tags$li("Certified Nursing Assistant:", tags$b("35.5%")),
+                            tags$li("Physician Assistant:", tags$b("10.7%")),
+                            tags$li("Physical Therapist:", tags$b("13.6%")),
+                            tags$li("Pharmacist:", tags$b("10%")),
+                            tags$li("Patient Care Tech:", tags$b("38.1%")),
+                            tags$li("Radiologic Technologist:", tags$b("17.5%")),
+                            br(),
+                            tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
+                                                       "kaggle"),
+                            "and pertains to healthcare employees quitting their jobs."
+                     )
+                      )
+                      )
+                          ),
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
@@ -94,6 +96,8 @@ dashboardPage(skin = "blue",
                     ),
                     
                     
+                             )             
+                    ),
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
                              h2( "Estimating Your Chance of Quitting! Happiness"
@@ -105,6 +109,11 @@ dashboardPage(skin = "blue",
                                             18, 
                                             60, 
                                             40, 
+                               numericInput( "Age", 
+                                            "What is Your Age?",
+                                            40,
+                                            18, 
+                                            60,
                                             step = 1
                                ),
                                selectizeInput( "BusinessTravel", 
@@ -131,6 +140,11 @@ dashboardPage(skin = "blue",
                                             1, 
                                             4, 
                                             2, 
+                               numericInput( "EnvironmentSatisfaction", 
+                                            "How Satisfied Are You with Your Job Environment?", 
+                                            2,
+                                            1, 
+                                            4, 
                                             step = 1
                                ),
                                selectizeInput( "Gender", 
@@ -145,6 +159,11 @@ dashboardPage(skin = "blue",
                                             1, 
                                             4, 
                                             2, 
+                               numericInput( "JobSatisfaction", 
+                                            "How Satisfied Are You with Your Job?", 
+                                            2,
+                                            1, 
+                                            4, 
                                             step = 1
                                ),
                                selectizeInput( "MaritalStatus", 
@@ -162,6 +181,13 @@ dashboardPage(skin = "blue",
                                             10000
                                ),
                                selectizeInput( "Overtime", "Do You Work Overtime Often?", 
+                               numericInput( "MonthlyIncome", 
+                                            "What Is Your Monthly Income?", 
+                                            10000,
+                                            1000,  
+                                            20000,
+                               ),
+                               selectizeInput( "OverTime", "Do You Work Overtime Often?", 
                                                c( "Yes", 
                                                   "No"
                                                ), 
@@ -199,6 +225,38 @@ dashboardPage(skin = "blue",
                                             0, 
                                             20, 
                                             10, 
+                               numericInput( "PercentSalaryHike",  
+                                            "How Much Has Your Salary Increased over Your Career?", 
+                                            17,
+                                            10, 
+                                            25,
+                               ),
+                               numericInput( "TotalWorkingYears", 
+                                            "How Many Years Have You Worked?", 
+                                            20,
+                                            0, 
+                                            40, 
+                                            step = 1
+                               ),
+                               numericInput( "WorkLifeBalance", 
+                                            "How Is Your Work/Life Balance?", 
+                                            2,
+                                            1, 
+                                            4, 
+                                            step = 1
+                               ),
+                               numericInput( "YearsAtCompany", 
+                                            "How Many Years Have You Worked at Your Current Company?", 
+                                            20,
+                                            0, 
+                                            40, 
+                                            step = 1
+                               ),
+                               numericInput( "YearsInCurrentRole", 
+                                            "How Many Years Have You Worked in Your Current Role?",
+                                            10,
+                                            0, 
+                                            20, 
                                             step = 1
                                ),
                                width = 12
@@ -270,6 +328,7 @@ dashboardPage(skin = "blue",
                                h2("Your Likelihood of Quitting Is..."
                                ),
                                #textOutput("AttritionEstimation")
+                               textOutput("AttritionEstimation"),
                                width = 6
                              ),
                              
@@ -282,7 +341,7 @@ dashboardPage(skin = "blue",
                              box(tableOutput("CategoricalRegression")
                              )
                     ),
-                    
+
                     #The fourth tab is the Graphs                
                     tabItem(tabName = "Graphs", 
                             
@@ -338,12 +397,37 @@ dashboardPage(skin = "blue",
                                                            "YearsAtCompany"
                                               )
                                  )
+
                             )
                            
                     ),
                     
-                    
-                    
+
+                            ),
+                            
+                            h2("Summary Table"),
+                            #Summary Table
+                            box( tableOutput("SummaryTable"),
+                                 selectInput(inputId = "SummaryData",
+                                             "Choose an x-axis",
+                                             choices = c( "Age", 
+                                                          "BusinessTravel", 
+                                                          "EducationField", 
+                                                          "EnvironmentSatisfaction", 
+                                                          "Gender", 
+                                                          "JobSatisfaction", 
+                                                          "MaritalStatus", 
+                                                          "OverTime", 
+                                                          "PercentSalaryHike", 
+                                                          "TotalWorkingYears",
+                                                          "WorkLifeBalance", 
+                                                          "YearsAtCompany", 
+                                                          "YearsInCurrentRole"
+                                             )
+                                 )
+                            )
+                    ),
+
                     #The fifth tab is the history tab
                     tabItem( tabName ="History", 
                              box(
@@ -411,3 +495,5 @@ dashboardPage(skin = "blue",
                 )
               )
 )
+)
+
