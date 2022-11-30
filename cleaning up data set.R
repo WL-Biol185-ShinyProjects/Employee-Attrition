@@ -13,3 +13,4 @@ watson_healthcare_reg <- watson_healthcare_modified %>%
               , "Attrition"))
 
 write.csv(watson_healthcare_reg, file = "watson_healthcare_reg.csv")
+

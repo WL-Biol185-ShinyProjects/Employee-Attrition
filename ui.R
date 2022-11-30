@@ -49,14 +49,13 @@ dashboardPage(skin = "blue",
                             tags$li("Pharmacist:", tags$b("10%")),
                             tags$li("Patient Care Tech:", tags$b("38.1%")),
                             tags$li("Radiologic Technologist:", tags$b("17.5%")),
-                            br()
-                            # tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
-                            #                            "kaggle"),
-                            # "and pertains to healthcare employees quitting their jobs."
-                               )
-                          )
-                      
-                      ),   
+
+                            br(),
+                            tags$li("Our data was obtained from kaggle and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on dataset explored:"))
+                        )    
+                    ),
+                          
+
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
@@ -465,6 +464,7 @@ dashboardPage(skin = "blue",
                             ),
                             box(plotOutput("BarWorkLifeBalance"
                                           )
+
                                )
                             
                           )                                      
@@ -472,7 +472,11 @@ dashboardPage(skin = "blue",
               
               )
   )
+
   )
-  )
+)
+
+  
+
 
 
