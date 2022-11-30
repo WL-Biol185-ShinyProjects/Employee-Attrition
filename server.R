@@ -53,14 +53,13 @@ server <- function(input, output, session
 #Output for Summary Table
   output$SummaryTable <- renderTable(
     {
-    CountYes <- watson_healthcare_clean$Attrition == "Yes"      
     watson_healthcare_clean %>%
       group_by_at(input$SummaryData) %>%
-      summarise(rows = n()) %>%
-      mutate(PercentAttrition = sum(CountYes)/rows) %>%
+      summarise(PercentAttrition = ((sum(Attrition == "Yes")) / n()) * 100) %>%
       arrange(desc(PercentAttrition))
      }
                                         )
+
   
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
