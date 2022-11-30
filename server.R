@@ -608,7 +608,8 @@ server <- function(input, output, session
     labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
         )
                                                }
-   watson_healthcare_reg$Attrition <- TRUE                                            )
+                                               )
+   watson_healthcare_reg$Attrition <- TRUE                                            
    modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
    coef(modelGender)
    modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
