@@ -609,20 +609,8 @@ server <- function(input, output, session
         )
                                                }
                                                )
-   # watson_healthcare_reg$Attrition <- TRUE                                            
-   # modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-   # coef(modelGender)
-   # modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-   # coef(modelEdu)
 
-#Output for Regressions
-   output$CategoricalRegression <- renderPlot(
-                                             {
-   watson_healthcare_reg %>%
-   ggplot(aes(Gender, Attrition)) +
-   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17)
-
-                                              }
-                                              )
+#Output for bar G\graph that displays R squared values
+ 
                                                
 }
