@@ -12,7 +12,7 @@ dashboardPage(skin = "blue",
     sidebarMenu(
                  menuItem("Home", tabName = "Home"), 
                  menuItem("Who Quits?", tabName = "WhoQuits"),
-                 menuItem("Self Help", tabName = "SelfHelp"),
+                 menuItem("Your Likelihood of Quitting", tabName = "SelfHelp"),
                  menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
@@ -76,10 +76,15 @@ dashboardPage(skin = "blue",
                     ),
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
-                             h2( "Estimating Your Chance of Quitting! Happiness"
-                             ),
-                             #Slider         
                              box(
+                             h2( "Estimating Your Chance of Quitting"
+                             ),
+                             width = 12
+                             ),
+                             #Input values for the estimation         
+                             box(
+                               title =  "Input Your Values",
+                               background = "blue",
                                numericInput( "Age", 
                                             "What is Your Age?",
                                             40,
@@ -135,11 +140,14 @@ dashboardPage(skin = "blue",
                                                ), 
                                                selected = NULL
                                ),
-                               numericInput( "MonthlyIncome", 
+                               selectizeInput( "MonthlyIncome", 
                                             "What Is Your Monthly Income?", 
-                                            10000,
-                                            1000,  
-                                            20000,
+                                            c( "0-3999",
+                                               "4000-7999",
+                                               "8000-11999",
+                                               "12000-15999",
+                                               "16000-20000"
+                                              )
                                ),
                                selectizeInput( "OverTime", "Do You Work Overtime Often?", 
                                                c( "Yes", 
@@ -151,7 +159,7 @@ dashboardPage(skin = "blue",
                                             "How Much Has Your Salary Increased over Your Career?", 
                                             17,
                                             10, 
-                                            25,
+                                            25
                                ),
                                numericInput( "TotalWorkingYears", 
                                             "How Many Years Have You Worked?", 
@@ -178,23 +186,24 @@ dashboardPage(skin = "blue",
                                             "How Many Years Have You Worked in Your Current Role?",
                                             10,
                                             0, 
-                                            20, 
+                                            18, 
                                             step = 1
                                ),
-                               width = 12
+                               width = 4
                              ),
                              
-                             h2("Rank How Important Each Item Is to You."
-                             ),
-                             
+                             #Ranking them to assign each value a weighting factor
                              box(
+                               title = "Importance Rank in Work Life",
+                               background = "blue",
                                selectInput( "Rank1", "First", choices = c("", "Age", 
                                                                           "BusinessTravel", 
                                                                           "EducationField", 
                                                                           "EnvironmentSatisfaction", 
                                                                           "Gender", 
                                                                           "JobSatisfaction", 
-                                                                          "MaritalStatus", 
+                                                                          "MaritalStatus",
+                                                                          "MonthlyIncome",
                                                                           "OverTime", 
                                                                           "PercentSalaryHike", 
                                                                           "TotalWorkingYears",
@@ -243,21 +252,18 @@ dashboardPage(skin = "blue",
                                selectInput( "Rank14", "Fourteenth", choices = c(""
                                )
                                ),
-                               width = 6
+                               width = 4
                              ),
                              
+                             #Displaying the weighted average of the user's attrition values
                              box(
-                               h2("Your Likelihood of Quitting Is..."
-                               ),
+                               title = "Your Likelihood of Quitting Is...",
+                               background = "blue",
                                textOutput("AttritionEstimation"),
-                               width = 6
-                             ),
-                             
-                             h2("What You Can Do to Minimize Burnout"
-                                
+                               width = 4
                              )
-                             
-                    ),
+                             ),
+
                     tabItem( tabName = "WhatFactorsMattertheMost",
                              box(tableOutput("CategoricalRegression")
                              )

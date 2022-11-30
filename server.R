@@ -62,7 +62,7 @@ server <- function(input, output, session
                                         )
   
   #Updating the ranking input choices
-  oldChoices <- colnames(watson_healthcare_clean)
+  oldChoices <- colnames(watson_healthcare_clean[2:15])
   
   observeEvent(input$Rank1, 
                {
@@ -384,8 +384,6 @@ server <- function(input, output, session
     
     names(weight_factors) <- ranked_columns
     
-    whc_length <- nrow(watson_healthcare_clean)
-    
     percents <- c()
     
     groupedOnAge <- group_by_at(watson_healthcare_clean, "Age")
@@ -437,12 +435,12 @@ server <- function(input, output, session
     weightedPercentMS <- percentMS * weight_factors["MaritalStatus"]
     percents <- append(percents, weightedPercentMS)
     
-    groupedOnMI <- group_by_at(watson_healthcare_clean, "MonthlyIncome")
-    summarizedByMI <- summarize(groupedOnMI, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent8 <- filter(summarizedByMI, MonthlyIncome == input$MonthlyIncome)
-    percentMI <- percent8$AttritionPercent[1]
-    weightedPercentMI <- percentMI * weight_factors["MonthlyIncome"]
-    percents <- append(percents, weightedPercentMI)
+    groupedOnMIC <- group_by_at(whc, "MonthlyIncomeCat")
+    summarizedByMIC <- summarize(groupedOnMIC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent8 <- filter(summarizedByMIC, MonthlyIncomeCat == input$MonthlyIncome)
+    percentMIC <- percent8$AttritionPercent[1]
+    weightedPercentMIC <- percentMIC * weight_factors["MonthlyIncome"]
+    percents <- append(percents, weightedPercentMIC)
     
     groupedOnOT <- group_by_at(watson_healthcare_clean, "OverTime")
     summarizedByOT <- summarize(groupedOnOT, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
@@ -486,7 +484,7 @@ server <- function(input, output, session
     weightedPercentYCR <- percentYCR * weight_factors["YearsInCurrentRole"]
     percents <- append(percents, weightedPercentYCR)
     
-    #attrition <- mean(percents)
+    attrition <- mean(percents)
     
   })
   
@@ -550,10 +548,10 @@ server <- function(input, output, session
         )
                                                }
                                                )
-  modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-  coef(modelGender)
-  modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-  coef(modelEdu)
+  # modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
+  # coef(modelGender)
+  # modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
+  # coef(modelEdu)
   
 #Output for Regressions
   watson_healthcare_reg$Attrition <- TRUE
