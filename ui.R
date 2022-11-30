@@ -182,7 +182,6 @@ dashboardPage(skin = "blue",
                                             20000, 
                                             10000
                                ),
-                               selectizeInput( "Overtime", "Do You Work Overtime Often?", 
                                numericInput( "MonthlyIncome", 
                                             "What Is Your Monthly Income?", 
                                             10000,
@@ -472,6 +471,5 @@ dashboardPage(skin = "blue",
               )
               )
   )
-)
 
 
