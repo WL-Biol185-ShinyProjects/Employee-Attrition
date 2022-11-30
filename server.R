@@ -17,7 +17,7 @@ server <- function(input, output, session
            aes_string(input$HistogramData, 
                       fill = watson_healthcare_clean$Attrition
                       )
-           ) +
+          ) +
        geom_histogram(stat = "count"
                           ) + 
         labs(title = "Employee Attrition Count", y = "Count")
@@ -31,7 +31,7 @@ server <- function(input, output, session
     {
       ggplot(watson_healthcare_clean, 
           aes_string(input$DensityData, 
-          fill = watson_healthcare_clean$Attrition,
+          fill = watson_healthcare_clean$Attrition
         
                      )
           ) +
@@ -51,23 +51,23 @@ server <- function(input, output, session
      }
                                    )
 #Output for Summary Table
-  output$SummaryTable <- renderTable(
-    {
-    CountYes <- watson_healthcare_clean$Attrition == "Yes"      
-    watson_healthcare_clean %>%
-      group_by_at(input$SummaryData) %>%
-      summarise(rows = n()) %>%
-      mutate(PercentAttrition = sum(CountYes)/rows) %>%
-      arrange(desc(PercentAttrition))
-     }
-                                        )
+   output$SummaryTable <- renderTable(
+     {
+     CountYes <- watson_healthcare_clean$Attrition == "Yes"      
+     watson_healthcare_clean %>%
+       group_by_at(input$SummaryData) %>%
+       summarise(rows = n()) %>%
+       mutate(PercentAttrition = sum(CountYes)/rows) %>%
+       arrange(desc(PercentAttrition))
+      }
+                                         )
   
   #Updating the ranking input choices
   oldChoices <- colnames(watson_healthcare_clean)
   
   observeEvent(input$Rank1, 
                {
-      
+     
                   newChoices <- setdiff( oldChoices, 
                                          c(input$Rank1)
                                         )
@@ -80,7 +80,7 @@ server <- function(input, output, session
   )
       
 
-  observeEvent( c(input$Rank1, input$Rank2), 
+  #observeEvent( c(input$Rank1, input$Rank2), 
                {
                 newChoices <- setdiff( oldChoices, 
                                         c( input$Rank1, 
@@ -95,7 +95,7 @@ server <- function(input, output, session
                                    )
                  }
                 }
-               )
+               
   
   observeEvent( c(input$Rank1, input$Rank2, input$Rank3), 
                {
@@ -492,27 +492,30 @@ server <- function(input, output, session
   })
   
   #Output for Bar Graphs 
-  output$BarBusinessTravel <- renderPlot({
-    watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, 
-                                               levels = c("Yes", 
-                                                          "No"
-                                                          )
-                                               )
-    watson_healthcare_clean %>%
-      group_by(BusinessTravel, Attrition) %>%
-      summarise(cnt = n()) %>%
-      mutate(freq = (cnt / sum(cnt))*100) %>%
-      ggplot(aes(x = BusinessTravel, y = freq, fill = Attrition)) + 
-      geom_bar(position = position_stack(), stat = "identity", width = .7) +
-      geom_text(aes(label = paste0(round(freq,0), "%")), 
-                position = position_stack(vjust = 0.5), size = 3) +
-      scale_x_discrete(breaks = c("Travel_Rarely", "Travel_Frequently", "Non-Travel"),
-                       labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
-      scale_fill_manual(values = c("#fde725", "#21918c"))
-    
-                                        }
-                                       )
   
+  #Business Travel and Attrition
+   output$BarBusinessTravel <- renderPlot({
+     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, 
+                                                levels = c("Yes", 
+                                                           "No"
+                                                           )
+                                                )
+     watson_healthcare_clean %>%
+       group_by(BusinessTravel, Attrition) %>%
+       summarise(cnt = n()) %>%
+       mutate(freq = (cnt / sum(cnt))*100) %>%
+       ggplot(aes(x = BusinessTravel, y = freq, fill = Attrition)) + 
+       geom_bar(position = position_stack(), stat = "identity", width = .7) +
+       geom_text(aes(label = paste0(round(freq,0), "%")), 
+                 position = position_stack(vjust = 0.5), size = 3) +
+       labs(title = "Business Travel and Attrition", x = "Business Travel", y = "Percentage") +
+       scale_x_discrete(breaks = c("Travel_Rarely", "Travel_Frequently", "Non-Travel"),
+                        labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
+       scale_fill_manual(values = c("#fde725", "#21918c"))
+     
+                                         }
+                                        )
+ #Overtime and Attrition 
   output$BarOvertime <- renderPlot(
                                   {
     watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
@@ -525,12 +528,13 @@ server <- function(input, output, session
       geom_bar(position = position_stack(), stat = "identity", width = .7) +
       geom_text(aes(label = paste0(round(freq,0), "%")), 
                 position = position_stack(vjust = 0.5), size = 3) +
-      scale_y_continuous(labels = function(x) paste0(x, "%")) +
       labs(title = "Over Time and Attrition", x = "Over Time", y = "Percentage") +
       scale_fill_manual(values = c("#fde725",  "#21918c"))
                                     }
                                     )
   #Environment Satisfaction and Attrition
+  output$BarEnvirSatisfaction <- renderPlot(
+                                           {
   watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
   
   watson_healthcare_clean$EnvironmentSatisfaction = factor(watson_healthcare_clean$EnvironmentSatisfaction, levels = c("Low",
@@ -547,12 +551,15 @@ server <- function(input, output, session
     geom_bar(position = position_stack(), stat = "identity", width = .7) +
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
-    scale_y_continuous(labels = function(x) paste0(x, "%")) +
     labs(title = "Environment Satisfaction and Attrition", x = "Environment Satisfaction", y = "Percentage") +
     scale_fill_manual(values = c("#fde725",  "#21918c"))
+                                           }
+                                           )
     
   
   #Job Satisfaction and Attrition
+  output$BarJobSatisfaction <- renderPlot(
+                                         {
   watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
   watson_healthcare_clean$JobSatisfaction = factor(watson_healthcare_clean$JobSatisfaction, levels = c("Low",
                                                                                                        "Medium",
@@ -560,18 +567,21 @@ server <- function(input, output, session
                                                                                                        "Very High"))
   
   watson_healthcare_clean %>% 
-    dplyr::group_by(JobSatisfaction, Attrition) %>% 
-    dplyr::summarise(cnt = n()) %>% 
-    dplyr::mutate(freq = (cnt / sum(cnt))*100) %>% 
+    group_by(JobSatisfaction, Attrition) %>% 
+    summarise(cnt = n()) %>% 
+    mutate(freq = (cnt / sum(cnt))*100) %>% 
     ggplot(aes(x = JobSatisfaction, y = freq, fill = Attrition)) +
     geom_bar(position = position_stack(), stat = "identity", width = .7) +
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
-    scale_y_continuous(labels = function(x) paste0(x, "%")) +
     labs(title = "Job Satisfaction and Attrition", x = "Job Satisfaction", y = "Percentage") +
     scale_fill_manual(values = c("#fde725",  "#21918c"))
+                                         }
+                                         )
   
   #Work Life Balance and Attrition
+  output$BarWorkLifeBalance <- renderPlot(
+                                         {
   watson_healthcare_clean$Attrition = factor(watson_healthcare_clean$Attrition, levels = c("Yes", "No"))
   watson_healthcare_clean$WorkLifeBalance = factor(watson_healthcare_clean$WorkLifeBalance, levels = c("Bad",
                                                                                                        "Good",
@@ -579,16 +589,17 @@ server <- function(input, output, session
                                                                                                        "Best"))
   
   watson_healthcare_clean %>% 
-    dplyr::group_by(WorkLifeBalance, Attrition) %>% 
-    dplyr::summarise(cnt = n()) %>% 
-    dplyr::mutate(freq = (cnt / sum(cnt))*100) %>% 
+    group_by(WorkLifeBalance, Attrition) %>% 
+    summarise(cnt = n()) %>% 
+    mutate(freq = (cnt / sum(cnt))*100) %>% 
     ggplot(aes(x = WorkLifeBalance, y = freq, fill = Attrition)) +
     geom_bar(position = position_stack(), stat = "identity", width = .7) +
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
-    scale_y_continuous(labels = function(x) paste0(x, "%")) +
     labs(title = "Work Life Balance and Attrition", x = "Work Life Balance", y = "Percentage") +
     scale_fill_manual(values = c("#fde725",  "#21918c"))
+                                         }
+                                         )
   
   
  #Output for Categorical Comparison Bar Graph
@@ -609,25 +620,26 @@ server <- function(input, output, session
     labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
         )
                                                }
-   watson_healthcare_reg$Attrition <- TRUE                                            )
-   modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
-   coef(modelGender)
-   modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
-   coef(modelEdu)
-
-#Output for Regressions
-   output$CategoricalRegression <- renderPlot(
-                                             {
-   watson_healthcare_reg %>%
-   ggplot(aes(Gender, Attrition)) +
-   geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17) 
-   
-   
-                                               
+                                               ) 
   
+  
+  #  watson_healthcare_reg$Attrition <- TRUE                                            )
+   # modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
+   # coef(modelGender)
+   # modelEdu <- glm(Attrition ~ EducationField, data = watson_healthcare_reg)
+   # coef(modelEdu)
 
-
-                                              }
-                                              )
+  
+#Output for Regressions
+    output$CategoricalRegression <- renderPlot(
+                                              {
+    watson_healthcare_reg %>%
+    ggplot(aes(Gender, Attrition)) +
+    geom_abline(slope =  1.000000e+00, intercept =  6.703746e-17) 
+    
+                                               )
+                                                }
                                                
-}
+                                               
+
+    
