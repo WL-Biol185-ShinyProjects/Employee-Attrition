@@ -141,7 +141,7 @@ dashboardPage(skin = "blue",
                                             "What Is Your Monthly Income?", 
                                             10000,
                                             1000,  
-                                            20000,
+                                            20000
                                ),
                                selectizeInput( "OverTime", "Do You Work Overtime Often?", 
                                                c( "Yes", 
@@ -153,7 +153,7 @@ dashboardPage(skin = "blue",
                                             "How Much Has Your Salary Increased over Your Career?", 
                                             17,
                                             10, 
-                                            25,
+                                            25
                                ),
                                numericInput( "TotalWorkingYears", 
                                             "How Many Years Have You Worked?", 
@@ -384,7 +384,7 @@ dashboardPage(skin = "blue",
                                ),
                                br(),
                                p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
-                             )
+                                )
                              
                     ),
                     
