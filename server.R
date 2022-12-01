@@ -596,25 +596,43 @@ server <- function(input, output, session
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
                                          )
- 
+
   
+  
+#Percent Attrition Bar Graphs
+  output$BarCategoricalComparison <- renderPlot(
+                                               {
+                                                 
+ sum1 <-  watson_healthcare_clean %>%
+    group_by_at(input$XCategoricalComparisonData) %>%
+    summarize(AttritionByCategory = ((sum(Attrition == "Yes")) / n()) * 100)
+ 
+ colnames(sum1) [1] <- "PercentAttrition"
+ 
+ sum1 %>%      
+    arrange(AttritionByCategory) %>%
+    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
+    ggplot(aes(PercentAttrition, AttritionByCategory)) +
+    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
+    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
+        )
+                                               }
+                                               )
 
- # colnames(sum1) [1] <- "PercentAttrition"
- # 
- # sum1 %>%      
- #    arrange(AttritionByCategory) %>%
- #    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
- #    ggplot(aes(PercentAttrition, AttritionByCategory)) +
- #    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
- #    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
- #        )
-                                               
 
-#Output for bar G\graph that displays R squared values
+#Output for bar graph that displays R squared values
+ output$CategoricalRegression <- renderPlot(
+                                           {
+ regressionData %>%
+    ggplot(aes(Category, AdjustedRSquared)) +
+    geom_bar(stat = "identity")
+                                           }
+                                           )
  
 
                                                
 #Output for Graph on Home Tab showing Attrition
+
 
 output$BarAttrition <- renderPlot(
   {
@@ -633,3 +651,4 @@ output$BarAttrition <- renderPlot(
   })
     
 } 
+
