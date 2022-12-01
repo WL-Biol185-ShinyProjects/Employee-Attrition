@@ -511,7 +511,7 @@ server <- function(input, output, session
        labs(title = "Business Travel and Attrition", x = "Business Travel", y = "Percentage") +
        scale_x_discrete(breaks = c("Travel_Rarely", "Travel_Frequently", "Non-Travel"),
                         labels = c("Travel Rarely", "Travel Frequently", "Non Travel")) +
-       scale_fill_manual(values = c("blue", "red"))
+       scale_fill_manual(values = c("skyblue1", "darkseagreen1"))
      
                                          }
                                         )
@@ -529,7 +529,7 @@ server <- function(input, output, session
       geom_text(aes(label = paste0(round(freq,0), "%")), 
                 position = position_stack(vjust = 0.5), size = 3) +
       labs(title = "Over Time and Attrition", x = "Over Time", y = "Percentage") +
-      scale_fill_manual(values = c("blue",  "red"))
+      scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                     }
                                     )
 
@@ -547,10 +547,10 @@ server <- function(input, output, session
     geom_bar(position = position_stack(), stat = "identity", width = .7) +
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
-    labs(title = "Environment Satisfaction and Attrition", x = "Environment Satisfaction", y = "Percentage") +
-    scale_x_discrete(breaks = c("Low", "Medium", "High", "Very High"),
-                    labels = c("Low", "Medium", "High", "Very High")) +
-    scale_fill_manual(values = c("blue",  "red"))
+    labs(title = "Environment Satisfaction and Attrition", 
+         x = "1 = Low, 4 = Very High", y = "Percentage") +
+    
+    scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                            }
                                            )
     
@@ -569,10 +569,10 @@ server <- function(input, output, session
     geom_bar(position = position_stack(), stat = "identity", width = .7) +
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
-    labs(title = "Job Satisfaction and Attrition", x = "Job Satisfaction", y = "Percentage") +
-    scale_x_discrete(breaks = c("Low", "Medium", "High", "Very High"),
-                     labels = c("Low", "Medium", "High", "Very High")) +
-    scale_fill_manual(values = c("blue",  "red"))
+    labs(title = "Job Satisfaction and Attrition", 
+    x = "1 = Low, 4 = Very High", y = "Percentage") +
+    
+    scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
                                          )
   
@@ -590,30 +590,46 @@ server <- function(input, output, session
     geom_bar(position = position_stack(), stat = "identity", width = .7) +
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
-    labs(title = "Work Life Balance and Attrition", x = "Work Life Balance", y = "Percentage") +
-    scale_x_discrete(breaks = c("Bad", "Good", "Better", "Best"),
-                     labels = c("Bad", "Good", "Better", "Best")) +
-    scale_fill_manual(values = c("blue",  "red"))
+    labs(title = "Work Life Balance and Attrition", 
+         x = "1 = Bad, 4 = Best", y = "Percentage") +
+    
+    scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
                                          )
-}  
+ 
   
 
- colnames(sum1) [1] <- "PercentAttrition"
- 
- sum1 %>%      
-    arrange(AttritionByCategory) %>%
-    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
-    ggplot(aes(PercentAttrition, AttritionByCategory)) +
-    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
-    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
-        )
-                                               }
-                                               )
+ # colnames(sum1) [1] <- "PercentAttrition"
+ # 
+ # sum1 %>%      
+ #    arrange(AttritionByCategory) %>%
+ #    mutate(PercentAttrition = factor(PercentAttrition, levels = PercentAttrition, ordered = TRUE)) %>%
+ #    ggplot(aes(PercentAttrition, AttritionByCategory)) +
+ #    geom_bar(stat = 'identity', color = "darkorchid1", fill = "blue3") +
+ #    labs(title = "Percent Employee Attrition by Category", x = "Category", y = "Percent Attrition"
+ #        )
+                                               
 
 #Output for bar G\graph that displays R squared values
  
 
                                                
+#Output for Graph on Home Tab showing Attrition
 
+output$BarAttrition <- renderPlot(
+  {
     
+    watson_healthcare_clean %>%
+      group_by(Attrition) %>%
+      summarise(cnt = n()) %>%
+      mutate(freq = (cnt / sum(cnt))*100) %>%
+      ggplot(aes(x = Attrition, y = freq, fill = Attrition)) +
+      geom_bar(stat = "identity") +
+      geom_text(aes(label = paste0(round(freq,0), "%")),
+                position = position_stack(vjust = 0.5), size = 3) +
+      labs(title = "Attrition", x = "Attrition", y = "Percentage") +
+      scale_fill_manual(values = c("lightblue", "lightgreen"))
+    
+  })
+    
+} 
