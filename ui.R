@@ -31,12 +31,15 @@ dashboardPage(skin = "blue",
       tabItems(
                 tabItem(tabName = "Home",
                         box(
-                          title = "Welcome!", background = "red", width = "12", status = "primary",
+                          title = "Welcome!", background = "navy", width = "12", status = "primary",
                           HTML('<center><img src="group picture.jpeg" width="800"></center>'
                               ),
                     h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."
                          )
-                      ), 
+                      )
+                    ), 
+                    box(
+                      title = "Quick Facts:", background = "navy", width = "12", status = "primary",
                          tags$ul(
                             tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
                             br(),
@@ -49,14 +52,18 @@ dashboardPage(skin = "blue",
                             tags$li("Pharmacist:", tags$b("10%")),
                             tags$li("Patient Care Tech:", tags$b("38.1%")),
                             tags$li("Radiologic Technologist:", tags$b("17.5%")),
-                            br()
-                            # tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
-                            #                            "kaggle"),
-                            # "and pertains to healthcare employees quitting their jobs."
-                               )
-                          )
-                      
-                      ),   
+
+                            br(),
+                            tags$li("Our data was obtained from ", a("kaggle", href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", target = "_blank"), 
+                            "and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on the dataset explored:",
+                            h4(p("There is a", tags$b("12%"), "attrition rate."))),
+                            br(),
+                            box( plotOutput( "BarAttrition"))
+                         )  
+                    )
+                    ),
+
+                  
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
@@ -293,7 +300,7 @@ dashboardPage(skin = "blue",
                     ),
 
                     tabItem( tabName = "WhatFactorsMattertheMost",
-                             box(tableOutput("CategoricalRegression")
+                             box(plotOutput("CategoricalRegression")
                              )
                     ),
 
@@ -417,6 +424,7 @@ dashboardPage(skin = "blue",
                             ),
                             box(plotOutput("BarWorkLifeBalance"
                                           )
+
                                )
                             
                           )                                      
@@ -424,7 +432,12 @@ dashboardPage(skin = "blue",
               
               )
   )
-  )
-  )
+
+       )  
+)
+
+
+  
+
 
 
