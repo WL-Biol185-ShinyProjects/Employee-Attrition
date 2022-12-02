@@ -62,7 +62,7 @@ server <- function(input, output, session
 
   
   #Updating the ranking input choices
-  oldChoices <- colnames(watson_healthcare_clean[2:15])
+  oldChoices <- colnames(watson_healthcare_clean[1:14])
   
   observeEvent(input$Rank1, 
                {
@@ -380,7 +380,7 @@ server <- function(input, output, session
                         input$Rank14
     )
     
-    weight_factors <- c(10.4, 9.9, 9.4, 8.9, 8.4, 7.9, 7.4, 6.9, 6.4, 5.9, 5.4, 4.9, 4.4, 3.9)
+    weight_factors <- c(14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
     
     names(weight_factors) <- ranked_columns
     
@@ -484,7 +484,7 @@ server <- function(input, output, session
     weightedPercentYCR <- percentYCR * weight_factors["YearsInCurrentRole"]
     percents <- append(percents, weightedPercentYCR)
     
-    attrition <- mean(percents)
+    attrition <- (sum(percents) / 105)
     
   })
   
