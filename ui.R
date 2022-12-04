@@ -3,6 +3,8 @@ library(shinydashboard)
 library(ggplot2)
 library(dplyr)
 library(tidyverse)
+library(leaflet)
+
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
 dashboardPage(skin = "blue", 
@@ -55,8 +57,8 @@ dashboardPage(skin = "blue",
                             # "and pertains to healthcare employees quitting their jobs."
                                )
                           )
-                      ),
-                          
+                      
+                      ),   
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
@@ -400,7 +402,20 @@ dashboardPage(skin = "blue",
                                               )
                                  )
 
+                            ),
+                            #US Map
+                            box( h2("US Attrition by Region: June-Sept 2022"),
+                                 leafletOutput( "usmap"),
+                                 selectInput( "mapmonth", 
+                                              "Choose a month", 
+                                              choices = c( "June", 
+                                                           "July",
+                                                           "August",
+                                                           "September"
+                                              )
+                                 )
                             )
+                            
 
                     ),
 
@@ -467,9 +482,11 @@ dashboardPage(skin = "blue",
                                )
                             
                           )                                      
+              
+              
               )
-              )
-              )
+  )
+  )
   )
 
 

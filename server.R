@@ -10,6 +10,22 @@ server <- function(input, output, session
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
   
+  #usmap output
+  output$usmap <- renderLeaflet(
+    {
+      leaflet(map_data_new) %>%
+        addTiles() %>%
+        setView(-98.58, 38.82,  zoom = 3) %>%
+        addCircles(fill = ~map_data_new$July, label = paste("Region: " , map_data_new$Region,
+                                 
+                                 "Number of employees who quit: ", map_data_new$mapmonth), 
+                   weight = 30)
+
+    }
+    
+    
+  )
+  
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
     {
@@ -609,7 +625,6 @@ server <- function(input, output, session
         )
                                                }
                                                )
- 
    watson_healthcare_reg$Attrition <- TRUE                                            
    modelGender <- glm(Attrition ~ Gender, data = watson_healthcare_reg)
    coef(modelGender)
