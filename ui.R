@@ -15,10 +15,8 @@ dashboardPage(skin = "blue",
                  menuItem("Who Quits?", tabName = "WhoQuits"),
                  menuItem("Your Likelihood of Quitting", tabName = "SelfHelp"),
                  menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
-                 menuItem("Graphs", tabName = "Graphs"),
-                 menuItem("History", tabName = "History"),
-                 menuItem("Employee Lifestyle", tabName = "EmployeeLifestyle")
-                
+                 menuItem("Interactive Plots", tabName = "Graphs"),
+                 menuItem("History", tabName = "History")
                )
                   ),
 
@@ -64,12 +62,14 @@ dashboardPage(skin = "blue",
                          )  
                     )
                     ),
+            
 
                   
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
-                             box( plotOutput("BarCategoricalComparison"
+                             box( width = 7, 
+                               plotOutput("BarCategoricalComparison"
                                             ),
                              selectInput( "XCategoricalComparisonData",
                                           "Choose an X-axis",
@@ -83,9 +83,28 @@ dashboardPage(skin = "blue",
                                           )
                              )
                              ),
-                             h2("Summary Table"),
+                             
+                             
+                             box( 
+                             h2("Employee Lifestyle Effects:"),
+                             plotOutput( "BarBusinessTravel"
+                             ), 
+                             plotOutput( "BarOvertime"
+                             ),
+                             plotOutput("BarEnvirSatisfaction"
+                             ),
+                             plotOutput("BarJobSatisfaction"
+                             ),
+                             plotOutput("BarWorkLifeBalance"
+                               )
+                             ),
+                            
+                             
+                             
                              #Summary Table
-                             box( tableOutput("SummaryTable"),
+                             box( 
+                                  h2("Summary Table"),
+                                  tableOutput("SummaryTable"),
                                   selectInput(inputId = "SummaryData",
                                               "Choose an x-axis",
                                               choices = c( "Age", 
@@ -104,7 +123,8 @@ dashboardPage(skin = "blue",
                                               )
                                   )
                              )
-                    ),
+                             ),
+                    
 
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
@@ -124,6 +144,7 @@ dashboardPage(skin = "blue",
                                             60,
                                             step = 1
                                ),
+                               
                                selectizeInput( "BusinessTravel", 
                                                "How Often Do you Travel?", 
                                                c( "Non-Travel", 
@@ -132,25 +153,7 @@ dashboardPage(skin = "blue",
                                                ),
                                                selected = NULL
                                ),
-                               selectizeInput( "EducationField", 
-                                               "What Field Did You Study?", 
-                                               c( "Life Sciences", 
-                                                  "Medical", 
-                                                  "Marketing", 
-                                                  "Technical Degree", 
-                                                  "Human Resources", 
-                                                  "Other"
-                                               ), 
-                                               selected = NULL
-                               ),
                         
-                               numericInput( "EnvironmentSatisfaction", 
-                                            "How Satisfied Are You with Your Job Environment?", 
-                                            2,
-                                            1, 
-                                            4, 
-                                            step = 1
-                               ),
                                selectizeInput( "Gender", 
                                                "What Is Your Gender?", 
                                                c( "Male", 
@@ -166,6 +169,7 @@ dashboardPage(skin = "blue",
                                             4, 
                                             step = 1
                                ),
+                               
                                selectizeInput( "MaritalStatus", 
                                                "What's Your Marital Status?", 
                                                c( "Single", 
@@ -184,20 +188,7 @@ dashboardPage(skin = "blue",
                                                "16000-20000"
                                             )
                                 ),
-                                            
-                               selectizeInput( "OverTime", "Do You Work Overtime Often?", 
-                                               c( "Yes", 
-                                                  "No"
-                                               ), 
-                                               selected = NULL
-                               ),
-                              
-                               numericInput( "PercentSalaryHike",  
-                                            "How Much Has Your Salary Increased over Your Career?", 
-                                            17,
-                                            10, 
-                                            25
-                               ),
+                               
                                numericInput( "TotalWorkingYears", 
                                             "How Many Years Have You Worked?", 
                                             20,
@@ -205,6 +196,7 @@ dashboardPage(skin = "blue",
                                             40, 
                                             step = 1
                                ),
+                               
                                numericInput( "WorkLifeBalance", 
                                             "How Is Your Work/Life Balance?", 
                                             2,
@@ -212,13 +204,7 @@ dashboardPage(skin = "blue",
                                             4, 
                                             step = 1
                                ),
-                               numericInput( "YearsAtCompany", 
-                                            "How Many Years Have You Worked at Your Current Company?", 
-                                            20,
-                                            0, 
-                                            40, 
-                                            step = 1
-                               ),
+                               
                                numericInput( "YearsInCurrentRole", 
                                             "How Many Years Have You Worked in Your Current Role?",
                                             10,
@@ -234,18 +220,13 @@ dashboardPage(skin = "blue",
                                title = "Importance Rank in Work Life",
                                background = "blue",
                                selectInput( "Rank1", "First", choices = c("", "Age", 
-                                                                          "BusinessTravel", 
-                                                                          "EducationField", 
-                                                                          "EnvironmentSatisfaction", 
+                                                                          "BusinessTravel",
                                                                           "Gender", 
                                                                           "JobSatisfaction", 
                                                                           "MaritalStatus",
-                                                                          "MonthlyIncome",
-                                                                          "OverTime", 
-                                                                          "PercentSalaryHike", 
+                                                                          "MonthlyIncome", 
                                                                           "TotalWorkingYears",
                                                                           "WorkLifeBalance", 
-                                                                          "YearsAtCompany", 
                                                                           "YearsInCurrentRole"
                                ),
                                selected = ""
@@ -272,21 +253,6 @@ dashboardPage(skin = "blue",
                                )
                                ),
                                selectInput( "Rank9", "Ninth", choices = c(""
-                               )
-                               ),
-                               selectInput( "Rank10", "Tength", choices = c(""
-                               )
-                               ),
-                               selectInput( "Rank11", "Eleventh", choices = c(""
-                               )
-                               ),
-                               selectInput( "Rank12", "Twelfth", choices = c(""
-                               )
-                               ),
-                               selectInput( "Rank13", "Thirteenth", choices = c(""
-                               )
-                               ),
-                               selectInput( "Rank14", "Fourteenth", choices = c(""
                                )
                                ),
                                width = 4
@@ -345,10 +311,12 @@ dashboardPage(skin = "blue",
                                  )
                             ),
                             
-                            h2("Scatter Plot"),
+                          
                             #Scatter Plot
                             
-                            box( plotOutput("ScatterPlot"), 
+                            box( h2("Scatter Plot"),
+                                 plotOutput("ScatterPlot"), 
+
                                  selectInput( "XScatterData", 
                                               "Choose an X-axis", 
                                               choices = c( "MonthlyIncome", 
@@ -421,26 +389,9 @@ dashboardPage(skin = "blue",
                                p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
                                 )
                              
-                    ),
+                    )
                     
-                    #The sixth tab is the Employee Lifestyle tab
-                    tabItem(tabName = "EmployeeLifestyle", 
-                            box(plotOutput( "BarBusinessTravel"
-                            )
-                            ), 
-                            box(plotOutput( "BarOvertime"
-                            ) 
-                            ),
-                            box(plotOutput("BarEnvirSatisfaction"
-                            )
-                            ),
-                            box(plotOutput("BarJobSatisfaction"
-                            )
-                            ),
-                            box(plotOutput("BarWorkLifeBalance"
-                                          )
-
-                               )
+                    
                             
                           )                                      
               
@@ -449,6 +400,7 @@ dashboardPage(skin = "blue",
   )
 
 
-       )  
-)
+       )
+
+
 
