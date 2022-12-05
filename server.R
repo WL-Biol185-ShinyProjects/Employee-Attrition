@@ -637,6 +637,9 @@ server <- function(input, output, session
                                                )
 
 #Output for bar graph that displays R squared values
+regressionData <- data.frame(Category = c("Gender", "EducationField", "MaritalStatus", "OverTime", "BusinessTravel"),
+                               AdjustedRSquared = c(0.4994, 0.4982, 0.499, 0.4992, 0.5004))
+
  output$CategoricalRegression <- renderPlot(
                                            {
  regressionData %>%
