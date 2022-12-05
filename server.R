@@ -4,11 +4,31 @@
 server <- function(input, output, session
                    ) 
 {
+ 
   #Converting Character Vectors to Factors
   watson_healthcare_clean$Attrition <- factor(watson_healthcare_clean$Attrition
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
+  
+  #usmap output
+  output$usmap <- renderLeaflet(
+    {
+      leaflet(map_data_new) %>%
+        addTiles() %>%
+        setView(-98.58, 38.82,  zoom = 3) %>%
+        addMarkers(data = map_data_new,
+                   label = paste("Region: " ,
+                                 map_data_new$Region,
+                                 "<br>",
+                                 "Number of employees who quit: ",
+                                 map_data_new$number
+                                 ))
+
+    }
+    
+    
+                               )
   
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
@@ -62,7 +82,7 @@ server <- function(input, output, session
 
   
   #Updating the ranking input choices
-  oldChoices <- colnames(watson_healthcare_clean[1:14])
+  oldChoices <- colnames(watson_healthcare_clean[2:15])
   
   observeEvent(input$Rank1, 
                {
@@ -618,6 +638,9 @@ server <- function(input, output, session
                                                )
 
 #Output for bar graph that displays R squared values
+regressionData <- data.frame(Category = c("Gender", "EducationField", "MaritalStatus", "OverTime", "BusinessTravel"),
+                               AdjustedRSquared = c(0.4994, 0.4982, 0.499, 0.4992, 0.5004))
+
  output$CategoricalRegression <- renderPlot(
                                            {
  regressionData %>%
