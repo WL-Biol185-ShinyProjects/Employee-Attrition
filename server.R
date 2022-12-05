@@ -1,5 +1,5 @@
 
-  # Define server logic required to draw a histogram
+  # Define server logic 
 
 server <- function(input, output, session
                    ) 
@@ -8,11 +8,7 @@ server <- function(input, output, session
   
   library(readr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-  View(watson_healthcare_modified)
-  
-  library(readr)
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
-  View(watson_healthcare_clean)
   
   
   #Converting Character Vectors to Factors
@@ -663,10 +659,37 @@ server <- function(input, output, session
                                                }
                                                )
 
-#Output for bar graph that displays R squared values
-regressionData <- data.frame(Category = c("Gender", "EducationField", "MaritalStatus", "OverTime", "BusinessTravel"),
-                               AdjustedRSquared = c(0.4994, 0.4982, 0.499, 0.4992, 0.5004))
 
+#Loading watson_healthcare_reg dataset 
+watson_healthcare_reg <- read_csv("watson_healthcare_reg.csv")
+
+#Making Attrition a Boolean vector
+watson_healthcare_reg$Attrition <- TRUE
+
+#Calculating adjusted Rsquared values and placing them into variables
+
+summaryModelGender <- summary(lm(Attrition ~ Gender, data = watson_healthcare_reg))$adj.r.squared
+summaryModelEdu <- summary(lm(Attrition ~ EducationField, data = watson_healthcare_reg))$adj.r.squared
+summaryModelMarital <- summary(lm(Attrition ~ MaritalStatus,  data = watson_healthcare_reg))$adj.r.squared                          
+summaryModelOverTime <- summary(lm(Attrition ~ OverTime,  data = watson_healthcare_reg))$adj.r.squared
+summaryModelBusinessTravel <- summary(lm(Attrition ~ BusinessTravel,  data = watson_healthcare_reg))$adj.r.squared
+
+#Generating new data frame 
+regressionData <- data.frame( Category = c( "Gender", 
+                                           "EducationField", 
+                                           "MaritalStatus", 
+                                           "OverTime", 
+                                           "BusinessTravel"
+                                          ),
+                              AdjustedRSquared = c( summaryModelGender, 
+                                                     summaryModelEdu, 
+                                                     summaryModelMarital, 
+                                                     summaryModelOverTime, 
+                                                     summaryModelBusinessTravel
+                                                    )
+                             )
+
+#Output for bar graph that displays R squared values
  output$CategoricalRegression <- renderPlot(
                                            {
  regressionData %>%
