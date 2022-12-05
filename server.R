@@ -7,10 +7,7 @@ server <- function(input, output, session
   
   library(readr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-<<<<<<< HEAD
-  
-=======
->>>>>>> 23f3534f6d53623537d7d7c2dbb43f71f881d02d
+
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
@@ -291,7 +288,7 @@ server <- function(input, output, session
                         input$Rank9
     )
     
-    weight_factors <- c(18, 16, 14, 12, 10, 8, 6, 4, 2)
+    weight_factors <- c(25, 22, 19, 16, 13, 10, 7, 4, 1)
     
     names(weight_factors) <- ranked_columns
     
@@ -360,7 +357,7 @@ server <- function(input, output, session
     weightedPercentYCR <- percentYCR * weight_factors["YearsInCurrentRole"]
     percents <- append(percents, weightedPercentYCR)
     
-    attrition <- (sum(percents) / 90)
+    attrition <- (sum(percents) / 117)
     
   })
   
