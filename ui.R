@@ -343,10 +343,13 @@ dashboardPage(skin = "blue",
                                               )
                                  )
                             ),
+                            
                           
                             #Scatter Plot
-                            box(h2("Scatter Plot"),
-                                plotOutput("ScatterPlot"), 
+                            
+                            box( h2("Scatter Plot"),
+                                 plotOutput("ScatterPlot"), 
+
                                  selectInput( "XScatterData", 
                                               "Choose an X-axis", 
                                               choices = c( "MonthlyIncome", 
