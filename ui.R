@@ -69,7 +69,7 @@ dashboardPage(skin = "blue",
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
-                             box( plotOutput("BarCategoricalComparison"
+                             box(h2("Summary Attrition Graph"), plotOutput("BarCategoricalComparison"
                                             ),
                              selectInput( "XCategoricalComparisonData",
                                           "Choose an X-axis",
@@ -83,9 +83,8 @@ dashboardPage(skin = "blue",
                                           )
                              )
                              ),
-                             h2("Summary Table"),
                              #Summary Table
-                             box( tableOutput("SummaryTable"),
+                             box(h2("Summary Attrition Table"), tableOutput("SummaryTable"),
                                   selectInput(inputId = "SummaryData",
                                               "Choose an x-axis",
                                               choices = c( "Age", 
