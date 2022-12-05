@@ -11,15 +11,31 @@ server <- function(input, output, session
                                                    )
   
   #usmap output
+  #data
+  map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
+                             July = c(7034, 25431,	10740, 11893), 
+                             August = c(6901, 20738,	9870,	10690),
+                             September = c(7406, 23805,	10076, 11424),
+                             Region = c("Northeast", "South", "Midwest", "West"),
+                             lat = c(42, 32, 39, 41),
+                             lon = c(-75, -88, -103, -120))
+  
+  map_data_new <- map_data_new %>%
+    pivot_longer(cols = 1:4, 
+                 names_to = "month",
+                 values_to = "number")
+  
   output$usmap <- renderLeaflet(
     {
       leaflet(map_data_new) %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
-        addMarkers(data = map_data_new,
+        addCircles(data = map_data_new,
+                   fillColor = ~map_data_new$number,
+                   fillOpacity = .3,
+                   weight = 30,
                    label = paste("Region: " ,
                                  map_data_new$Region,
-                                 "<br>",
                                  "Number of employees who quit: ",
                                  map_data_new$number
                                  ))

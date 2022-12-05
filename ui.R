@@ -15,9 +15,8 @@ dashboardPage(skin = "blue",
                  menuItem("Who Quits?", tabName = "WhoQuits"),
                  menuItem("Your Likelihood of Quitting", tabName = "SelfHelp"),
                  menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
-                 menuItem("Graphs", tabName = "Graphs"),
+                 menuItem("Interactive Plots", tabName = "Graphs"),
                  menuItem("History", tabName = "History")
-                
                )
                   ),
 
@@ -366,10 +365,12 @@ dashboardPage(skin = "blue",
                                  )
                             ),
                             
-                            h2("Scatter Plot"),
+                          
                             #Scatter Plot
                             
-                            box( plotOutput("ScatterPlot"), 
+                            box( h2("Scatter Plot"),
+                                 plotOutput("ScatterPlot"), 
+
                                  selectInput( "XScatterData", 
                                               "Choose an X-axis", 
                                               choices = c( "MonthlyIncome", 
