@@ -7,10 +7,7 @@ server <- function(input, output, session
   
   library(readr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-<<<<<<< HEAD
-  
-=======
->>>>>>> 23f3534f6d53623537d7d7c2dbb43f71f881d02d
+
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
