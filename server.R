@@ -33,6 +33,7 @@ server <- function(input, output, session
         addCircles(data = map_data_new,
                    fillColor = ~map_data_new$number,
                    fillOpacity = .3,
+                   radius = ~map_data_new$number,
                    weight = 30,
                    label = paste("Region: " ,
                                  map_data_new$Region,
