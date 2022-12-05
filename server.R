@@ -4,6 +4,17 @@
 server <- function(input, output, session
                    ) 
 {
+  
+  
+  library(readr)
+  watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
+  View(watson_healthcare_modified)
+  
+  library(readr)
+  watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
+  View(watson_healthcare_clean)
+  
+  
   #Converting Character Vectors to Factors
   watson_healthcare_clean$Attrition <- factor(watson_healthcare_clean$Attrition
                                               )
