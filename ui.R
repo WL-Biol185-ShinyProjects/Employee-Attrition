@@ -13,7 +13,7 @@ dashboardPage(skin = "blue",
     sidebarMenu(
                  menuItem("Home", tabName = "Home"), 
                  menuItem("Who Quits?", tabName = "WhoQuits"),
-                 menuItem("Self Help", tabName = "SelfHelp"),
+                 menuItem("Your Likelihood of Quitting", tabName = "SelfHelp"),
                  menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
                  menuItem("Graphs", tabName = "Graphs"),
                  menuItem("History", tabName = "History"),
@@ -33,12 +33,15 @@ dashboardPage(skin = "blue",
       tabItems(
                 tabItem(tabName = "Home",
                         box(
-                          title = "Welcome!", background = "red", width = "12", status = "primary",
+                          title = "Welcome!", background = "navy", width = "12", status = "primary",
                           HTML('<center><img src="group picture.jpeg" width="800"></center>'
                               ),
                     h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."
                          )
-                      ), 
+                      )
+                    ), 
+                    box(
+                      title = "Quick Facts:", background = "navy", width = "12", status = "primary",
                          tags$ul(
                             tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
                             br(),
@@ -51,14 +54,18 @@ dashboardPage(skin = "blue",
                             tags$li("Pharmacist:", tags$b("10%")),
                             tags$li("Patient Care Tech:", tags$b("38.1%")),
                             tags$li("Radiologic Technologist:", tags$b("17.5%")),
-                            br()
-                            # tags$li("Our data was obtained from", a(href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
-                            #                            "kaggle"),
-                            # "and pertains to healthcare employees quitting their jobs."
-                               )
-                          )
-                      
-                      ),   
+
+                            br(),
+                            tags$li("Our data was obtained from ", a("kaggle", href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", target = "_blank"), 
+                            "and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on the dataset explored:",
+                            h4(p("There is a", tags$b("12%"), "attrition rate."))),
+                            br(),
+                            box( plotOutput( "BarAttrition"))
+                         )  
+                    )
+                    ),
+
+                  
                     
                     #The second tab is Who Quits
                     tabItem( tabName = "WhoQuits",
@@ -101,16 +108,15 @@ dashboardPage(skin = "blue",
 
                     #The third tab is the self-help tab          
                     tabItem( tabName = "SelfHelp",
-                             h2( "Estimating Your Chance of Quitting! Happiness"
-                                ),
-                             #Slider         
                              box(
-                               sliderInput( "Age", 
-                                            "What is Your Age?", 
-                                            18, 
-                                            60, 
-                                            40
-                               ),
+                             h2( "Estimating Your Chance of Quitting"
+                             ),
+                             width = 12
+                             ),
+                             #Input values for the estimation         
+                             box(
+                               title =  "Input Your Values",
+                               background = "blue",
                                numericInput( "Age", 
                                             "What is Your Age?",
                                             40,
@@ -137,12 +143,7 @@ dashboardPage(skin = "blue",
                                                ), 
                                                selected = NULL
                                ),
-                               sliderInput( "EnvironmentSatisfaction", 
-                                            "How Satisfied Are You with Your Job Environment?", 
-                                            1, 
-                                            4, 
-                                            2
-                               ),
+                        
                                numericInput( "EnvironmentSatisfaction", 
                                             "How Satisfied Are You with Your Job Environment?", 
                                             2,
@@ -157,12 +158,7 @@ dashboardPage(skin = "blue",
                                                ), 
                                                selected = NULL
                                ),
-                               sliderInput( "JobSatisfaction", 
-                                            "How Satisfied Are You with Your Job?", 
-                                            1, 
-                                            4, 
-                                            2
-                               ),
+                              
                                numericInput( "JobSatisfaction", 
                                             "How Satisfied Are You with Your Job?", 
                                             2,
@@ -178,57 +174,24 @@ dashboardPage(skin = "blue",
                                                ), 
                                                selected = NULL
                                ),
-                               sliderInput( "MonthlyIncome", 
+
+                               selectizeInput( "MonthlyIncome", 
                                             "What Is Your Monthly Income?", 
-                                            1000,  
-                                            20000, 
-                                            10000
-                               ),
-                               numericInput( "MonthlyIncome", 
-                                            "What Is Your Monthly Income?", 
-                                            10000,
-                                            1000,  
-                                            20000
-                               ),
+                                            c( "0-3999",
+                                               "4000-7999",
+                                               "8000-11999",
+                                               "12000-15999",
+                                               "16000-20000"
+                                            )
+                                ),
+                                            
                                selectizeInput( "OverTime", "Do You Work Overtime Often?", 
                                                c( "Yes", 
                                                   "No"
                                                ), 
                                                selected = NULL
                                ),
-                               sliderInput( "PercentSalaryHike",  
-                                            "How Much Has Your Salary Increased over Your Career?", 
-                                            10, 
-                                            25, 
-                                            17
-                               ),
-                               sliderInput( "TotalWorkingYears", 
-                                            "How Many Years Have You Worked?", 
-                                            0, 
-                                            40, 
-                                            20, 
-                                            step = 1
-                               ),
-                               sliderInput( "WorkLifeBalance", 
-                                            "How Is Your Work/Life Balance?", 
-                                            1, 
-                                            4, 
-                                            2, 
-                                            step = 1
-                               ),
-                               sliderInput( "YearsAtCompany", 
-                                            "How Many Years Have You Worked at Your Current Company?", 
-                                            0, 
-                                            40, 
-                                            20, 
-                                            step = 1
-                               ),
-                               sliderInput( "YearsInCurrentRole", 
-                                            "How Many Years Have You Worked in Your Current Role?", 
-                                            0, 
-                                            20, 
-                                            10
-                               ),
+                              
                                numericInput( "PercentSalaryHike",  
                                             "How Much Has Your Salary Increased over Your Career?", 
                                             17,
@@ -260,23 +223,24 @@ dashboardPage(skin = "blue",
                                             "How Many Years Have You Worked in Your Current Role?",
                                             10,
                                             0, 
-                                            20, 
+                                            18, 
                                             step = 1
                                ),
-                               width = 12
+                               width = 4
                              ),
                              
-                             h2("Rank How Important Each Item Is to You."
-                             ),
-                             
+                             #Ranking them to assign each value a weighting factor
                              box(
+                               title = "Importance Rank in Work Life",
+                               background = "blue",
                                selectInput( "Rank1", "First", choices = c("", "Age", 
                                                                           "BusinessTravel", 
                                                                           "EducationField", 
                                                                           "EnvironmentSatisfaction", 
                                                                           "Gender", 
                                                                           "JobSatisfaction", 
-                                                                          "MaritalStatus", 
+                                                                          "MaritalStatus",
+                                                                          "MonthlyIncome",
                                                                           "OverTime", 
                                                                           "PercentSalaryHike", 
                                                                           "TotalWorkingYears",
@@ -325,24 +289,20 @@ dashboardPage(skin = "blue",
                                selectInput( "Rank14", "Fourteenth", choices = c(""
                                )
                                ),
-                               width = 6
+                               width = 4
                              ),
                              
+                             #Displaying the weighted average of the user's attrition values
                              box(
-                               h2("Your Likelihood of Quitting Is..."
-                               ),
-                               #textOutput("AttritionEstimation")
+                               title = "Your Likelihood of Quitting Is...",
+                               background = "blue",
                                textOutput("AttritionEstimation"),
-                               width = 6
-                             ),
-                             
-                             h2("What You Can Do to Minimize Burnout"
-                                
+                               width = 4
                              )
-                             
                     ),
+
                     tabItem( tabName = "WhatFactorsMattertheMost",
-                             box(tableOutput("CategoricalRegression")
+                             box(plotOutput("CategoricalRegression")
                              )
                     ),
 
@@ -479,6 +439,7 @@ dashboardPage(skin = "blue",
                             ),
                             box(plotOutput("BarWorkLifeBalance"
                                           )
+
                                )
                             
                           )                                      
@@ -486,7 +447,8 @@ dashboardPage(skin = "blue",
               
               )
   )
-  )
-  )
 
+
+       )  
+)
 
