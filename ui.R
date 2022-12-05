@@ -322,9 +322,15 @@ dashboardPage(skin = "blue",
                     ),
 
                     tabItem( tabName = "WhatFactorsMattertheMost",
-                             box(plotOutput("CategoricalRegression")
-                             )
-                    ),
+                             box( plotOutput("CategoricalRegression")
+                                ),
+                             box( title = "Categorical Regression Explanation!", background = "navy", width = "12", status = "primary",
+                                  tags$ul(
+                                  tags$li(""), 
+                                     br()
+                                         )
+                                )
+                             ),
 
                     #The fourth tab is the Graphs                
                     tabItem(tabName = "Graphs", 
