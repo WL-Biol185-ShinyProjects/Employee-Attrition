@@ -135,6 +135,7 @@ dashboardPage(skin = "blue",
                              ),
                              #Input values for the estimation         
                              box(
+                               status = "primary",
                                title =  "Input Your Values",
                                background = "blue",
                                numericInput( "Age", 
@@ -217,6 +218,7 @@ dashboardPage(skin = "blue",
                              
                              #Ranking them to assign each value a weighting factor
                              box(
+                               status = "primary",
                                title = "Importance Rank in Work Life",
                                background = "blue",
                                selectInput( "Rank1", "First", choices = c("", "Age", 
@@ -260,10 +262,26 @@ dashboardPage(skin = "blue",
                              
                              #Displaying the weighted average of the user's attrition values
                              box(
+                               status = "primary",
                                title = "Your Likelihood of Quitting Is...",
                                background = "blue",
                                textOutput("AttritionEstimation"),
                                width = 4
+                             ),
+                             
+                             box(
+                               status = "primary",
+                               title = "How the Percentage is Calculated",
+                               background = "blue",
+                               "We used a weighted average calculation to produce this estimate. 
+                               First, your input values are matched against our dataset, and the percent of people in our dataset
+                               who had that exact value AND quit is returned. Next, that percentage is multipled by a weighting factor. 
+                               The weighting factor it is multipled by depends on your rankings. 
+                               For example, if you answered 'How satisfied are you with your job?' with '3' and ranked 'JobSatisfaction' as the most important, 
+                               the percentage of people who quit their job and had a job satisfaction of 3 would be multipled by the greatest weighting factor.
+                               The nine percentages multipled by their corresponding weighting factors are then summed, and that sum is divided
+                               by the sum of the weighting factors.",
+                               "Don't worry if your estimation is high! This dataset is limited, and, therefore, our estimation is not perfect. It is simply an estimation."
                              )
                     ),
 
