@@ -13,12 +13,26 @@ server <- function(input, output, session
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
   
   
-  #Recoding EnvrionmentSatisfaction numerical vector as character vector 
+  #Recoding EnvironmentSatisfaction numerical vector as character vector 
   envNumVec <- c(1:4)
   envNewVec <- recode_factor(envNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
   envSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
   envSatisfactionCharacter <- envNewVec[envSatisfaction]
   watson_healthcare_clean$EnvironmentSatisfaction <- envSatisfactionCharacter
+  
+  #Recoding JobSatisfaction numerical vector as a character vector 
+  jobNumVec <- c(1:4)
+  jobNewVec <- recode_factor(jobNumVec, '1' = "Low", '2' = "Medium", '3' = "High", '4' = "Very High")
+  jobSatisfaction <- watson_healthcare_clean$JobSatisfaction
+  jobSatisfactionCharacter <- jobNewVec[jobSatisfaction]
+  watson_healthcare_clean$JobSatisfaction <- jobSatisfactionCharacter
+  
+  #Recoding WorkLifeBalance numerical vector as a character vector 
+  WLBNumVec <- c(1:4)
+  WLBNewVec <- recode_factor(WLBNumVec, '1' = "Bad", '2' = "Good", '3' = "Better", '4' = "Best")
+  WLB <- watson_healthcare_clean$WorkLifeBalance
+  WLBCharacter <- WLBNewVec [WLB]
+  watson_healthcare_clean$WorkLifeBalance <- WLBCharacter
   
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
@@ -437,7 +451,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Environment Satisfaction and Attrition", 
-         x = "1 = Low, 4 = Very High", y = "Percentage") +
+         x = "Environment Satisfaction", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                            }
@@ -459,7 +473,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Job Satisfaction and Attrition", 
-    x = "1 = Low, 4 = Very High", y = "Percentage") +
+    x = "Job Satisfaction", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
@@ -480,7 +494,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Work Life Balance and Attrition", 
-         x = "1 = Bad, 4 = Best", y = "Percentage") +
+         x = "Work Life Balance", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
