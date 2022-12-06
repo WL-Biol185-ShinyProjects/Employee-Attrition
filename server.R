@@ -8,10 +8,7 @@ server <- function(input, output, session
   library(readr)
   library(dplyr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-<<<<<<< HEAD
-=======
 
->>>>>>> 70014f2848fdc60a4eb5470e8c82f2fb374b3bbe
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
   
   
