@@ -270,10 +270,11 @@ dashboardPage(skin = "blue",
                     tabItem( tabName = "WhatFactorsMattertheMost",
                              box( plotOutput("CategoricalRegression")
                                 ),
-                             box( title = "Categorical Regression Explanation!", background = "navy", width = "12", status = "primary",
+                             box( title = "Categorical Regression Explanation", background = "navy", width = "12", status = "primary",
                                   tags$ul(
-                                  tags$li(""), 
-                                     br()
+                                    tags$li("An R squared value (also known as a coefficient of determination) represents the proportion of variation in the dependent variable that can be predicted from the independent variable"), 
+                                     br(),
+                                    tags$li("In this scario the R squared value represents the proportion of variation  in Attrition that can be predicted by Gender, Marital Status, OverTime, etc."),
                                          )
                                 )
                              ),

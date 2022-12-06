@@ -6,8 +6,18 @@ server <- function(input, output, session
 {
   
   library(readr)
+  library(dplyr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
+  
+  
+  #Recoding EnvrionmentSatisfaction numerical vector as character vector 
+  envNumVec <- c(1:4)
+  envNewVec <- recode_factor(envNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
+  envSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
+  envSatisfactionCharacter <- envNewVec[envSatisfaction]
+  watson_healthcare_clean$EnvironmentSatisfaction <- envSatisfactionCharacter
+  
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
   #Allows the attrition estimation function to work
