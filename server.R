@@ -9,7 +9,13 @@ server <- function(input, output, session
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
+ #Fixing numeric variables in columns to characters 
   
+  watson_healthcare_clean %>%
+   mutate(watson_healthcare_clean, EnvironmentSatisfaction = ifelse(EnvironmentSatisfaction = 1, "Low",
+                                           ifelse(EnvironmentSatisfaction = 2, "Medium",
+                                           ifelse(EnvironmentSatisfaction = 3, "High",
+                                           ifelse(EnvironmentSatisfaction = 4, "Very High")))))
   #usmap output
   #data
   map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
@@ -44,7 +50,7 @@ server <- function(input, output, session
     
     
                                )
-  
+ 
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
     {
