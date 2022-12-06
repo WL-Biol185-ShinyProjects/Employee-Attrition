@@ -8,10 +8,8 @@ server <- function(input, output, session
   library(readr)
   library(dplyr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-<<<<<<< HEAD
-=======
 
->>>>>>> 70014f2848fdc60a4eb5470e8c82f2fb374b3bbe
+
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
   
   
@@ -38,16 +36,7 @@ server <- function(input, output, session
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
-<<<<<<< HEAD
- #Fixing numeric variables in columns to characters 
-  
-  watson_healthcare_clean %>%
-   mutate(watson_healthcare_clean, EnvironmentSatisfaction = ifelse(EnvironmentSatisfaction = 1, "Low",
-                                           ifelse(EnvironmentSatisfaction = 2, "Medium",
-                                           ifelse(EnvironmentSatisfaction = 3, "High",
-                                           ifelse(EnvironmentSatisfaction = 4, "Very High")))))
-=======
->>>>>>> d6c0b4a6e55eb7d3d75f39ba6beb61f2a9ab6502
+
   #usmap output
   #data
   map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
