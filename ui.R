@@ -85,7 +85,8 @@ dashboardPage(skin = "blue",
                              ),
                              
                              
-                             box( 
+                             #Summary Table
+                             box(
                              h2("Employee Lifestyle Effects:"),
                              plotOutput( "BarBusinessTravel"
                              ), 
@@ -98,9 +99,7 @@ dashboardPage(skin = "blue",
                              plotOutput("BarWorkLifeBalance"
                                )
                              ),
-                            
-                             
-                             
+ 
                              #Summary Table
                              box( 
                                   h2("Summary Table"),
@@ -120,9 +119,9 @@ dashboardPage(skin = "blue",
                                                            "WorkLifeBalance", 
                                                            "YearsAtCompany", 
                                                            "YearsInCurrentRole"
-                                              )
+                                                           )
                                   )
-                             )
+                               )
                              ),
                     
 
@@ -340,6 +339,9 @@ dashboardPage(skin = "blue",
                             ),
                             #US Map
                             box( h2("US Attrition by Region: June-Sept 2022"),
+                                 br(),
+                                 tags$li("This data was obtained from the ", a("Bureau of Labor Statistics", 
+                                           href = "https://www.bls.gov/news.release/pdf/jolts.pdf", target = "_blank")),
                                  leafletOutput( "usmap"),
                                  selectInput( "mapmonth", 
                                               "Choose a month", 

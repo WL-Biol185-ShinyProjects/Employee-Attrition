@@ -8,6 +8,10 @@ server <- function(input, output, session
   library(readr)
   library(dplyr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70014f2848fdc60a4eb5470e8c82f2fb374b3bbe
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
   
   
@@ -41,6 +45,7 @@ server <- function(input, output, session
                              August = c(6901, 20738,	9870,	10690),
                              September = c(7406, 23805,	10076, 11424),
                              Region = c("Northeast", "South", "Midwest", "West"),
+                             color = c("red", "orange", "palegreen", "lightblue"),
                              lat = c(42, 32, 39, 41),
                              lon = c(-75, -88, -103, -120))
   
@@ -54,15 +59,20 @@ server <- function(input, output, session
       leaflet(map_data_new) %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
-        addCircles(data = map_data_new,
-                   fillColor = ~map_data_new$number,
-                   fillOpacity = .3,
-                   weight = 30,
-                   label = paste("Region: " ,
-                                 map_data_new$Region,
+        addCircleMarkers(data = map_data_new,
+                   fillColor = ~map_data_new$color,
+                   radius = ~map_data_new$number/1000,
+                   stroke = FALSE,
+                   opacity = .8,
+                   label = paste(
                                  "Number of employees who quit: ",
                                  map_data_new$number
-                                 ))
+                   )) %>%
+        addLegend(data = map_data_new,
+                  title = "Employee Attrition by Region",
+                  colors = c("red", "orange", "palegreen", "lightblue"),
+                  labels = c("Northeast", "South", "Midwest", "West"))
+        
 
     }
     
