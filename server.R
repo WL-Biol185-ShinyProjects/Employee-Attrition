@@ -1,14 +1,44 @@
 
-  # Define server logic required to draw a histogram
+  # Define server logic 
 
 server <- function(input, output, session
                    ) 
 {
+  
+  library(readr)
+  library(dplyr)
+  watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
+<<<<<<< HEAD
+=======
+
+>>>>>>> 70014f2848fdc60a4eb5470e8c82f2fb374b3bbe
+  watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
+  
+  
+  #Recoding EnvrionmentSatisfaction numerical vector as character vector 
+  envNumVec <- c(1:4)
+  envNewVec <- recode_factor(envNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
+  envSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
+  envSatisfactionCharacter <- envNewVec[envSatisfaction]
+  watson_healthcare_clean$EnvironmentSatisfaction <- envSatisfactionCharacter
+  
+  
+  #Creating a dataset so that the MonthlyIncome column can be a categorical variable
+  #Allows the attrition estimation function to work
+  whc <- read_csv("whc.csv")
+  whc$MonthlyIncomeCat <- NA
+  whc$MonthlyIncomeCat[whc$MonthlyIncome > 0 & whc$MonthlyIncome < 3999] <- "0-3999"
+  whc$MonthlyIncomeCat[whc$MonthlyIncome > 4000 & whc$MonthlyIncome < 7999] <- "4000-7999"
+  whc$MonthlyIncomeCat[whc$MonthlyIncome > 8000 & whc$MonthlyIncome < 11999] <- "8000-11999"
+  whc$MonthlyIncomeCat[whc$MonthlyIncome > 12000 & whc$MonthlyIncome < 15999] <- "12000-15999"
+  whc$MonthlyIncomeCat[whc$MonthlyIncome > 16000 & whc$MonthlyIncome < 20000] <- "16000-20000"
+  
   #Converting Character Vectors to Factors
   watson_healthcare_clean$Attrition <- factor(watson_healthcare_clean$Attrition
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
+<<<<<<< HEAD
  #Fixing numeric variables in columns to characters 
   
   watson_healthcare_clean %>%
@@ -16,6 +46,8 @@ server <- function(input, output, session
                                            ifelse(EnvironmentSatisfaction = 2, "Medium",
                                            ifelse(EnvironmentSatisfaction = 3, "High",
                                            ifelse(EnvironmentSatisfaction = 4, "Very High")))))
+=======
+>>>>>>> d6c0b4a6e55eb7d3d75f39ba6beb61f2a9ab6502
   #usmap output
   #data
   map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
@@ -23,6 +55,7 @@ server <- function(input, output, session
                              August = c(6901, 20738,	9870,	10690),
                              September = c(7406, 23805,	10076, 11424),
                              Region = c("Northeast", "South", "Midwest", "West"),
+                             color = c("red", "orange", "palegreen", "lightblue"),
                              lat = c(42, 32, 39, 41),
                              lon = c(-75, -88, -103, -120))
   
@@ -36,15 +69,20 @@ server <- function(input, output, session
       leaflet(map_data_new) %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
-        addCircles(data = map_data_new,
-                   fillColor = ~map_data_new$number,
-                   fillOpacity = .3,
-                   weight = 30,
-                   label = paste("Region: " ,
-                                 map_data_new$Region,
+        addCircleMarkers(data = map_data_new,
+                   fillColor = ~map_data_new$color,
+                   radius = ~map_data_new$number/1000,
+                   stroke = FALSE,
+                   opacity = .8,
+                   label = paste(
                                  "Number of employees who quit: ",
                                  map_data_new$number
-                                 ))
+                   )) %>%
+        addLegend(data = map_data_new,
+                  title = "Employee Attrition by Region",
+                  colors = c("red", "orange", "palegreen", "lightblue"),
+                  labels = c("Northeast", "South", "Midwest", "West"))
+        
 
     }
     
@@ -101,9 +139,8 @@ server <- function(input, output, session
      }
                                         )
 
-  
   #Updating the ranking input choices
-  oldChoices <- colnames(watson_healthcare_clean[1:14])
+  oldChoices <- c("Age", "BusinessTravel", "Gender", "JobSatisfaction", "MaritalStatus", "MonthlyIncome", "TotalWorkingYears", "WorkLifeBalance", "YearsInCurrentRole")
   
   observeEvent(input$Rank1, 
                {
@@ -263,142 +300,6 @@ server <- function(input, output, session
                  )
                  }
                }
-  
-              )
-  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9), 
-               {
-                 
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2, 
-                                         input$Rank3, 
-                                         input$Rank4, 
-                                         input$Rank5, 
-                                         input$Rank6,
-                                         input$Rank7,
-                                         input$Rank8,
-                                         input$Rank9
-                                       )
-                 )
-                 
-                 if(input$Rank1 != "") {
-                   updateSelectInput(session, 
-                                   "Rank10", 
-                                   choices = newChoices
-                  )
-                 }
-               }
-               
-             )
-  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10), 
-               {
-                 
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2, 
-                                         input$Rank3, 
-                                         input$Rank4, 
-                                         input$Rank5, 
-                                         input$Rank6,
-                                         input$Rank7,
-                                         input$Rank8,
-                                         input$Rank9,
-                                         input$Rank10
-                                       )
-                 )
-                 
-                 if(input$Rank1 != "") {
-                   updateSelectInput(session, 
-                                   "Rank11", 
-                                   choices = newChoices
-                 )
-                 }
-               }
-               
-             )
-  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10, input$Rank11), 
-               {
-                 
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2, 
-                                         input$Rank3, 
-                                         input$Rank4, 
-                                         input$Rank5, 
-                                         input$Rank6,
-                                         input$Rank7,
-                                         input$Rank8,
-                                         input$Rank9,
-                                         input$Rank10,
-                                         input$Rank11
-                                       )
-                 )
-                 
-                 if(input$Rank1 != "") {
-                   updateSelectInput(session, 
-                                   "Rank12", 
-                                   choices = newChoices
-                 )
-                 }
-               }
-               
-            )
-  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10, input$Rank11, input$Rank12), 
-               {
-                 
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2, 
-                                         input$Rank3, 
-                                         input$Rank4, 
-                                         input$Rank5, 
-                                         input$Rank6,
-                                         input$Rank7,
-                                         input$Rank8,
-                                         input$Rank9,
-                                         input$Rank10,
-                                         input$Rank11,
-                                         input$Rank12
-                                       )
-                 )
-                 
-                 if(input$Rank1 != "") {
-                   updateSelectInput(session, 
-                                   "Rank13", 
-                                   choices = newChoices
-                 )
-                 }
-               }
-               
-            )
-  observeEvent( c(input$Rank1, input$Rank2, input$Rank3, input$Rank4, input$Rank5, input$Rank6, input$Rank7, input$Rank8, input$Rank9, input$Rank10, input$Rank11, input$Rank12, input$Rank13), 
-               {
-                 
-                 newChoices <- setdiff(oldChoices, 
-                                       c(input$Rank1, 
-                                         input$Rank2, 
-                                         input$Rank3, 
-                                         input$Rank4, 
-                                         input$Rank5, 
-                                         input$Rank6,
-                                         input$Rank7,
-                                         input$Rank8,
-                                         input$Rank9,
-                                         input$Rank10,
-                                         input$Rank11,
-                                         input$Rank12,
-                                         input$Rank13
-                                       )
-                 )
-                 
-                 if(input$Rank1 != "") {
-                   updateSelectInput(session, 
-                                   "Rank14", 
-                                   choices = newChoices
-                 )
-                 }
-               }
-               
              )
   
   #Output for Estimation Feature
@@ -413,15 +314,10 @@ server <- function(input, output, session
                         input$Rank6,
                         input$Rank7,
                         input$Rank8,
-                        input$Rank9,
-                        input$Rank10,
-                        input$Rank11,
-                        input$Rank12,
-                        input$Rank13,
-                        input$Rank14
+                        input$Rank9
     )
     
-    weight_factors <- c(14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+    weight_factors <- c(18, 16, 14, 12, 10, 8, 6, 4, 2)
     
     names(weight_factors) <- ranked_columns
     
@@ -440,20 +336,6 @@ server <- function(input, output, session
     percentBT <- percent2$AttritionPercent[1]
     weightedPercentBT <- percentBT * weight_factors["BusinessTravel"]
     percents <- append(percents, weightedPercentBT)
-    
-    groupedOnEF <- group_by_at(watson_healthcare_clean, "EducationField")
-    summarizedByEF <- summarize(groupedOnEF, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent3 <- filter(summarizedByEF, EducationField == input$EducationField)
-    percentEF <- percent3$AttritionPercent[1]
-    weightedPercentEF <- percentEF * weight_factors["EducationField"]
-    percents <- append(percents, weightedPercentEF)
-    
-    groupedOnES <- group_by_at(watson_healthcare_clean, "EnvironmentSatisfaction")
-    summarizedByES <- summarize(groupedOnES, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent4 <- filter(summarizedByES, EnvironmentSatisfaction == input$EnvironmentSatisfaction)
-    percentES <- percent4$AttritionPercent[1]
-    weightedPercentES <- percentES * weight_factors["EnvironmentSatisfaction"]
-    percents <- append(percents, weightedPercentES)
     
     groupedOnGen <- group_by_at(watson_healthcare_clean, "Gender")
     summarizedByGen <- summarize(groupedOnGen, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
@@ -483,20 +365,6 @@ server <- function(input, output, session
     weightedPercentMIC <- percentMIC * weight_factors["MonthlyIncome"]
     percents <- append(percents, weightedPercentMIC)
     
-    groupedOnOT <- group_by_at(watson_healthcare_clean, "OverTime")
-    summarizedByOT <- summarize(groupedOnOT, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent9 <- filter(summarizedByOT, OverTime == input$OverTime)
-    percentOT <- percent9$AttritionPercent[1]
-    weightedPercentOT <- percentOT * weight_factors["OverTime"]
-    percents <- append(percents, weightedPercentOT)
-    
-    groupedOnPSH <- group_by_at(watson_healthcare_clean, "PercentSalaryHike")
-    summarizedByPSH <- summarize(groupedOnPSH, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent10 <- filter(summarizedByPSH, PercentSalaryHike == input$PercentSalaryHike)
-    percentPSH <- percent10$AttritionPercent[1]
-    weightedPercentPSH <- percentPSH * weight_factors["PercentSalaryHike"]
-    percents <- append(percents, weightedPercentPSH)
-    
     groupedOnTWY <- group_by_at(watson_healthcare_clean, "TotalWorkingYears")
     summarizedByTWY <- summarize(groupedOnTWY, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
     percent11 <- filter(summarizedByTWY, TotalWorkingYears == input$TotalWorkingYears)
@@ -511,13 +379,6 @@ server <- function(input, output, session
     weightedPercentWLB <- percentWLB * weight_factors["WorkLifeBalance"]
     percents <- append(percents, weightedPercentWLB)
     
-    groupedOnYAC <- group_by_at(watson_healthcare_clean, "YearsAtCompany")
-    summarizedByYAC <- summarize(groupedOnYAC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent13 <- filter(summarizedByYAC, YearsAtCompany == input$YearsAtCompany)
-    percentYAC <- percent13$AttritionPercent[1]
-    weightedPercentYAC <- percentYAC * weight_factors["YearsAtCompany"]
-    percents <- append(percents, weightedPercentYAC)
-    
     groupedOnYCR <- group_by_at(watson_healthcare_clean, "YearsInCurrentRole")
     summarizedByYCR <- summarize(groupedOnYCR, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
     percent14 <- filter(summarizedByYCR, YearsInCurrentRole == input$YearsInCurrentRole)
@@ -525,7 +386,7 @@ server <- function(input, output, session
     weightedPercentYCR <- percentYCR * weight_factors["YearsInCurrentRole"]
     percents <- append(percents, weightedPercentYCR)
     
-    attrition <- (sum(percents) / 105)
+    attrition <- (sum(percents) / 90)
     
   })
   
@@ -658,10 +519,37 @@ server <- function(input, output, session
                                                }
                                                )
 
-#Output for bar graph that displays R squared values
-regressionData <- data.frame(Category = c("Gender", "EducationField", "MaritalStatus", "OverTime", "BusinessTravel"),
-                               AdjustedRSquared = c(0.4994, 0.4982, 0.499, 0.4992, 0.5004))
 
+#Loading watson_healthcare_reg dataset 
+watson_healthcare_reg <- read_csv("watson_healthcare_reg.csv")
+
+#Making Attrition a Boolean vector
+watson_healthcare_reg$Attrition <- TRUE
+
+#Calculating adjusted Rsquared values and placing them into variables
+
+summaryModelGender <- summary(lm(Attrition ~ Gender, data = watson_healthcare_reg))$adj.r.squared
+summaryModelEdu <- summary(lm(Attrition ~ EducationField, data = watson_healthcare_reg))$adj.r.squared
+summaryModelMarital <- summary(lm(Attrition ~ MaritalStatus,  data = watson_healthcare_reg))$adj.r.squared                          
+summaryModelOverTime <- summary(lm(Attrition ~ OverTime,  data = watson_healthcare_reg))$adj.r.squared
+summaryModelBusinessTravel <- summary(lm(Attrition ~ BusinessTravel,  data = watson_healthcare_reg))$adj.r.squared
+
+#Generating new data frame 
+regressionData <- data.frame( Category = c( "Gender", 
+                                           "EducationField", 
+                                           "MaritalStatus", 
+                                           "OverTime", 
+                                           "BusinessTravel"
+                                          ),
+                              AdjustedRSquared = c( summaryModelGender, 
+                                                     summaryModelEdu, 
+                                                     summaryModelMarital, 
+                                                     summaryModelOverTime, 
+                                                     summaryModelBusinessTravel
+                                                    )
+                             )
+
+#Output for bar graph that displays R squared values
  output$CategoricalRegression <- renderPlot(
                                            {
  regressionData %>%
