@@ -5,32 +5,43 @@ library(dplyr)
 library(tidyverse)
 library(leaflet)
 
+DashboardHeader <- dashboardHeader(title = "Healthcare Attrition")
+SideBar <- dashboardSidebar(
+                            sidebarMenu(
+                                         menuItem( "Home", tabName = "Home"), 
+                                         menuItem( "Who Quits?", 
+                                                  tabName = "WhoQuits"
+                                                ),
+                                         menuItem( "Your Likelihood of Quitting", 
+                                                  tabName = "SelfHelp"
+                                                ),
+                                         menuItem( "What Factors Matter the Most?", 
+                                                  tabName = 
+                                                  "WhatFactorsMattertheMost"
+                                                ),
+                                         menuItem( "Interactive Plots", 
+                                                  tabName = "Graphs"
+                                                ),
+                                         menuItem( "History", 
+                                                  tabName = "History")
+                                      )
+                          )
 
 #The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
-dashboardPage(skin = "blue", 
-  dashboardHeader(title = "Healthcare Attrition"),
-  dashboardSidebar(
-    sidebarMenu(
-                 menuItem("Home", tabName = "Home"), 
-                 menuItem("Who Quits?", tabName = "WhoQuits"),
-                 menuItem("Your Likelihood of Quitting", tabName = "SelfHelp"),
-                 menuItem("What Factors Matter the Most?", tabName = "WhatFactorsMattertheMost"),
-                 menuItem("Interactive Plots", tabName = "Graphs"),
-                 menuItem("History", tabName = "History")
-               )
-                  ),
-
-  dashboardBody(
+dashboardPage( skin = "blue", 
+               DashboardHeader,
+               SideBar,
+               dashboardBody(
       
 #Boxes need to be put in a row (or column)
-       fluidRow(
+                              fluidRow(
       
     
 #Below tabs are named and their contents is specified
 #The first tab is the home tab
-      tabItems(
-                tabItem(tabName = "Home",
-                        box(
+                                       tabItems(
+                                                 tabItem(tabName = "Home",
+                                                         box(
                           title = "Welcome!", background = "navy", width = "12", status = "primary",
                           HTML('<center><img src="group picture.jpeg" width="800"></center>'
                               ),
