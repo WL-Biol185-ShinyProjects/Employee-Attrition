@@ -6,9 +6,34 @@ server <- function(input, output, session
 {
   
   library(readr)
+  library(dplyr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
 
+
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
+  
+  
+  #Recoding EnvironmentSatisfaction numerical vector as character vector 
+  envNumVec <- c(1:4)
+  envNewVec <- recode_factor(envNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
+  envSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
+  envSatisfactionCharacter <- envNewVec[envSatisfaction]
+  watson_healthcare_clean$EnvironmentSatisfaction <- envSatisfactionCharacter
+  
+  #Recoding JobSatisfaction numerical vector as a character vector 
+  jobNumVec <- c(1:4)
+  jobNewVec <- recode_factor(jobNumVec, '1' = "Low", '2' = "Medium", '3' = "High", '4' = "Very High")
+  jobSatisfaction <- watson_healthcare_clean$JobSatisfaction
+  jobSatisfactionCharacter <- jobNewVec[jobSatisfaction]
+  watson_healthcare_clean$JobSatisfaction <- jobSatisfactionCharacter
+  
+  #Recoding WorkLifeBalance numerical vector as a character vector 
+  WLBNumVec <- c(1:4)
+  WLBNewVec <- recode_factor(WLBNumVec, '1' = "Bad", '2' = "Good", '3' = "Better", '4' = "Best")
+  WLB <- watson_healthcare_clean$WorkLifeBalance
+  WLBCharacter <- WLBNewVec [WLB]
+  watson_healthcare_clean$WorkLifeBalance <- WLBCharacter
+  
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
   #Allows the attrition estimation function to work
@@ -25,39 +50,37 @@ server <- function(input, output, session
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
+
   #usmap output
   #data
-  map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
+  Map_Data_New <- data.frame(June = c(7447, 22035, 11075, 12042),
                              July = c(7034, 25431,	10740, 11893), 
                              August = c(6901, 20738,	9870,	10690),
                              September = c(7406, 23805,	10076, 11424),
                              Region = c("Northeast", "South", "Midwest", "West"),
                              color = c("red", "orange", "palegreen", "lightblue"),
                              lat = c(42, 32, 39, 41),
-                             lon = c(-75, -88, -103, -120))
-  
-  map_data_new <- map_data_new %>%
+                             lon = c(-75, -88, -103, -120)) %>%
     pivot_longer(cols = 1:4, 
-                 names_to = "month",
-                 values_to = "number")
-
+                 names_to = "Month",
+                 values_to = "Number")
+  
  
-  output$usmap <- renderLeaflet(
+  output$UsMap <- renderLeaflet(
     
     {
-      map_data_new %>%
-        filter(month == input$mapmonth) %>%
+      Map_Data_New %>%
+        filter(Month == input$MapMonth) %>%
         leaflet() %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
-        addCircleMarkers(data = map_data_new,
-                   fillColor = ~map_data_new$color,
-                   radius = ~map_data_new$number/1000,
-                   stroke = FALSE,
-                   opacity = .8,
-                   label = paste("Number of employees who quit: ",
-                                 map_data_new$number)) %>%
-        addLegend(data = map_data_new,
+        addCircleMarkers(
+          fill = TRUE,
+          fillColor = ~color,
+          radius = ~Number/1000,
+          stroke = FALSE,
+          label = ~Number) %>%
+        addLegend(data = Map_Data_New,
                   title = "Employee Attrition by Region",
                   colors = c("red", "orange", "palegreen", "lightblue"),
                   labels = c("Northeast", "South", "Midwest", "West"))
@@ -68,7 +91,6 @@ server <- function(input, output, session
     
                                )
 
-  
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
     {
@@ -428,7 +450,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Environment Satisfaction and Attrition", 
-         x = "1 = Low, 4 = Very High", y = "Percentage") +
+         x = "Environment Satisfaction", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                            }
@@ -450,7 +472,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Job Satisfaction and Attrition", 
-    x = "1 = Low, 4 = Very High", y = "Percentage") +
+    x = "Job Satisfaction", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
@@ -471,7 +493,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Work Life Balance and Attrition", 
-         x = "1 = Bad, 4 = Best", y = "Percentage") +
+         x = "Work Life Balance", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
