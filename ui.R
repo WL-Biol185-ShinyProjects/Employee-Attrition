@@ -274,7 +274,7 @@ dashboardPage(skin = "blue",
                                     tags$li("An R squared value (also known as a coefficient of determination) represents the proportion of variation in the dependent variable that can be predicted from the independent variable. The adjusted R squared value differs from the R squared variable because R squared assumes that all independent variables affect the result of the model, however, adjusted R squared only considers the independent variables that have an effect on the model. The adjusted R squared is a better measure for models with different numbers of variables because an R squared will always increase if the number of variables increases"
                                             ), 
                                      br(),
-                                    tags$li("In this scario the R squared value represents the proportion of variation  in Attrition that can be predicted by Gender, Marital Status, OverTime, etc."
+                                    tags$li("In this scenario the R squared value represents the proportion of variation  in Attrition that can be predicted by Gender, Marital Status, OverTime, etc."
                                            )
                                          )
                                 )
@@ -398,7 +398,25 @@ dashboardPage(skin = "blue",
                                ),
                                br(),
                                p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2020). Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. Frontiers in Public Health, 9. https://doi.org/10.3389/fpubh.2021.750529")
-                                )
+                                ),
+                             box(
+                               title = "Citations:", background = "blue", width = "12", status = "primary",
+                               p("Arndt, B. G., Beasley, J. W., Watkinson, M. D., Temte, J. L., Tuan, W. J., Sinsky, C. A., & Gilchrist, V. J. (2017). 
+                                 Tethered to the EHR: Primary Care Physician Workload Assessment Using EHR Event Log Data and Time-Motion Observations. 
+                                 Annals of family medicine, 15(5), 419–426. https://doi.org/10.1370/afm.2121"),
+                               br(),
+                               p("Frogner BK, Dill JS. Tracking Turnover Among Health Care Workers During the COVID-19 Pandemic: A Cross-sectional Study. 
+                                 JAMA Health Forum. 2022;3(4):e220371. doi:10.1001/jamahealthforum.2022.0371"),
+                               br(),
+                               p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2021). 
+                                 Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. 
+                                 Frontiers in public health, 9, 750529. https://doi.org/10.3389/fpubh.2021.750529"),
+                               br(),
+                               p("Murthy, V. H., Interview with Dr. Vivek Murthy on approaches to supporting well-being among health workers. (13:50), 
+                                 Author AffiliationsFrom the Office of the Surgeon General, Interview with Dr. Vivek Murthy on approaches to supporting well-being among health workers. (13:50), 
+                                 Salmi, L., Longo, R. L. S. and D. L., & Shireman, R. (2022, August 18). Confronting health worker burnout and well-being: Nejm. New England Journal of Medicine.
+                                 Retrieved December 7, 2022, from https://www.nejm.org/doi/full/10.1056/NEJMp2207252 ")
+                             )
                              
                     )
                     
