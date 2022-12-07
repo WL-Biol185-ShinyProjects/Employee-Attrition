@@ -7,12 +7,12 @@ server <- function(input, output, session
   
   library(readr)
   library(dplyr)
-  watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-  watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
+  watson_healthcare_modified <- read_csv( "watson_healthcare_modified.csv" )
+  watson_healthcare_clean <- read_csv( "watson_healthcare_clean.csv" )
   
   
   #Recoding EnvironmentSatisfaction numerical vector as character vector 
-  EnvNumVec <- c(1:4)
+  EnvNumVec <- c( 1:4 )
   EnvNewVec <- recode_factor(EnvNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
   EnvSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
   EnvSatisfactionCharacter <- EnvNewVec[EnvSatisfaction]
@@ -68,22 +68,22 @@ server <- function(input, output, session
   
   output$usmap <- renderLeaflet(
     {
-      leaflet(map_data_new) %>%
-        addTiles() %>%
-        setView(-98.58, 38.82,  zoom = 3) %>%
-        addCircleMarkers(data = map_data_new,
-                   fillColor = ~map_data_new$color,
-                   radius = ~map_data_new$number/1000,
-                   stroke = FALSE,
-                   opacity = .8,
-                   label = paste(
-                                 "Number of employees who quit: ",
-                                 map_data_new$number
-                   )) %>%
-        addLegend(data = map_data_new,
-                  title = "Employee Attrition by Region",
-                  colors = c("red", "orange", "palegreen", "lightblue"),
-                  labels = c("Northeast", "South", "Midwest", "West"))
+                                leaflet(map_data_new) %>%
+                                  addTiles() %>%
+                                  setView(-98.58, 38.82,  zoom = 3) %>%
+                                  addCircleMarkers(data = map_data_new,
+                                             fillColor = ~map_data_new$color,
+                                             radius = ~map_data_new$number/1000,
+                                             stroke = FALSE,
+                                             opacity = .8,
+                                             label = paste(
+                                                           "Number of employees who quit: ",
+                                                           map_data_new$number
+                                             )) %>%
+                                  addLegend(data = map_data_new,
+                                            title = "Employee Attrition by Region",
+                                            colors = c("red", "orange", "palegreen", "lightblue"),
+                                            labels = c("Northeast", "South", "Midwest", "West"))
         
 
     }
