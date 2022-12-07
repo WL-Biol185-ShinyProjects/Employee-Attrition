@@ -219,7 +219,7 @@ dashboardPage(skin = "blue",
                              #Ranking them to assign each value a weighting factor
                              box(
                                status = "primary",
-                               title = "Importance Rank in Work Life",
+                               title = "Importance Rank to You",
                                background = "blue",
                                selectInput( "Rank1", "First", choices = c("", "Age", 
                                                                           "BusinessTravel",
