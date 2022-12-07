@@ -6,9 +6,32 @@ server <- function(input, output, session
 {
   
   library(readr)
+  library(dplyr)
   watson_healthcare_modified <- read_csv("watson_healthcare_modified.csv")
-
   watson_healthcare_clean <- read_csv("watson_healthcare_clean.csv")
+  
+  
+  #Recoding EnvironmentSatisfaction numerical vector as character vector 
+  EnvNumVec <- c(1:4)
+  EnvNewVec <- recode_factor(EnvNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
+  EnvSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
+  EnvSatisfactionCharacter <- EnvNewVec[EnvSatisfaction]
+  watson_healthcare_clean$EnvironmentSatisfaction <- EnvSatisfactionCharacter
+  
+  #Recoding JobSatisfaction numerical vector as a character vector 
+  JobNumVec <- c(1:4)
+  JobNewVec <- recode_factor(JobNumVec, '1' = "Low", '2' = "Medium", '3' = "High", '4' = "Very High")
+  JobSatisfaction <- watson_healthcare_clean$JobSatisfaction
+  JobSatisfactionCharacter <- JobNewVec[JobSatisfaction]
+  watson_healthcare_clean$JobSatisfaction <- JobSatisfactionCharacter
+  
+  #Recoding WorkLifeBalance numerical vector as a character vector 
+  WLBNumVec <- c(1:4)
+  WLBNewVec <- recode_factor(WLBNumVec, '1' = "Bad", '2' = "Good", '3' = "Better", '4' = "Best")
+  WLB <- watson_healthcare_clean$WorkLifeBalance
+  WLBCharacter <- WLBNewVec [WLB]
+  watson_healthcare_clean$WorkLifeBalance <- WLBCharacter
+  
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
   #Allows the attrition estimation function to work
@@ -25,6 +48,8 @@ server <- function(input, output, session
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
+#Interactive Plots Tab:
+  
   #usmap output
   #data
   map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
@@ -32,6 +57,7 @@ server <- function(input, output, session
                              August = c(6901, 20738,	9870,	10690),
                              September = c(7406, 23805,	10076, 11424),
                              Region = c("Northeast", "South", "Midwest", "West"),
+                             color = c("red", "orange", "palegreen", "lightblue"),
                              lat = c(42, 32, 39, 41),
                              lon = c(-75, -88, -103, -120))
   
@@ -45,21 +71,26 @@ server <- function(input, output, session
       leaflet(map_data_new) %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
-        addCircles(data = map_data_new,
-                   fillColor = ~map_data_new$number,
-                   fillOpacity = .3,
-                   weight = 30,
-                   label = paste("Region: " ,
-                                 map_data_new$Region,
+        addCircleMarkers(data = map_data_new,
+                   fillColor = ~map_data_new$color,
+                   radius = ~map_data_new$number/1000,
+                   stroke = FALSE,
+                   opacity = .8,
+                   label = paste(
                                  "Number of employees who quit: ",
                                  map_data_new$number
-                                 ))
+                   )) %>%
+        addLegend(data = map_data_new,
+                  title = "Employee Attrition by Region",
+                  colors = c("red", "orange", "palegreen", "lightblue"),
+                  labels = c("Northeast", "South", "Midwest", "West"))
+        
 
     }
     
     
                                )
-  
+ 
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
     {
@@ -99,8 +130,11 @@ server <- function(input, output, session
            geom_point(stat = "identity") +
            geom_smooth()
      }
-                                   )
-#Output for Summary Table
+  
+                                           )
+#Who Quits Tab:
+  
+  #Output for Summary Table
   output$SummaryTable <- renderTable(
     {
     watson_healthcare_clean %>%
@@ -315,12 +349,12 @@ server <- function(input, output, session
     weightedPercentGen <- percentGen * weight_factors["Gender"]
     percents <- append(percents, weightedPercentGen)
     
-    groupedOnJS <- group_by_at(watson_healthcare_clean, "JobSatisfaction")
-    summarizedByJS <- summarize(groupedOnJS, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent6 <- filter(summarizedByJS, JobSatisfaction == input$JobSatisfaction)
-    percentJS <- percent6$AttritionPercent[1]
-    weightedPercentJS <- percentJS * weight_factors["JobSatisfaction"]
-    percents <- append(percents, weightedPercentJS)
+    groupedOnJSC <- group_by_at(watson_healthcare_clean, "JobSatisfactionCharacter")
+    summarizedByJSC <- summarize(groupedOnJSC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent6 <- filter(summarizedByJSC, JobSatisfactionCharacter == input$JobSatisfaction)
+    percentJSC <- percent6$AttritionPercent[1]
+    weightedPercentJSC <- percentJSC * weight_factors["JobSatisfaction"]
+    percents <- append(percents, weightedPercentJSC)
     
     groupedOnMS <- group_by_at(watson_healthcare_clean, "MaritalStatus")
     summarizedByMS <- summarize(groupedOnMS, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
@@ -343,12 +377,12 @@ server <- function(input, output, session
     weightedPercentTWY <- percentTWY * weight_factors["TotalWorkingYears"]
     percents <- append(percents, weightedPercentTWY)
     
-    groupedOnWLB <- group_by_at(watson_healthcare_clean, "WorkLifeBalance")
-    summarizedByWLB <- summarize(groupedOnWLB, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent12 <- filter(summarizedByWLB, WorkLifeBalance == input$WorkLifeBalance)
-    percentWLB <- percent12$AttritionPercent[1]
-    weightedPercentWLB <- percentWLB * weight_factors["WorkLifeBalance"]
-    percents <- append(percents, weightedPercentWLB)
+    groupedOnWLBC <- group_by_at(watson_healthcare_clean, "WLBCharacter")
+    summarizedByWLBC <- summarize(groupedOnWLBC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
+    percent12 <- filter(summarizedByWLBC, WLBCharacter == input$WorkLifeBalance)
+    percentWLBC <- percent12$AttritionPercent[1]
+    weightedPercentWLBC <- percentWLBC * weight_factors["WorkLifeBalance"]
+    percents <- append(percents, weightedPercentWLBC)
     
     groupedOnYCR <- group_by_at(watson_healthcare_clean, "YearsInCurrentRole")
     summarizedByYCR <- summarize(groupedOnYCR, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
@@ -419,7 +453,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Environment Satisfaction and Attrition", 
-         x = "1 = Low, 4 = Very High", y = "Percentage") +
+         x = "Environment Satisfaction", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                            }
@@ -441,7 +475,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Job Satisfaction and Attrition", 
-    x = "1 = Low, 4 = Very High", y = "Percentage") +
+    x = "Job Satisfaction", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }
@@ -462,7 +496,7 @@ server <- function(input, output, session
     geom_text(aes(label = paste0(round(freq,0), "%")), 
               position = position_stack(vjust = 0.5), size = 3) +
     labs(title = "Work Life Balance and Attrition", 
-         x = "1 = Bad, 4 = Best", y = "Percentage") +
+         x = "Work Life Balance", y = "Percentage") +
     
     scale_fill_manual(values = c("skyblue1",  "darkseagreen1"))
                                          }

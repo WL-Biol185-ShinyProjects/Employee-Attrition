@@ -85,7 +85,8 @@ dashboardPage(skin = "blue",
                              ),
                              
                              
-                             box( 
+                             #Summary Table
+                             box(
                              h2("Employee Lifestyle Effects:"),
                              plotOutput( "BarBusinessTravel"
                              ), 
@@ -98,9 +99,7 @@ dashboardPage(skin = "blue",
                              plotOutput("BarWorkLifeBalance"
                                )
                              ),
-                            
-                             
-                             
+ 
                              #Summary Table
                              box( 
                                   h2("Summary Table"),
@@ -120,9 +119,9 @@ dashboardPage(skin = "blue",
                                                            "WorkLifeBalance", 
                                                            "YearsAtCompany", 
                                                            "YearsInCurrentRole"
-                                              )
+                                                           )
                                   )
-                             )
+                               )
                              ),
                     
 
@@ -286,9 +285,18 @@ dashboardPage(skin = "blue",
                     ),
 
                     tabItem( tabName = "WhatFactorsMattertheMost",
-                             box(plotOutput("CategoricalRegression")
-                             )
-                    ),
+                             box( plotOutput("CategoricalRegression")
+                                ),
+                             box( title = "Categorical Regression Explanation", background = "navy", width = "12", status = "primary",
+                                  tags$ul(
+                                    tags$li("An R squared value (also known as a coefficient of determination) represents the proportion of variation in the dependent variable that can be predicted from the independent variable. The adjusted R squared value differs from the R squared variable because R squared assumes that all independent variables affect the result of the model, however, adjusted R squared only considers the independent variables that have an effect on the model. The adjusted R squared is a better measure for models with different numbers of variables because an R squared will always increase if the number of variables increases"
+                                            ), 
+                                     br(),
+                                    tags$li("In this scario the R squared value represents the proportion of variation  in Attrition that can be predicted by Gender, Marital Status, OverTime, etc."
+                                           )
+                                         )
+                                )
+                             ),
 
                     #The fourth tab is the Graphs                
                     tabItem(tabName = "Graphs", 
@@ -351,6 +359,9 @@ dashboardPage(skin = "blue",
                             ),
                             #US Map
                             box( h2("US Attrition by Region: June-Sept 2022"),
+                                 br(),
+                                 tags$li("This data was obtained from the ", a("Bureau of Labor Statistics", 
+                                           href = "https://www.bls.gov/news.release/pdf/jolts.pdf", target = "_blank")),
                                  leafletOutput( "usmap"),
                                  selectInput( "mapmonth", 
                                               "Choose a month", 
