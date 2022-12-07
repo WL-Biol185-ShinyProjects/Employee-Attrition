@@ -58,9 +58,7 @@ server <- function(input, output, session
                                                    )
 #Interactive Plots Tab:
   
-  #usmap output
-  #data
-<<<<<<< HEAD
+#usmap output
   Map_Data_New <- data.frame(June = c(7447, 22035, 11075, 12042),
                              July = c(7034, 25431,	10740, 11893), 
                              August = c(6901, 20738,	9870,	10690),
@@ -99,47 +97,7 @@ server <- function(input, output, session
     
                                )
 
-=======
-  map_data_new <- data.frame( June = c(7447, 22035, 11075, 12042),
-                              July = c(7034, 25431,	10740, 11893), 
-                              August = c(6901, 20738,	9870,	10690),
-                              September = c(7406, 23805,	10076, 11424),
-                              Region = c( "Northeast", "South", "Midwest", 
-                                          "West"
-                                        ),
-                              color = c( "red", "orange", "palegreen", 
-                                         "lightblue"
-                                       ),
-                              lat = c(42, 32, 39, 41),
-                              lon = c(-75, -88, -103, -120)
-                            )
-  
-  map_data_new <- map_data_new %>%
-    pivot_longer( cols = 1:4, 
-                  names_to = "month",
-                  values_to = "number"
-                )
-  
-  output$usmap <- renderLeaflet({
-      leaflet(map_data_new) %>%
-        addTiles() %>%
-        setView(-98.58, 38.82,  zoom = 3) %>%
-        addCircleMarkers( data = map_data_new,
-                          fillColor = ~map_data_new$color,
-                          radius = ~map_data_new$number/1000,
-                          stroke = FALSE,
-                          opacity = .8,
-                          label = paste(
-                                         "Number of employees who quit: ",
-                                          map_data_new$number
-                                         )
-                          ) %>%
-        addLegend( data = map_data_new,
-                   title = "Employee Attrition by Region",
-                   colors = c("red", "orange", "palegreen", "lightblue"),
-                   labels = c("Northeast", "South", "Midwest", "West"))})
- 
->>>>>>> 3da64bef8fec13bf750d0374a37756e8373ee440
+
   #Output for Histogram
   output$HistogramPlot <- renderPlot({
       ggplot(watson_healthcare_clean,
