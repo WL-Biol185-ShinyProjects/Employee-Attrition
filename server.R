@@ -14,18 +14,18 @@ server <- function(input, output, session
   
   
   #Recoding EnvironmentSatisfaction numerical vector as character vector 
-  envNumVec <- c(1:4)
-  envNewVec <- recode_factor(envNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
-  envSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
-  envSatisfactionCharacter <- envNewVec[envSatisfaction]
-  watson_healthcare_clean$EnvironmentSatisfaction <- envSatisfactionCharacter
+  EnvNumVec <- c(1:4)
+  EnvNewVec <- recode_factor(EnvNumVec, `1` = "Low", `2` = "Medium", `3` = "High", `4` = "Very High")
+  EnvSatisfaction <- watson_healthcare_clean$EnvironmentSatisfaction
+  EnvSatisfactionCharacter <- EnvNewVec[EnvSatisfaction]
+  watson_healthcare_clean$EnvironmentSatisfaction <- EnvSatisfactionCharacter
   
   #Recoding JobSatisfaction numerical vector as a character vector 
-  jobNumVec <- c(1:4)
-  jobNewVec <- recode_factor(jobNumVec, '1' = "Low", '2' = "Medium", '3' = "High", '4' = "Very High")
-  jobSatisfaction <- watson_healthcare_clean$JobSatisfaction
-  jobSatisfactionCharacter <- jobNewVec[jobSatisfaction]
-  watson_healthcare_clean$JobSatisfaction <- jobSatisfactionCharacter
+  JobNumVec <- c(1:4)
+  JobNewVec <- recode_factor(JobNumVec, '1' = "Low", '2' = "Medium", '3' = "High", '4' = "Very High")
+  JobSatisfaction <- watson_healthcare_clean$JobSatisfaction
+  JobSatisfactionCharacter <- JobNewVec[JobSatisfaction]
+  watson_healthcare_clean$JobSatisfaction <- JobSatisfactionCharacter
   
   #Recoding WorkLifeBalance numerical vector as a character vector 
   WLBNumVec <- c(1:4)
@@ -50,7 +50,8 @@ server <- function(input, output, session
                                               )
   watson_healthcare_clean$BusinessTravel <- factor(watson_healthcare_clean$BusinessTravel
                                                    )
-
+#Interactive Plots Tab:
+  
   #usmap output
   #data
   map_data_new <- data.frame(June = c(7447, 22035, 11075, 12042),
@@ -131,8 +132,11 @@ server <- function(input, output, session
            geom_point(stat = "identity") +
            geom_smooth()
      }
-                                   )
-#Output for Summary Table
+  
+                                           )
+#Who Quits Tab:
+  
+  #Output for Summary Table
   output$SummaryTable <- renderTable(
     {
     watson_healthcare_clean %>%
