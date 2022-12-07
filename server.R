@@ -46,6 +46,7 @@ server <- function(input, output, session
     
     {
       map_data_new %>%
+        filter(month == input$mapmonth) %>%
         leaflet() %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
