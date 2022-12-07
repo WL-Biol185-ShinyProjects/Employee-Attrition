@@ -40,10 +40,13 @@ server <- function(input, output, session
     pivot_longer(cols = 1:4, 
                  names_to = "month",
                  values_to = "number")
-  
+
+ 
   output$usmap <- renderLeaflet(
+    
     {
-      leaflet(map_data_new) %>%
+      map_data_new %>%
+        leaflet() %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
         addCircleMarkers(data = map_data_new,
@@ -51,10 +54,8 @@ server <- function(input, output, session
                    radius = ~map_data_new$number/1000,
                    stroke = FALSE,
                    opacity = .8,
-                   label = paste(
-                                 "Number of employees who quit: ",
-                                 map_data_new$number
-                   )) %>%
+                   label = paste("Number of employees who quit: ",
+                                 map_data_new$number)) %>%
         addLegend(data = map_data_new,
                   title = "Employee Attrition by Region",
                   colors = c("red", "orange", "palegreen", "lightblue"),
@@ -65,6 +66,7 @@ server <- function(input, output, session
     
     
                                )
+
   
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
@@ -103,7 +105,7 @@ server <- function(input, output, session
       ggplot(watson_healthcare_clean, 
            aes_string(input$XScatterData, input$YScatterData)) +
            geom_point(stat = "identity") +
-           geom_smooth()
+           geom_smooth(method = "gam")
      }
                                    )
 #Output for Summary Table
