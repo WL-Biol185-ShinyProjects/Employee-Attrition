@@ -162,12 +162,9 @@ dashboardPage(skin = "blue",
                                                selected = NULL
                                ),
                               
-                               numericInput( "JobSatisfaction", 
+                               selectizeInput( "JobSatisfaction", 
                                             "How Satisfied Are You with Your Job?", 
-                                            2,
-                                            1, 
-                                            4, 
-                                            step = 1
+                                            c( "Low", "Medium", "High", "Very High")
                                ),
                                
                                selectizeInput( "MaritalStatus", 
@@ -197,12 +194,9 @@ dashboardPage(skin = "blue",
                                             step = 1
                                ),
                                
-                               numericInput( "WorkLifeBalance", 
+                               selectizeInput( "WorkLifeBalance", 
                                             "How Is Your Work/Life Balance?", 
-                                            2,
-                                            1, 
-                                            4, 
-                                            step = 1
+                                            c( "Bad", "Good", "Better", "Best")
                                ),
                                
                                numericInput( "YearsInCurrentRole", 

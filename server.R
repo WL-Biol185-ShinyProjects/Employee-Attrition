@@ -344,50 +344,50 @@ server <- function(input, output, session
     
     groupedOnGen <- group_by_at(watson_healthcare_clean, "Gender")
     summarizedByGen <- summarize(groupedOnGen, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent5 <- filter(summarizedByGen, Gender == input$Gender)
-    percentGen <- percent5$AttritionPercent[1]
+    percent3 <- filter(summarizedByGen, Gender == input$Gender)
+    percentGen <- percent3$AttritionPercent[1]
     weightedPercentGen <- percentGen * weight_factors["Gender"]
     percents <- append(percents, weightedPercentGen)
     
-    groupedOnJSC <- group_by_at(watson_healthcare_clean, "JobSatisfactionCharacter")
+    groupedOnJSC <- group_by_at(watson_healthcare_clean, "JobSatisfaction")
     summarizedByJSC <- summarize(groupedOnJSC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent6 <- filter(summarizedByJSC, JobSatisfactionCharacter == input$JobSatisfaction)
-    percentJSC <- percent6$AttritionPercent[1]
+    percent4 <- filter(summarizedByJSC, JobSatisfaction == input$JobSatisfaction)
+    percentJSC <- percent4$AttritionPercent[1]
     weightedPercentJSC <- percentJSC * weight_factors["JobSatisfaction"]
     percents <- append(percents, weightedPercentJSC)
     
     groupedOnMS <- group_by_at(watson_healthcare_clean, "MaritalStatus")
     summarizedByMS <- summarize(groupedOnMS, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent7 <- filter(summarizedByMS, MaritalStatus == input$MaritalStatus)
-    percentMS <- percent7$AttritionPercent[1]
+    percent5 <- filter(summarizedByMS, MaritalStatus == input$MaritalStatus)
+    percentMS <- percent5$AttritionPercent[1]
     weightedPercentMS <- percentMS * weight_factors["MaritalStatus"]
     percents <- append(percents, weightedPercentMS)
     
     groupedOnMIC <- group_by_at(whc, "MonthlyIncomeCat")
     summarizedByMIC <- summarize(groupedOnMIC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent8 <- filter(summarizedByMIC, MonthlyIncomeCat == input$MonthlyIncome)
-    percentMIC <- percent8$AttritionPercent[1]
+    percent6 <- filter(summarizedByMIC, MonthlyIncomeCat == input$MonthlyIncome)
+    percentMIC <- percent6$AttritionPercent[1]
     weightedPercentMIC <- percentMIC * weight_factors["MonthlyIncome"]
     percents <- append(percents, weightedPercentMIC)
     
     groupedOnTWY <- group_by_at(watson_healthcare_clean, "TotalWorkingYears")
     summarizedByTWY <- summarize(groupedOnTWY, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent11 <- filter(summarizedByTWY, TotalWorkingYears == input$TotalWorkingYears)
-    percentTWY <- percent11$AttritionPercent[1]
+    percent7 <- filter(summarizedByTWY, TotalWorkingYears == input$TotalWorkingYears)
+    percentTWY <- percent7$AttritionPercent[1]
     weightedPercentTWY <- percentTWY * weight_factors["TotalWorkingYears"]
     percents <- append(percents, weightedPercentTWY)
     
-    groupedOnWLBC <- group_by_at(watson_healthcare_clean, "WLBCharacter")
+    groupedOnWLBC <- group_by_at(watson_healthcare_clean, "WorkLifeBalance")
     summarizedByWLBC <- summarize(groupedOnWLBC, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent12 <- filter(summarizedByWLBC, WLBCharacter == input$WorkLifeBalance)
-    percentWLBC <- percent12$AttritionPercent[1]
+    percent8 <- filter(summarizedByWLBC, WorkLifeBalance == input$WorkLifeBalance)
+    percentWLBC <- percent8$AttritionPercent[1]
     weightedPercentWLBC <- percentWLBC * weight_factors["WorkLifeBalance"]
     percents <- append(percents, weightedPercentWLBC)
     
     groupedOnYCR <- group_by_at(watson_healthcare_clean, "YearsInCurrentRole")
     summarizedByYCR <- summarize(groupedOnYCR, AttritionPercent = ((sum(Attrition == "Yes")) / n())*100)
-    percent14 <- filter(summarizedByYCR, YearsInCurrentRole == input$YearsInCurrentRole)
-    percentYCR <- percent14$AttritionPercent[1]
+    percent9 <- filter(summarizedByYCR, YearsInCurrentRole == input$YearsInCurrentRole)
+    percentYCR <- percent9$AttritionPercent[1]
     weightedPercentYCR <- percentYCR * weight_factors["YearsInCurrentRole"]
     percents <- append(percents, weightedPercentYCR)
     
