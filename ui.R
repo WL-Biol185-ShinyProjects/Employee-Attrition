@@ -388,7 +388,7 @@ GraphsTab <- tabItem( tabName = "Graphs",
                            br(),
                            tags$li( "This data was obtained from the ", 
                                     a( "Bureau of Labor Statistics", 
-                                       ref = "https://www.bls.gov/news.release/pdf/jolts.pdf", 
+                                       href = "https://www.bls.gov/news.release/pdf/jolts.pdf", 
                                        target = "_blank"
                                      )
                                   ),
