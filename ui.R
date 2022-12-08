@@ -27,61 +27,59 @@ SideBar <- dashboardSidebar(
                                       )
                           )
 
-#The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
-dashboardPage( skin = "blue", 
-               DashboardHeader, 
-               SideBar, 
-               dashboardBody(
-      
-#Boxes need to be put in a row (or column)
-                              fluidRow(
-      
-    
-#Below tabs are named and their contents is specified
-#The first tab is the home tab
-                                       tabItems(
-                                                 tabItem( tabName = "Home",
-                                                          box(
-                          title = "Welcome!", background = "navy", width = "12", status = "primary",
-                          HTML('<center><img src="group picture.jpeg" width="800"></center>'
-                              ),
-                    h3(p("This project was created by Sadie Charles Calame, Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."
-                         )
-                      )
-                    ), 
+KaggleUrl <- a( "kaggle", href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", 
+                target = "_blank"
+              )
+HomeTab <- tabItem( tabName = "Home",
+                    box( title = "Welcome!", background = "navy", width = "12",
+                         status = "primary",
+                         HTML( '<center><img src="group picture.jpeg" width="800"></center>'),
+                         h3( p(  "This project was created by Sadie Charles Calame, 
+                                 Ellen Dulin, Mary Jane McConnell, and Dylan Walmsley."
+                              )
+                           )
+                      ), 
                     box(
-                      title = "Quick Facts:", background = "navy", width = "12", status = "primary",
+                         title = "Quick Facts:", background = "navy", 
+                         width = "12", status = "primary",
                          tags$ul(
-                            tags$li("Healthcare employee attrition is a growing problem in the United States. The COVID-19 pandemic has exacerbated this issue in the past few years."), 
-                            br(),
-                            tags$li("According to the 2022 NSI report, the 2021 turnover by position was:"),
-                            br(),
-                            tags$li("Staff RNs:", tags$b("27.1%")),
-                            tags$li("Certified Nursing Assistant:", tags$b("35.5%")),
-                            tags$li("Physician Assistant:", tags$b("10.7%")),
-                            tags$li("Physical Therapist:", tags$b("13.6%")),
-                            tags$li("Pharmacist:", tags$b("10%")),
-                            tags$li("Patient Care Tech:", tags$b("38.1%")),
-                            tags$li("Radiologic Technologist:", tags$b("17.5%")),
-
-                            br(),
-                            tags$li("Our data was obtained from ", a("kaggle", href = "https://www.kaggle.com/datasets/jpmiller/employee-attrition-for-healthcare", target = "_blank"), 
-                            "and pertains to healthcare employees quitting their jobs. Here is the attrition rate based on the dataset explored:",
-                            h4(p("There is a", tags$b("12%"), "attrition rate."))),
-                            br(),
-                            box( plotOutput( "BarAttrition"))
-                         )  
-                    )
-                    ),
-            
-
-                  
-                    
-                    #The second tab is Who Quits
-                    tabItem( tabName = "WhoQuits",
-                             box( width = 7, 
-                               plotOutput("BarCategoricalComparison"
-                                            ),
+                                  tags$li( "Healthcare employee attrition is a growing 
+                                           problem in the United States. The COVID-19 
+                                           pandemic has exacerbated this issue 
+                                           in the past few years."), 
+                                  br(),
+                                  tags$li( "According to the 2022 NSI report, 
+                                           the 2021 turnover by position was:"
+                                         ),
+                                  br(),
+                                  tags$li( "Staff RNs:", tags$b( "27.1%")),
+                                  tags$li( "Certified Nursing Assistant:", 
+                                           tags$b( "35.5%")),
+                                  tags$li( "Physician Assistant:", 
+                                           tags$b( "10.7%")),
+                                  tags$li( "Physical Therapist:", 
+                                           tags$b( "13.6%")),
+                                  tags$li( "Pharmacist:", tags$b( "10%")),
+                                  tags$li( "Patient Care Tech:", 
+                                           tags$b( "38.1%")),
+                                  tags$li( "Radiologic Technologist:", 
+                                           tags$b("17.5%")),
+                                  br(),
+                                  tags$li( "Our data was obtained from ", KaggleUrl, 
+                                          "and pertains to healthcare employees quitting their jobs. 
+                                          Here is the attrition rate based on the dataset explored:",
+                                          h4( p( "There is a",
+                                                 tags$b("12%"), "attrition rate."
+                                               )
+                                            )
+                                        ),
+                                 br(),
+                                 box( plotOutput( "BarAttrition"))
+                              )  
+                        )
+                  )
+WhoQuitsTab <- tabItem( tabName = "WhoQuits", 
+                        box( width = 7, plotOutput("BarCategoricalComparison"),
                              selectInput( "XCategoricalComparisonData",
                                           "Choose an X-axis",
                                           choices = c( "BusinessTravel",
@@ -91,49 +89,56 @@ dashboardPage( skin = "blue",
                                                        "JobSatisfaction",
                                                        "MaritalStatus", 
                                                        "WorkLifeBalance"
-                                          )
-                             )
-                             ),
-                             
-                             
-                             #Summary Table
-                             box(
+                                                     )
+                                        )
+                          ),
+                        
+                        box(
                              h2("Employee Lifestyle Effects:"),
-                             plotOutput( "BarBusinessTravel"
-                             ), 
-                             plotOutput( "BarOvertime"
-                             ),
-                             plotOutput("BarEnvirSatisfaction"
-                             ),
-                             plotOutput("BarJobSatisfaction"
-                             ),
-                             plotOutput("BarWorkLifeBalance"
-                               )
-                             ),
- 
-                             #Summary Table
-                             box( 
-                                  h2("Summary Table"),
-                                  tableOutput("SummaryTable"),
-                                  selectInput(inputId = "SummaryData",
-                                              "Choose an x-axis",
-                                              choices = c( "Age", 
-                                                           "BusinessTravel", 
-                                                           "EducationField", 
-                                                           "EnvironmentSatisfaction", 
-                                                           "Gender", 
-                                                           "JobSatisfaction", 
-                                                           "MaritalStatus", 
-                                                           "OverTime", 
-                                                           "PercentSalaryHike", 
-                                                           "TotalWorkingYears",
-                                                           "WorkLifeBalance", 
-                                                           "YearsAtCompany", 
-                                                           "YearsInCurrentRole"
-                                                           )
-                                  )
-                               )
-                             ),
+                             plotOutput( "BarBusinessTravel"), 
+                             plotOutput( "BarOvertime"),
+                             plotOutput("BarEnvirSatisfaction"),
+                             plotOutput("BarJobSatisfaction"),
+                             plotOutput("BarWorkLifeBalance")
+                           ),
+                        
+                        #Summary Table
+                        box( 
+                             h2( "Summary Table"),tableOutput("SummaryTable"),
+                             selectInput( inputId = "SummaryData", 
+                                          "Choose an x-axis",
+                                          choices = c( "Age", 
+                                                       "BusinessTravel", 
+                                                       "EducationField", 
+                                                       "EnvironmentSatisfaction", 
+                                                       "Gender", 
+                                                       "JobSatisfaction", 
+                                                       "MaritalStatus", 
+                                                       "OverTime", 
+                                                       "PercentSalaryHike", 
+                                                       "TotalWorkingYears",
+                                                       "WorkLifeBalance", 
+                                                       "YearsAtCompany", 
+                                                       "YearsInCurrentRole"
+                                                    )
+                                       )
+                         )
+                      )
+                         
+                        
+
+#The general layout of dashboard page contains a dashboardHeader and dashboardSidebar
+dashboardPage( skin = "blue", 
+               DashboardHeader, 
+               SideBar, 
+               dashboardBody( fluidRow(
+      
+    
+#Below tabs are named and their contents is specified
+#The first tab is the home tab
+                                       tabItems( HomeTab, WhoQuitsTab,
+              
+                             
                     
 
                     #The third tab is the self-help tab          
@@ -422,7 +427,7 @@ dashboardPage( skin = "blue",
   )
 
 
-       )
+)       
 
 
 
