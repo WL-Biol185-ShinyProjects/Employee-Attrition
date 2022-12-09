@@ -61,18 +61,18 @@ server <- function(input, output, session
   
 
   #data
-  Map_Data_New <- data.frame( June = c(7447, 22035, 11075, 12042),
-                              July = c(7034, 25431,	10740, 11893), 
-                              August = c(6901, 20738,	9870,	10690),
-                              September = c(7406, 23805,	10076, 11424),
+  Map_Data_New <- data.frame( June = c( 7447, 22035, 11075, 12042),
+                              July = c( 7034, 25431,	10740, 11893), 
+                              August = c( 6901, 20738,	9870,	10690),
+                              September = c( 7406, 23805,	10076, 11424),
                               Region = c( "Northeast", "South", "Midwest", 
                                           "West"
                                         ),
                               color = c( "red", "orange", "palegreen", 
                                          "lightblue"
                                        ),
-                              lat = c(42, 32, 39, 41),
-                              lon = c(-75, -88, -103, -120)
+                              lat = c( 42, 32, 39, 41),
+                              lon = c( -75, -88, -103, -120)
                             )
   
   Map_Data_New <- Map_Data_New %>%
@@ -83,10 +83,10 @@ server <- function(input, output, session
   
   output$UsMap <- renderLeaflet({
       Map_Data_New %>%
-      filter(Month == input$MapMonth) %>%
+      filter( Month == input$MapMonth) %>%
       leaflet() %>%
         addTiles() %>%
-        setView(-98.58, 38.82,  zoom = 3) %>%
+        setView( -98.58, 38.82,  zoom = 3) %>%
         addCircleMarkers(
                           fillColor = ~color,
                           radius = ~Number/1000,
@@ -94,8 +94,8 @@ server <- function(input, output, session
                           label = ~Number) %>%
         addLegend( data = Map_Data_New,
                    title = "Employee Attrition by Region",
-                   colors = c("red", "orange", "palegreen", "lightblue"),
-                   labels = c("Northeast", "South", "Midwest", "West"))})
+                   colors = c( "red", "orange", "palegreen", "lightblue"),
+                   labels = c( "Northeast", "South", "Midwest", "West"))})
 
 
   #Output for Histogram
@@ -127,8 +127,8 @@ server <- function(input, output, session
                                         geom_density( alpha = 0.3
                                         ) +
                                         ggtitle( "Density of Employee Attrition 
-                                                Versus Various Employee 
-                                                Characteristics" )
+                                                 Versus Various Employee 
+                                                 Characteristics" )
                                     }
                                    )
   
