@@ -58,44 +58,44 @@ server <- function(input, output, session
                                                    )
 #Interactive Plots Tab:
   
-#usmap output
-  Map_Data_New <- data.frame(June = c(7447, 22035, 11075, 12042),
-                             July = c(7034, 25431,	10740, 11893), 
-                             August = c(6901, 20738,	9870,	10690),
-                             September = c(7406, 23805,	10076, 11424),
-                             Region = c("Northeast", "South", "Midwest", "West"),
-                             color = c("red", "orange", "palegreen", "lightblue"),
-                             lat = c(42, 32, 39, 41),
-                             lon = c(-75, -88, -103, -120)) %>%
-    pivot_longer(cols = 1:4, 
-                 names_to = "Month",
-                 values_to = "Number")
+
+  #data
+
+  Map_Data_New <- data.frame( June = c(7447, 22035, 11075, 12042),
+                              July = c(7034, 25431,	10740, 11893), 
+                              August = c(6901, 20738,	9870,	10690),
+                              September = c(7406, 23805,	10076, 11424),
+                              Region = c( "Northeast", "South", "Midwest", 
+                                          "West"
+                                        ),
+                              color = c( "red", "orange", "palegreen", 
+                                         "lightblue"
+                                       ),
+                              lat = c(42, 32, 39, 41),
+                              lon = c(-75, -88, -103, -120)
+                            )
   
- 
-  output$UsMap <- renderLeaflet(
-    
-    {
+  Map_Data_New <- Map_Data_New %>%
+    pivot_longer( cols = 1:4, 
+                  names_to = "Month",
+                  values_to = "Number"
+                )
+  
+  output$UsMap <- renderLeaflet({
       Map_Data_New %>%
-        filter(Month == input$MapMonth) %>%
-        leaflet() %>%
+      filter(Month == input$MapMonth) %>%
+      leaflet() %>%
         addTiles() %>%
         setView(-98.58, 38.82,  zoom = 3) %>%
         addCircleMarkers(
-          fill = TRUE,
-          fillColor = ~color,
-          radius = ~Number/1000,
-          stroke = FALSE,
-          label = ~Number) %>%
-        addLegend(data = Map_Data_New,
-                  title = "Employee Attrition by Region",
-                  colors = c("red", "orange", "palegreen", "lightblue"),
-                  labels = c("Northeast", "South", "Midwest", "West"))
-        
-
-    }
-    
-    
-                               )
+                          fillColor = ~color,
+                          radius = ~Number/1000,
+                          stroke = FALSE,
+                          label = ~Number) %>%
+        addLegend( data = Map_Data_New,
+                   title = "Employee Attrition by Region",
+                   colors = c("red", "orange", "palegreen", "lightblue"),
+                   labels = c("Northeast", "South", "Midwest", "West"))})
 
 
   #Output for Histogram
