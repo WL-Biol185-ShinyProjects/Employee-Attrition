@@ -25,7 +25,7 @@ server <- function(input, output, session
                               '3' = "High", '4' = "Very High"
                               )
   JobSatisfaction <- watson_healthcare_clean$JobSatisfaction
-  JobSatisfactionCharacter <- JobNewVec[JobSatisfaction]
+  JobSatisfactionCharacter <- JobNewVec[ JobSatisfaction ]
   watson_healthcare_clean$JobSatisfaction <- JobSatisfactionCharacter
   
   #Recoding WorkLifeBalance numerical vector as a character vector 
@@ -34,7 +34,7 @@ server <- function(input, output, session
                               '3' = "Better", '4' = "Best"
                               )
   WLB <- watson_healthcare_clean$WorkLifeBalance
-  WLBCharacter <- WLBNewVec [WLB]
+  WLBCharacter <- WLBNewVec[ WLB ]
   watson_healthcare_clean$WorkLifeBalance <- WLBCharacter
   
   #Creating a dataset so that the MonthlyIncome column can be a categorical variable
@@ -68,7 +68,8 @@ server <- function(input, output, session
                              Region = c( "Northeast", "South", "Midwest", "West" ),
                              color = c( "red", "orange", "palegreen", "lightblue" ),
                              lat = c( 42, 32, 39, 41 ),
-                             lon = c( -75, -88, -103, -120 ))
+                             lon = c( -75, -88, -103, -120 )
+                             )
   
   map_data_new <- map_data_new %>%
     pivot_longer( cols = 1:4, 
@@ -76,7 +77,7 @@ server <- function(input, output, session
                  values_to = "number" )
   
   output$usmap <- renderLeaflet(
-    {
+                                {
                                 leaflet( map_data_new ) %>%
                                   addTiles() %>%
                                   setView( -98.58, 38.82,  zoom = 3 ) %>%
@@ -95,14 +96,12 @@ server <- function(input, output, session
                                             labels = c( "Northeast", "South", "Midwest", "West" ))
         
 
-    }
-    
-    
+                                }
                                )
- 
+
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
-    {
+                                    {
                                     ggplot( watson_healthcare_clean,
                                          aes_string( input$HistogramData, 
                                                     fill = 
@@ -114,12 +113,13 @@ server <- function(input, output, session
                                       labs( title = "Employee Attrition Count", 
                                            y = "Count"
                                            )           
-     }
-                                       )
+                                      }
+                                      )
+
   
   #Output for Density Plot 
   output$DensityPlot <- renderPlot(
-    {
+                                    {
                                     ggplot( watson_healthcare_clean, 
                                         aes_string( input$DensityData, 
                                         fill = watson_healthcare_clean$Attrition
@@ -130,20 +130,21 @@ server <- function(input, output, session
                                         ggtitle( "Density of Employee Attrition 
                                                 Versus Various Employee 
                                                 Characteristics" )
-     }
+                                    }
                                    )
   
   #Output for Scatter Plot 
   output$ScatterPlot <- renderPlot(
-    {
+                                    {
                                     ggplot( watson_healthcare_clean, 
                                          aes_string( input$XScatterData, 
                                                     input$YScatterData )) +
                                          geom_point( stat = "identity" ) +
                                          geom_smooth()
-     }
+
+                                      }
+                                    )
   
-                                           )
 #Who Quits Tab:
   
   #Output for Summary Table
@@ -157,7 +158,8 @@ server <- function(input, output, session
                                         arrange(desc(PercentAttrition))
      }
                                         )
-
+#Your Likelihood of Quitting Tab:
+  
   #Updating the ranking input choices
   oldChoices <- c( "Age", "BusinessTravel", "Gender", "JobSatisfaction", 
                   "MaritalStatus", "MonthlyIncome", "TotalWorkingYears", 
@@ -439,7 +441,8 @@ server <- function(input, output, session
                 attrition <- ( sum( percents ) / 117 )
     
   })
-  
+
+#Who Quits? Tab:    
   #Output for Bar Graphs 
   
   #Business Travel and Attrition
@@ -564,6 +567,7 @@ server <- function(input, output, session
                  )
 
   
+#What Factors Matter the Most Tab: 
   
 #Percent Attrition Bar Graphs
   output$BarCategoricalComparison <- 
@@ -634,7 +638,8 @@ regressionData <- data.frame( Category = c( "Gender",
              )
  
 
-                                               
+#Home Tab:
+ 
 #Output for Graph on Home Tab showing Attrition
 
 output$BarAttrition <- 
