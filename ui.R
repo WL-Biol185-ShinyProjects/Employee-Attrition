@@ -24,8 +24,15 @@ RSquaredTag <- tags$ul( tags$li( "An R squared value (also known as a coefficien
                               ),
                          br(),
                          tags$li( "In this scenario the R squared value represents
-                                  the proportion of variation  in Attrition that
-                                  can be predicted by Gender, Marital Status, OverTime, etc."
+                                  the proportion of variation in Attrition that
+                                  can be predicted by Gender, Marital Status, Over Time, Business Travel, and Education Field. 
+                                  The R Squared value falls between 0 and 1. 
+                                  The closer the value is to 1, the better the 
+                                  indepedent variable predicts variation in the dependent variable. 
+                                  The independent variables shown above 
+                                  (Gender, Marital Status, Over Time, Business Travel, and Education Field)
+                                  all have R squared values of about 0.5 indicating that 
+                                  they are all equally marginal predictors of variation in Attrition."
                                 )
                      )
 
