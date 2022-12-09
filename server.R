@@ -59,45 +59,44 @@ server <- function(input, output, session
                                                    )
 #Interactive Plots Tab:
   
-  #usmap output
-  #data
-  map_data_new <- data.frame( June = c( 7447, 22035, 11075, 12042 ),
-                             July = c( 7034, 25431,	10740, 11893 ), 
-                             August = c( 6901, 20738,	9870,	10690 ),
-                             September = c( 7406, 23805,	10076, 11424 ),
-                             Region = c( "Northeast", "South", "Midwest", "West" ),
-                             color = c( "red", "orange", "palegreen", "lightblue" ),
-                             lat = c( 42, 32, 39, 41 ),
-                             lon = c( -75, -88, -103, -120 )
-                             )
-  
-  map_data_new <- map_data_new %>%
-    pivot_longer( cols = 1:4, 
-                 names_to = "month",
-                 values_to = "number" )
-  
-  output$usmap <- renderLeaflet(
-                                {
-                                leaflet( map_data_new ) %>%
-                                  addTiles() %>%
-                                  setView( -98.58, 38.82,  zoom = 3 ) %>%
-                                  addCircleMarkers( data = map_data_new,
-                                             fillColor = ~map_data_new$color,
-                                             radius = ~map_data_new$number/1000,
-                                             stroke = FALSE,
-                                             opacity = .8,
-                                             label = paste(
-                                                           "Number of employees who quit: ",
-                                                           map_data_new$number
-                                             )) %>%
-                                  addLegend( data = map_data_new,
-                                            title = "Employee Attrition by Region",
-                                            colors = c( "red", "orange", "palegreen", "lightblue" ),
-                                            labels = c( "Northeast", "South", "Midwest", "West" ))
-        
 
-                                }
-                               )
+  #data
+  Map_Data_New <- data.frame( June = c(7447, 22035, 11075, 12042),
+                              July = c(7034, 25431,	10740, 11893), 
+                              August = c(6901, 20738,	9870,	10690),
+                              September = c(7406, 23805,	10076, 11424),
+                              Region = c( "Northeast", "South", "Midwest", 
+                                          "West"
+                                        ),
+                              color = c( "red", "orange", "palegreen", 
+                                         "lightblue"
+                                       ),
+                              lat = c(42, 32, 39, 41),
+                              lon = c(-75, -88, -103, -120)
+                            )
+  
+  Map_Data_New <- Map_Data_New %>%
+    pivot_longer( cols = 1:4, 
+                  names_to = "Month",
+                  values_to = "Number"
+                )
+  
+  output$UsMap <- renderLeaflet({
+      Map_Data_New %>%
+      filter(Month == input$MapMonth) %>%
+      leaflet() %>%
+        addTiles() %>%
+        setView(-98.58, 38.82,  zoom = 3) %>%
+        addCircleMarkers(
+                          fillColor = ~color,
+                          radius = ~Number/1000,
+                          stroke = FALSE,
+                          label = ~Number) %>%
+        addLegend( data = Map_Data_New,
+                   title = "Employee Attrition by Region",
+                   colors = c("red", "orange", "palegreen", "lightblue"),
+                   labels = c("Northeast", "South", "Midwest", "West"))})
+
 
   #Output for Histogram
   output$HistogramPlot <- renderPlot(
@@ -139,8 +138,7 @@ server <- function(input, output, session
                                     ggplot( watson_healthcare_clean, 
                                          aes_string( input$XScatterData, 
                                                     input$YScatterData )) +
-                                         geom_point( stat = "identity" ) +
-                                         geom_smooth()
+                                         geom_point( stat = "identity" )
 
                                       }
                                     )
@@ -645,7 +643,6 @@ regressionData <- data.frame( Category = c( "Gender",
 output$BarAttrition <- 
   renderPlot(
             {
-    
               watson_healthcare_clean %>%
                 group_by( Attrition ) %>%
                 summarise( cnt = n() ) %>%

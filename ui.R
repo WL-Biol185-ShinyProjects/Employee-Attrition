@@ -209,17 +209,17 @@ WhoQuitsTab <- tabItem( tabName = "WhoQuits",
                           ),
                         
                         box(
-                             h2("Employee Lifestyle Effects:"),
+                             h2( "Employee Lifestyle Effects:"),
                              plotOutput( "BarBusinessTravel"), 
                              plotOutput( "BarOvertime"),
-                             plotOutput("BarEnvirSatisfaction"),
-                             plotOutput("BarJobSatisfaction"),
-                             plotOutput("BarWorkLifeBalance")
+                             plotOutput( "BarEnvirSatisfaction"),
+                             plotOutput( "BarJobSatisfaction"),
+                             plotOutput( "BarWorkLifeBalance")
                            ),
                         
                         #Summary Table
                         box( 
-                             h2( "Summary Table"),tableOutput("SummaryTable"),
+                             h2( "Summary Table"), tableOutput( "SummaryTable"),
                              selectInput( inputId = "SummaryData", 
                                           "Choose an x-axis",
                                           choices = c( "Age", 
@@ -329,21 +329,20 @@ SelfHelpTab <- tabItem( tabName = "SelfHelp",
 #Displaying the weighted average of the user's attrition values
                       box( title = "Your Likelihood of Quitting Is...",
                            background = "blue",
-                           textOutput("AttritionEstimation"),
+                           textOutput( h2( "AttritionEstimation")),
                            width = 4
                          )
                       )
 WhatFactorsMatterTheMostTab <- tabItem( tabName = "WhatFactorsMatterTheMost",
-                                        box( plotOutput("CategoricalRegression")),
+                                        box( plotOutput( "CategoricalRegression")),
                                         box( title = "Categorical Regression Explanation", 
                                              background = "navy", width = "12", 
-                                             status = "primary",
-                                              RSquaredTag
+                                             status = "primary", RSquaredTag
                                            )
                                       )
 GraphsTab <- tabItem( tabName = "Graphs", 
                       #Histogram
-                      box( h2( "Histogram"), plotOutput("HistogramPlot"),
+                      box( h2( "Histogram"), plotOutput( "HistogramPlot"),
                                 selectInput( "HistogramData","Choose an X-axis",
                                              choices = c( "Age", "BusinessTravel",
                                                           "EducationField",
@@ -370,7 +369,7 @@ GraphsTab <- tabItem( tabName = "Graphs",
         
         
                       #Scatter Plot
-                      box( h2("Scatter Plot"), plotOutput("ScatterPlot"), 
+                      box( h2( "Scatter Plot"), plotOutput( "ScatterPlot"), 
                            selectInput( "XScatterData", "Choose an X-axis", 
                                         choices = c( "MonthlyIncome", 
                                                      "PercentSalaryHike"
@@ -402,7 +401,7 @@ GraphsTab <- tabItem( tabName = "Graphs",
         
         
                     )
-HistoryTab <- tabItem( tabName ="History", 
+HistoryTab <- tabItem( tabName = "History", 
                        box( title = "COVID-19 and Healthcare Attrition:", 
                             background = "teal", solidHeader = TRUE,
                             width = 6, status = "primary", HistoryTags1
@@ -412,7 +411,7 @@ HistoryTab <- tabItem( tabName ="History",
                           ),
                        box( title = "Consequences of Burnout on Health Care Workers:", 
                             background = "blue", width = "12", status = "primary",
-                            HTML('<center><img src="consequencesofhealthcareattrition.png" width="800"></center>'
+                            HTML( '<center><img src="consequencesofhealthcareattrition.png" width="800"></center>'
                                 ),
                             br(),
                             p( "Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, 
@@ -439,11 +438,12 @@ HistoryTab <- tabItem( tabName ="History",
                                A Cross-sectional Study. 
                                JAMA Health Forum. 2022;3(4):e220371. 
                               doi:10.1001/jamahealthforum.2022.0371"),
-                           br(), p("Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2021). 
+                           br(), 
+                           p( "Leo, C. G., Sabina, S., Tumolo, M. R., Bodini, A., Ponzini, G., Sabato, E., & Mincarone, P. (2021). 
                                  Burnout Among Healthcare Workers in the COVID 19 Era: A Review of the Existing Literature. 
                                  Frontiers in public health, 9, 750529. https://doi.org/10.3389/fpubh.2021.750529"),
                           br(),
-                          p("Murthy, V. H., Interview with Dr. Vivek Murthy on approaches to supporting well-being among health workers. (13:50), 
+                          p( "Murthy, V. H., Interview with Dr. Vivek Murthy on approaches to supporting well-being among health workers. (13:50), 
                                  Author AffiliationsFrom the Office of the Surgeon General, Interview with Dr. Vivek Murthy on approaches to supporting well-being among health workers. (13:50), 
                                  Salmi, L., Longo, R. L. S. and D. L., & Shireman, R. (2022, August 18). Confronting health worker burnout and well-being: Nejm. New England Journal of Medicine.
                                  Retrieved December 7, 2022, from https://www.nejm.org/doi/full/10.1056/NEJMp2207252 ")
