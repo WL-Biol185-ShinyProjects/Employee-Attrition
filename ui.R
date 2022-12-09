@@ -263,10 +263,9 @@ SelfHelpTab <- tabItem( tabName = "SelfHelp",
                                             selected = NULL
                                           ),
              
-                            numericInput( "JobSatisfaction", 
+                            selectizeInput( "JobSatisfaction", 
                                           "How Satisfied Are You with Your Job?", 
-                                          2, 1, 4, 
-                                          step = 1
+                                          c( "Low", "Medium", "High", "Very High")
                                         ),
              
                             selectizeInput( "MaritalStatus", 
@@ -287,9 +286,9 @@ SelfHelpTab <- tabItem( tabName = "SelfHelp",
                                           20, 0, 40, step = 1
                                         ),
              
-                            numericInput( "WorkLifeBalance", 
-                                          "How Is Your Work/Life Balance?", 2,
-                                          1, 4, step = 1
+                            selectizeInput( "WorkLifeBalance", 
+                                          "How Is Your Work/Life Balance?",
+                                          c( "Bad", "Good", "Better", "Best")
                                         ),
              
                             numericInput( "YearsInCurrentRole", "How Many Years 
@@ -329,7 +328,7 @@ SelfHelpTab <- tabItem( tabName = "SelfHelp",
 #Displaying the weighted average of the user's attrition values
                       box( title = "Your Likelihood of Quitting Is...",
                            background = "blue",
-                           textOutput( h2( "AttritionEstimation")),
+                           h2( textOutput(  "AttritionEstimation")),
                            width = 4
                          )
                       )
