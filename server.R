@@ -133,16 +133,16 @@ server <- function(input, output, session
                                    )
   
   #Output for Scatter Plot 
-  output$ScatterPlot <- renderPlot(
+  output$ScatterPlot <- renderPlot(     
+                                   {
 
-                                    {
                                     ggplot( watson_healthcare_clean, 
                                          aes_string( input$XScatterData, 
                                                     input$YScatterData )) +
                                          geom_point( stat = "identity" )
 
-                                      }
-                                    )
+                                    }
+                                  )
 
   
 #Who Quits Tab:
